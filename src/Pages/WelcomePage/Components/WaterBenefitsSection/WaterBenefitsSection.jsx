@@ -9,7 +9,7 @@ export const WaterBenefitsSection = () => {
   return (
     <>
       <WaterBenefitsContainer>
-        <WaterTitle>Water consumption tracker</WaterTitle>
+        <WaterTitle>Why drink water</WaterTitle>
         <BenefitsList>
           <BenefitsLi>Supply of nutrients to all organs</BenefitsLi>
           <BenefitsLi>Providing oxygen to the lungs</BenefitsLi>
