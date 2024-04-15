@@ -1,12 +1,18 @@
-import { WaterBenefitsSection } from './Components/WaterBenefitsSection/WaterBenefitsSection';
-import { WaterTracker } from './Components/WaterTracker/WaterTracker';
+import { Container } from 'styles/GlobalStyle';
+import { WaterBenefitsSection } from '../../components/WaterBenefitsSection/WaterBenefitsSection';
+import { WaterTracker } from '../../components/WaterTracker/WaterTracker';
 import { WrapperWelcomePg } from './WelcomePage.styled';
+import { LayoutWelcome } from 'components/LayoutWelcome/LayoutWelcome';
 
 export const WelcomePage = () => {
   return (
-    <WrapperWelcomePg>
-      <WaterTracker />
-      <WaterBenefitsSection />
-    </WrapperWelcomePg>
+    <LayoutWelcome>
+      <Container>
+        <WrapperWelcomePg>
+          <WaterTracker />
+          <WaterBenefitsSection />
+        </WrapperWelcomePg>
+      </Container>
+    </LayoutWelcome>
   );
 };

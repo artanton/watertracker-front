@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { ReactComponent as Calendar } from '../../icons/calendar.svg';
-import { ReactComponent as PersonalSetings } from '../../icons/personal-settings.svg';
-import { ReactComponent as Statistics } from '../../icons/statistics.svg';
+import { theme } from '../../styles/theme';
+import { ReactComponent as Calendar } from '../../Pages/WelcomePage/icons/calendar.svg';
+import { ReactComponent as PersonalSetings } from '../../Pages/WelcomePage/icons/personal-settings.svg';
+import { ReactComponent as Statistics } from '../../Pages/WelcomePage/icons/statistics.svg';
 
 export const WaterTrackerContainer = styled.div`
   margin-bottom: 40px;
-  color: #2f2f2f;
+  color: ${theme.colors.primaryBlack};
   font-size: 28px;
   @media only screen and (min-width: 1440px) {
     margin-right: 81px;
@@ -19,9 +20,9 @@ export const WaterTrackerContainer = styled.div`
 `;
 export const WaterTrackerTitle = styled.h2`
   line-height: 1.16em;
-  color: #2f2f2f;
+  color: ${theme.colors.primaryBlack};
   font-weight: 700;
-  font-size: 36px;
+  font-size: 28px;
   margin-bottom: 16px;
   margin-top: 0px;
   @media only screen and (max-width: 767px) {
@@ -42,15 +43,12 @@ export const WaterTrackerInfo = styled.p`
 `;
 
 export const WaterTrackerSubtitle = styled.h3`
-  color: #2f2f2f;
+  color: ${theme.colors.primaryBlack};
   font-size: 18px;
   margin-bottom: 24px;
   margin-top: 0px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.11em;
-  @media only screen and (min-width: 768px) {
-    font-size: 26px;
-  }
 `;
 export const WaterTrackerList = styled.ul`
   font-size: 16px;
@@ -64,7 +62,7 @@ export const WaterTrackerList = styled.ul`
   }
 `;
 export const WaterTrackerLi = styled.li`
-  color: #2f2f2f;
+  color: ${theme.colors.primaryBlack};
   font-size: 16px;
   font-weight: 400;
   display: flex;
@@ -89,11 +87,11 @@ export const Button = styled.button`
   padding: 8px 30px;
   border-radius: 10px;
   border: none;
-  color: #fff;
+  color: ${theme.colors.primaryWhite};
   font-size: 16px;
   font-weight: 700;
   line-height: 1.33em;
-  background-color: #407bff;
+  background-color: ${theme.colors.primaryBlue};
   font-family: @media screen and (min-width: 768px) {
     font-size: 18px;
     width: 336px;
