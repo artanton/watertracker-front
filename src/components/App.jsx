@@ -1,4 +1,4 @@
-import { WelcomePage } from 'Pages/WelcomePage/WelcomePage';
+import { WelcomePage } from '../pages/WelcomePage/WelcomePage';
 export const App = () => {
   return (
     <div
