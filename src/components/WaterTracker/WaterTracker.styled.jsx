@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
-import { ReactComponent as Calendar } from '../../Pages/WelcomePage/icons/calendar.svg';
-import { ReactComponent as PersonalSetings } from '../../Pages/WelcomePage/icons/personal-settings.svg';
-import { ReactComponent as Statistics } from '../../Pages/WelcomePage/icons/statistics.svg';
+import { ReactComponent as Calendar } from '../../pages/WelcomePage/icons/calendar.svg';
+import { ReactComponent as PersonalSetings } from '../../pages/WelcomePage/icons/personal-settings.svg';
+import { ReactComponent as Statistics } from '../../pages/WelcomePage/icons/statistics.svg';
 
 export const WaterTrackerContainer = styled.div`
   margin-bottom: 40px;
