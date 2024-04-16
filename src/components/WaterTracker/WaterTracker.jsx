@@ -1,4 +1,4 @@
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   WaterTrackerContainer,
   WaterTrackerTitle,
@@ -13,10 +13,10 @@ import {
 } from './WaterTracker.styled';
 
 export const WaterTracker = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onClick = () => {
-    // navigate('/signUp');
+    navigate('/signUp');
   };
 
   return (
