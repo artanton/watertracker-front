@@ -1,18 +1,5 @@
-import { Container } from 'styles/GlobalStyle';
-import { WaterBenefitsSection } from '../../components/WaterBenefitsSection/WaterBenefitsSection';
-import { WaterTracker } from '../../components/WaterTracker/WaterTracker';
-import { WrapperWelcomePg } from './WelcomePage.styled';
-import { LayoutWelcome } from 'components/LayoutWelcome/LayoutWelcome';
+function WelcomePage() {
+  return <div>WELCOME PAGE HERE</div>;
+}
 
-export const WelcomePage = () => {
-  return (
-    <LayoutWelcome>
-      <Container>
-        <WrapperWelcomePg>
-          <WaterTracker />
-          <WaterBenefitsSection />
-        </WrapperWelcomePg>
-      </Container>
-    </LayoutWelcome>
-  );
-};
+export default WelcomePage;
