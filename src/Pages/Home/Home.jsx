@@ -10,7 +10,6 @@ import TodayWaterList from 'components/TodayWaterList/TodayWaterList';
 import { Container } from 'styles/GlobalStyle';
 import MonthStatsTable from 'components/MonthStatsTable/MonthStatsTable';
 function Home() {
-  const dispatch = useDispatch();
   return (
     <div
       style={{
