@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from './authorization/authReducer';
+import { modalReducer } from './modal/modalSlice';
 import {
   persistStore,
   persistReducer,
@@ -22,7 +23,9 @@ const authConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authConfig, authReducer),
+    modal: modalReducer,
   },
+
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
