@@ -10,7 +10,43 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+image {
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+
+
+input {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+svg {
+  display: block;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
