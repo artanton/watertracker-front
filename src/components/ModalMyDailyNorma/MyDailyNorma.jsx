@@ -1,8 +1,45 @@
-const MyDailyNormaModal = () => {
+import { useEffect, useState } from 'react';
+
+const MyDailyNorma = () => {
+const [waterRate, setWaterRate] = useState(calculateWaterRate());
+const [inputValues, setInputValues] = useState({
+  gender: 'male',
+  weight: 0,
+  hours: 0,
+});
+
+useEffect(() => {
+  setWaterRate(calculateWaterRate(inputValues));
+}, [inputValues]);
+
+const handleInputChange = evt => {
+  setInputValues(prevValues => ({
+    ...prevValues,
+    [evt.target.name]: evt.target.value,
+  }));
+};
+
+const calculateWaterRate = (
+  { gender, weight, hours } = { gender: 'male', hours: 0, weight: 0 }
+) => {
+  if (+weight === 0 || !weight) return 0;
+
+  switch (gender) {
+    case 'male':
+      return +weight * 0.03 + +hours * 0.4;
+
+    case 'female':
+      return +weight * 0.04 + +hours * 0.6;
+
+    default:
+      return 0;
+  }
+};
+
   return (
     <div>
       <div>
-        <h1>My daily norma</h1>
+        <h2>My daily norma</h2>
         <div>
           <p>
             For girl: <span>V=(M*0.03) + (T*0.4)</span>
@@ -64,7 +101,7 @@ const MyDailyNormaModal = () => {
           </form>
           <div>
             The required amount of water in liters per day:
-            <span>0 L</span>
+            <span>{waterRate} L</span>
           </div>
           <form>
             <label>
@@ -85,3 +122,5 @@ const MyDailyNormaModal = () => {
     </div>
   );
 };
+
+export default MyDailyNorma;

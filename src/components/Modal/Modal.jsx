@@ -1,28 +1,35 @@
+import { ModalBackdrop, ModalContent } from './Modal.styled';
+import { selectModalActiveModal } from '../../redux/modal/modalSlice.selectors';
+import { closeModal } from '../../redux/modal/modalSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Backdrop, StyledModal } from './Modal.styled';
 
-export const Modal = ({ onClose, children }) => {
-  useEffect(() => {
-    const handleEscKeyDown = evt => {
-      if (evt.code === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleEscKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleEscKeyDown);
-    };
-  }, [onClose]);
-
-  const handleBackdropClick = evt => {
-    if (evt.target === evt.currentTarget) {
-      onClose();
+export const Modal = ({ modalId, children }) => {
+  const dispatch = useDispatch();
+  const activeModal = useSelector(selectModalActiveModal);
+  const closeModalOnBackdrop = e => {
+    if (e.target === e.currentTarget) {
+      dispatch(closeModal());
     }
   };
 
-  return (
-    <Backdrop onClick={handleBackdropClick}>
-      <StyledModal>{children}</StyledModal>
-    </Backdrop>
-  );
+  useEffect(() => {
+    const closeModalonEsc = e => {
+      if (e.key === 'Escape') {
+        dispatch(closeModal());
+      }
+    };
+    if (activeModal === modalId) {
+      window.addEventListener('keydown', closeModalonEsc);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', closeModalonEsc);
+    };
+  }, [dispatch, activeModal, modalId]);
+  return activeModal === modalId ? (
+    <ModalBackdrop onClick={closeModalOnBackdrop}>
+      <ModalContent>{children}</ModalContent>
+    </ModalBackdrop>
+  ) : null;
 };
