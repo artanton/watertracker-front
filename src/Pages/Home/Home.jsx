@@ -1,9 +1,38 @@
+import React from 'react';
+import {
+  DesktopContainer,
+  ListContainer,
+  WrapperHomePage,
+} from './Home.styled';
+import DailyNorma from '../../components/DailyNorma/DailyNorma';
+import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel';
+import TodayWaterList from 'components/TodayWaterList/TodayWaterList';
+import { Container } from 'styles/GlobalStyle';
+import MonthStatsTable from 'components/MonthStatsTable/MonthStatsTable';
+
 function Home() {
   return (
-    <div>
-      HOME PAGE HERE. This page wants a private route. Please add a private
-      route after adding a redux in project. And this page should be on another
-      route.
+    <div
+      style={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: 40,
+        color: '#010101',
+      }}
+    >
+      <WrapperHomePage>
+        <Container>
+          <DesktopContainer>
+            <DailyNorma />
+            <WaterRatioPanel />
+          </DesktopContainer>
+          <ListContainer>
+            <TodayWaterList />
+            <MonthStatsTable />
+          </ListContainer>
+        </Container>
+      </WrapperHomePage>
     </div>
   );
 }
