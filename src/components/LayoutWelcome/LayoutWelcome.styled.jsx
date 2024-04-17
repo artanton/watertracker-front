@@ -14,28 +14,32 @@ const bgMainTablet1x = require('../../img/background/tablet/bg_mainpage@1x.png')
 const bgMainTablet2x = require('../../img/background/tablet/bg_mainpage@2x.png');
 
 export const LayoutStyle = styled.section`
-  background-image: url(${bgImageMob1x}), url(${bgImageMob2x});
+  background-image: url(${bgImageMob1x});
   background-repeat: no-repeat;
   background-position: center, center;
   background-size: cover, cover;
   padding-bottom: 40px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
-    padding-bottom: 50px;
-    background-image: url(${bgMainTablet1x}), url(${bgImageTablet1x}),
-      url(${bgMainTablet2x}), url(${bgImageTablet2x});
-    background-repeat: no-repeat, no-repeat;
-    background-position: center, center;
-    background-size: cover, cover;
+  @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+    background-image: url(${bgImageMob2x});
   }
 
-  @media only screen and (min-width: 1440px) {
-    background-image: url(${bgImageDesctop1x}), url(${bgMainPageDesctop1x}),
-      url(${bgImageDesctop2x}), url(${bgMainPageDesctop2x});
+  @media screen and (min-width: 768px) and (max-width: 1439px) {
+    padding-bottom: 50px;
+    background-image: url(${bgMainTablet1x}), url(${bgImageTablet1x});
     background-repeat: no-repeat, no-repeat;
     background-position: center, center;
     background-size: cover, cover;
     display: flex;
-    justify-content: center;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+    padding-bottom: 50px;
+    background-image: url(${bgMainTablet2x}), url(${bgImageTablet2x});
+  }
+  @media only screen and (min-width: 1440px) {
+    background-image: url(${bgImageDesctop1x}), url(${bgMainPageDesctop1x});
+  }
+  @media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+    background-image: url(${bgImageDesctop2x}), url(${bgMainPageDesctop2x});
   }
 `;
