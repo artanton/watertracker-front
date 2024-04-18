@@ -1,5 +1,5 @@
 export const modalNames = {
-  SETTINGS: 'settings',
+  USER_SETTINGS: 'settings',
   ADD_WATER: 'addWater',
   DAILY_NORMA: 'dailyNorma',
   EDIT_WATER: 'editWater',

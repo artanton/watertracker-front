@@ -18,6 +18,10 @@ export const HeaderContainer = styled.header`
     padding: 12px 112px 0;
   }
 `;
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const UserLogoContainer = styled.div`
   position: relative;
