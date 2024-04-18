@@ -11,7 +11,7 @@ const DailyNorma = ({ HandleOpenModal }) => {
     <MyDailyNormaContainer>
       <MyDailyNorma>My daily norma</MyDailyNorma>
       <MyDailyNormaAmount>
-        <WaterNormaAmount>2.0L</WaterNormaAmount>
+        <WaterNormaAmount>2.0 L</WaterNormaAmount>
         <WaterNormaAmountEdit onClick={HandleOpenModal}>
           Edit
         </WaterNormaAmountEdit>
