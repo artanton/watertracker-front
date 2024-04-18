@@ -3,19 +3,37 @@ import { theme } from '../../styles/theme';
 
 export const Label = styled.label`
   font-size: 18px;
-  line-height: calc(24 / 18);
-  color: ;
+  line-height: 1.33em;
+  color: ${theme.colors.primaryBlack};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
   gap: 8px;
   width: 100%;
 `;
+
+export const Wrap = styled.div`
+  width: 100%;
+  position: relative;
+
+  button {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+  }
+`;
+
 export const SignUpTitle = styled.h2`
-  font-size: ;
+  font-size: 26px;
+  margin: 0;
   line-height: 1.23em;
   font-weight: 500;
-  color: ;
+  color: ${theme.colors.primaryBlack};
 `;
 
 export const Error = styled.p`
@@ -33,6 +51,8 @@ export const EmailInput = styled.input`
   color: ${theme.colors.primaryAccent};
   border: 1px solid ${theme.colors.secondaryGray};
   font-family: inherit;
+  position: relative;
+
   &:focus {
     outline: none;
   }
@@ -43,6 +63,7 @@ export const EmailInput = styled.input`
     color: ${theme.colors.secondaryRed};
     border-color: ${theme.colors.secondaryRed};
   }
+
   ${props =>
     props.$error
       ? {
@@ -62,6 +83,8 @@ export const PasswordInput = styled.input`
   color: ${theme.colors.primaryAccent};
   border: 1px solid ${theme.colors.secondaryGray};
   font-family: inherit;
+  position: relative;
+
   &:focus {
     outline: none;
   }
@@ -72,6 +95,7 @@ export const PasswordInput = styled.input`
     color: ${theme.colors.secondaryRed};
     border-color: ${theme.colors.secondaryRed};
   }
+
   ${props =>
     props.$error
       ? {
@@ -91,6 +115,8 @@ export const RepeatPasswordInput = styled.input`
   color: ${theme.colors.primaryAccent};
   border: 1px solid ${theme.colors.secondaryGray};
   font-family: inherit;
+  position: relative;
+
   &:focus {
     outline: none;
   }
@@ -101,6 +127,7 @@ export const RepeatPasswordInput = styled.input`
     color: ${theme.colors.secondaryRed};
     border-color: ${theme.colors.secondaryRed};
   }
+
   ${props =>
     props.$error
       ? {
@@ -112,7 +139,7 @@ export const RepeatPasswordInput = styled.input`
 `;
 
 export const Button = styled.button`
-  width: 280px;
+  width: 100%;
   height: 36px;
   padding: 8px 30px;
   border-radius: 10px;
@@ -122,13 +149,8 @@ export const Button = styled.button`
   font-weight: 700;
   line-height: 1.33em;
   background-color: ${theme.colors.primaryBlue};
-  font-family: @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     font-size: 18px;
-    width: 336px;
-    height: 44px;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 384px;
     height: 44px;
   }
 `;
@@ -138,11 +160,12 @@ export const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   @media screen and (min-width: 768px) {
     width: 336px;
   }
   @media screen and (min-width: 1440px) {
     width: 384px;
-    margin-right: 104px;
+    margin-left: auto;
   }
 `;
