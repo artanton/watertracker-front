@@ -13,11 +13,13 @@ const bgMainTablet2x = require('../../img/background/tablet/bg_mainpage@2x.png')
 
 export const LayoutStyle = styled.section`
   background-image: url(${bgImageMob1x});
-  background-repeat: no-repeat;
-  background-position: center, center;
-  background-size: cover, cover;
-  height: -webkit-fill-available;
 
+  min-height: calc(100vh - 119px);
+
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
   @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
     background-image: url(${bgImageMob2x});
   }

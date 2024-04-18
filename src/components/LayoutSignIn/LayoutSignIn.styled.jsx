@@ -3,6 +3,26 @@ const bgSignin1x = require('../../img/background/mobile/bg_signin@1x.png');
 const bgSignin2x = require('../../img/background/mobile/bg_signin@2x.png');
 const bgSigninDes1x = require('../../img/background/desktop/bg_signin@1x.png');
 const bgSigninDes2x = require('../../img/background/desktop/bg_signin@2x.png');
+const bgSigninTab1x = require('../../img/background/tablet/bottle_signin@1x.png');
+// import bgSigninTab2x = '../../img/background/tablet/bottle_signin@1x.png';
+
+export const ContainerSignin = styled.div`
+  // width: 320px;
+  // margin: 24px auto 0;
+  // padding: 0px 20px 40px;
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    margin: 40px auto 0;
+    padding: 0px 32px 44px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 1440px;
+    margin: 20px auto 0;
+    padding: 0px 112px 56px;
+  }
+`;
 
 export const SignInStyle = styled.div`
   display: flex;
@@ -23,7 +43,14 @@ export const SignInStyle = styled.div`
   }
 
   @media screen and (min-width: 768px) and (max-width: 1439px) {
-    background-image: url(${bgSignin1x});
+    background-image: url(${bgSigninTab1x});
+
+    min-height: calc(100vh - 119px);
+
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
     picture {
       display: none;
     }
