@@ -12,14 +12,12 @@ export const MyDailyNormaContainer = styled.div`
   flex-direction: column;
 
   @media (min-width: 768px) {
-    margin-top: -24px;
     max-height: 76px;
   }
 
   @media (min-width: 1440px) {
     width: 166px;
     max-height: 76px;
-    margin-top: 32px;
   }
 `;
 
