@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { theme } from 'styles/theme';
 
 export const HeaderContainer = styled.header`
   margin: 0 auto;
@@ -7,12 +8,12 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     width: 768px;
     padding: 16px 32px 0;
   }
 
-  @media (min-width: 1440px) {
+  @media screen and (min-width: 1440px) {
     width: 1440px;
     padding: 12px 112px 0;
   }
@@ -34,30 +35,17 @@ export const UserLogoContainer = styled.div`
 
   &:hover > *,
   &:focus-within > * {
-    color: ${props => `${props.theme.colors.secondaryOrange}`};
   }
 `;
-
-export const UserName = styled.p``;
 
 export const DefaultNeme = styled.p`
   text-transform: uppercase;
 `;
 
-export const Button = styled.button`
-  width: 48px;
-  background-color: transparent;
-  color: ${props => `${props.theme.colors.primaryBlue}`};
-  font-size: ${props => `${props.theme.fontSizes.text}`};
-  font-weight: ${props => `${props.theme.fontWeights.regular}`};
-  line-height: ${props => `${props.theme.lineHeights.text}`};
-  border: none;
-  padding: 0;
-  cursor: pointer;
-
+export const SignInText = styled.p`
+  color: ${theme.colors.primaryBlue};
   @media (min-width: 768px) {
     width: 54px;
-    font-size: ${props => `${props.theme.fontSizes.listTitle}`};
     line-height: 1.33;
   }
 `;
