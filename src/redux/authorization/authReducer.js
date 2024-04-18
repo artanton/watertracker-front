@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const authInstance = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com', // ???????????????????????????????????????????????????????????????????????????????????????????????????????????
+  baseURL: ' https://project-codebusters-backend.onrender.com/api',
 });
 
 export const setToken = token => {
@@ -18,7 +18,7 @@ export const apiRegisterUser = createAsyncThunk(
   'auth/apiRegisterUser',
   async (formData, thunkApi) => {
     try {
-      const { data } = await authInstance.post('/signup', formData);
+      const { data } = await authInstance.post('/auth/register', formData);
       // data = {user: {name: 'Abra', email: 'abra@gmail.com'}, token: 'abrakadabra1223'}  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       setToken(data.token);
@@ -33,7 +33,7 @@ export const apiLoginUser = createAsyncThunk(
   'auth/apiLoginUser',
   async (formData, thunkApi) => {
     try {
-      const { data } = await authInstance.post('/login', formData);
+      const { data } = await authInstance.post('/auth/login', formData);
       setToken(data.token);
       return data;
     } catch (error) {
@@ -50,7 +50,7 @@ export const apiRefreshUser = createAsyncThunk(
     if (!token) return thunkApi.rejectWithValue('You don’t have any token!');
     try {
       setToken(token);
-      const { data } = await authInstance.get('/current');
+      const { data } = await authInstance.get('/auth/current');
       // data = {user: {name: 'Abra', email: 'abra@gmail.com'}, token: 'abrakadabra1223'}  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       return data;
     } catch (error) {
@@ -63,7 +63,7 @@ export const apiLogoutUser = createAsyncThunk(
   'auth/apiLogoutUser',
   async (_, thunkApi) => {
     try {
-      await authInstance.post('/logout');
+      await authInstance.post('/auth/logout');
       clearToken();
 
       return;
