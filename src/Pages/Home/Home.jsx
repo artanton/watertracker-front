@@ -11,6 +11,7 @@ import TodayWaterList from 'components/TodayWaterList/TodayWaterList';
 import { Container } from 'styles/GlobalStyle';
 import MonthStatsTable from 'components/MonthStatsTable/MonthStatsTable';
 import { LayoutHome } from 'components/LayoutHome/LayoutHome';
+import { ModalAddWater } from 'components';
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function Home() {
           <MonthStatsTable />
         </ListContainer>
       </Container>
+      <ModalAddWater />
     </LayoutHome>
   );
 }

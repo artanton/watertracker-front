@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
   AddWater,
@@ -11,6 +12,8 @@ import {
   AddWaterText,
   ProgressBarContainer,
 } from './WaterRatioPanel.styled';
+import { openModal } from '../../redux/modal/modalSlice';
+import { modalNames } from 'constants/constants';
 
 const ProgressBar = ({ percentage }) => {
   return (
@@ -24,8 +27,10 @@ const ProgressBar = ({ percentage }) => {
   );
 };
 
-const WaterRatioPanel = ({ HandleOpenModal }) => {
+const WaterRatioPanel = () => {
   const [percentage, setPercentage] = useState(0);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setPercentage(percentage);
@@ -61,7 +66,10 @@ const WaterRatioPanel = ({ HandleOpenModal }) => {
           </ProgressBarLabel>
         </ProgressBarLabels>
       </PanelContainer>
-      <AddWater onClick={HandleOpenModal}>
+      <AddWater
+        type="button"
+        onClick={() => dispatch(openModal(modalNames.ADD_WATER))}
+      >
         <PlusIcon />
         <AddWaterText>Add Water</AddWaterText>
       </AddWater>
