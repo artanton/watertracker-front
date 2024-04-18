@@ -1,38 +1,31 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const Styled = styled.div`
-  position: relative;
+export const Wrap = styled.div`
   width: 100%;
+  position: relative;
+
   button {
     display: flex;
     position: absolute;
-    right: -10px;
-    top: 70%;
+    right: 0px;
+    top: 50%;
     transform: translateY(-50%);
     border: none;
     background-color: transparent;
-  }
-  @media screen and (min-width: 768px) {
-    button {
-      right: 40px;
-    }
-  }
-  @media screen and (min-width: 1440px) {
   }
 `;
 
 export const Label = styled.label`
   font-size: 18px;
-  line-height: calc(24 / 18);
-  color: ;
+  line-height: 1.33em;
+  color: ${theme.colors.primaryBlack};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: relative;
+
   gap: 8px;
   width: 100%;
-  }
 `;
 
 export const Input = styled.input`
@@ -40,10 +33,11 @@ export const Input = styled.input`
   padding: 11px 10px;
   line-height: 1.25em;
   border-radius: 6px;
-  width: 280px;
+  width: 100%;
   color: ${theme.colors.primaryAccent};
   border: 1px solid ${theme.colors.secondaryGray};
   font-family: inherit;
+  position: relative;
 
   &:focus {
     outline: none;
@@ -55,8 +49,7 @@ export const Input = styled.input`
     color: ${theme.colors.secondaryRed};
     border-color: ${theme.colors.secondaryRed};
   }
-  &::before {
-  }
+
   ${props =>
     props.$error
       ? {
@@ -67,10 +60,11 @@ export const Input = styled.input`
       : null}
 `;
 export const SignInTitle = styled.h2`
-  font-size: ;
+  font-size: 26px;
+  margin: 0;
   line-height: 1.23em;
   font-weight: 500;
-  color: ;
+  color: ${theme.colors.primaryBlack};
 `;
 
 export const Error = styled.p`
@@ -79,7 +73,7 @@ export const Error = styled.p`
   color: ${theme.colors.secondaryRed};
 `;
 export const Button = styled.button`
-  width: 276px;
+  width: 100%;
   height: 36px;
   padding: 8px 30px;
   border-radius: 10px;
@@ -93,10 +87,6 @@ export const Button = styled.button`
     font-size: 18px;
     height: 44px;
   }
-  @media screen and (min-width: 1440px) {
-    width: 384px;
-    height: 44px;
-  }
 `;
 export const SignInForm = styled.form`
   gap: 16px;
@@ -107,7 +97,6 @@ export const SignInForm = styled.form`
 
   @media screen and (min-width: 768px) {
     width: 336px;
-    margin-right: auto;
   }
   @media screen and (min-width: 1440px) {
     width: 384px;

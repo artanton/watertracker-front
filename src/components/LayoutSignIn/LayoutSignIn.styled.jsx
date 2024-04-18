@@ -7,7 +7,7 @@ const bgSigninDes2x = require('../../img/background/desktop/bg_signin@2x.png');
 export const SignInStyle = styled.div`
   display: flex;
   align-items: centre;
-  height: 100%;
+  height: -webkit-fill-available;
   position: relative;
 
   @media screen and (max-width: 767px) {
@@ -43,16 +43,8 @@ export const SignInStyle = styled.div`
   @media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
     background-image: url(${bgSigninDes2x});
     background-size: cover;
-  }
-`;
-
-export const ContainerSignin = styled.div`
-  width: 320px;
-  margin: 24px auto 0;
-  padding: 0px 32px;
-  height: 100%;
-
-  @media screen and (min-width: 768px) {
-    width: 768px;
+    picture {
+      display: none;
+    }
   }
 `;

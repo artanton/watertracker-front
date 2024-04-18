@@ -1,15 +1,16 @@
 import React from 'react';
-import { SignInStyle, ContainerSignin } from './LayoutSignIn.styled';
+import { SignInStyle } from './LayoutSignIn.styled';
 
 import bgSigninMob1x from '../../img/background/mobile/bottle_signin@1x.png';
 import bgSigninMob2x from '../../img/background/mobile/bottle_signin@2x.png';
 import bgSigninTab1x from '../../img/background/tablet/bottle_signin@1x.png';
 import bgSigninTab2x from '../../img/background/tablet/bottle_signin@1x.png';
+import { Container } from 'styles/GlobalStyle';
 
 export const LayoutSignIn = ({ children }) => {
   return (
     <SignInStyle>
-      <ContainerSignin>
+      <Container>
         {children}
         <picture>
           <source
@@ -24,7 +25,7 @@ export const LayoutSignIn = ({ children }) => {
           />
           <img src={bgSigninTab1x} alt="bottle" />
         </picture>
-      </ContainerSignin>
+      </Container>
     </SignInStyle>
   );
 };

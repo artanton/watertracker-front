@@ -10,12 +10,12 @@ import {
   Error,
   Button,
   SignInForm,
+  Wrap,
 } from './SignIn.styled';
 
 import { useState } from 'react';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
-import { Styled } from './SignIn.styled';
 
 function Signin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -56,9 +56,10 @@ function Signin() {
           />
           {touched.email && errors.email && <Error>{errors.email}</Error>}
         </Label>
-        <Styled>
-          <Label>
-            Enter password
+
+        <Label>
+          Enter password
+          <Wrap>
             <Input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -71,11 +72,12 @@ function Signin() {
             <button type="button" onClick={swapPassword}>
               {showPassword ? <Eye /> : <EyeSlash />}
             </button>
-            {touched.password && errors.password && (
-              <Error>{errors.password}</Error>
-            )}
-          </Label>
-        </Styled>
+          </Wrap>
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+        </Label>
+
         <Button type="submit">Sign in</Button>
         <Link to="/signup">Signup</Link>
       </SignInForm>
