@@ -1,11 +1,41 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-//import { apiRegisterUser } from './redux/authorization/authReducer';
+import { apiRegisterUser } from './redux/authorization/authReducer';
+import { useFormik } from 'formik';
+import { signUpSchema } from 'schemas/schemas';
+
+import {
+  Label,
+  SignUpTitle,
+  EmailInput,
+  PasswordInput,
+  RepeatPasswordInput,
+  Error,
+  Button,
+  SignUpForm,
+} from './SignUp.styled';
 
 const Signup = () => {
+  const {
+    values,
+    touched,
+    errors,
+    //handleSubmit: formikHandleSubmit,
+    handleChange,
+    handleBlur,
+    isValid,
+  } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      repeatPassword: '',
+    },
+    validationSchema: signUpSchema,
+    // onSubmit,
+  });
   const dispatch = useDispatch();
 
-  const onSubmitRegistr = event => {
+  const onSubmit = event => {
     event.preventDefault();
     const email = event.currentTarget.elements.email.value;
     const password = event.currentTarget.elements.password.value;
@@ -14,13 +44,14 @@ const Signup = () => {
     const formData = {
       email,
       password,
-      repeatPassword,
     };
     //console.log(formData);
-    // dispatch(apiRegisterUser(formData));
-    // .unwrap()
-    // .then(() => toast.success('Perfect! Successfully registration!'))
-    // .catch(() => toast.error('Please, write a correct email or password!'));
+    dispatch(apiRegisterUser(formData));
+
+    handleChange({ target: { name: 'email', value: '' } });
+    handleChange({ target: { name: 'password', value: '' } });
+    handleChange({ target: { name: 'repeatPassword', value: '' } });
+
     //// event.currentTarget.reset();
   };
 
@@ -29,26 +60,55 @@ const Signup = () => {
       <div>SIGNUP PAGE HERE</div>
       <Link to="/signin">Signin</Link>
 
-      <form onSubmit={onSubmitRegistr}>
-        <label>
-          Enter your email
-          <input type="text" name="email" placeholder="Email" required />
-        </label>
-        <label>
-          Enter your password
-          <input type="text" name="password" placeholder="Password" required />
-        </label>
-        <label>
-          Repeat password
-          <input
-            type="text"
-            name="repeatPassword"
-            placeholder="Repeat password"
-            required
+      <SignUpForm onSubmit={onSubmit}>
+        <SignUpTitle>Sign up</SignUpTitle>
+        <Label>
+          Enter email
+          <EmailInput
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Email"
+            $error={touched.email && errors.email}
           />
-        </label>
-        <button type="submit">Sign up</button>
-      </form>
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+        </Label>
+        <Label>
+          Enter password
+          <PasswordInput
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Password"
+            $error={touched.password && errors.password}
+          />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+        </Label>
+        <Label>
+          Repeat password
+          <RepeatPasswordInput
+            type="password"
+            name="repeatPassword"
+            value={values.repeatPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Repeat password"
+            $error={touched.repeatPassword && errors.repeatPassword}
+          />
+          {touched.repeatPassword && errors.repeatPassword && (
+            <Error>{errors.repeatPassword}</Error>
+          )}
+        </Label>
+        <Button type="submit" disabled={!isValid}>
+          Sign up
+        </Button>
+      </SignUpForm>
     </>
   );
 };
