@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { apiRegisterUser } from './redux/authorization/authReducer';
+import { apiRegisterUser } from '../redux/authorization/authReducer';
 import { useFormik } from 'formik';
 import { signUpSchema } from 'schemas/schemas';
 
