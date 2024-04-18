@@ -44,6 +44,7 @@ const Signup = () => {
     const formData = {
       email,
       password,
+      repeatPassword,
     };
     //console.log(formData);
     dispatch(apiRegisterUser(formData));
