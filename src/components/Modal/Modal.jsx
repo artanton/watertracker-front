@@ -1,8 +1,11 @@
+import { createPortal } from 'react-dom';
 import { ModalBackdrop, ModalContent } from './Modal.styled';
 import { selectModalActiveModal } from '../../redux/modal/modalSlice.selectors';
 import { closeModal } from '../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+
+const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({ modalId, children }) => {
   const dispatch = useDispatch();
@@ -27,9 +30,12 @@ export const Modal = ({ modalId, children }) => {
       window.removeEventListener('keydown', closeModalonEsc);
     };
   }, [dispatch, activeModal, modalId]);
-  return activeModal === modalId ? (
-    <ModalBackdrop onClick={closeModalOnBackdrop}>
-      <ModalContent>{children}</ModalContent>
-    </ModalBackdrop>
-  ) : null;
+  return createPortal(
+    activeModal === modalId ? (
+      <ModalBackdrop onClick={closeModalOnBackdrop}>
+        <ModalContent>{children}</ModalContent>
+      </ModalBackdrop>
+    ) : null,
+    modalRoot
+  );
 };
