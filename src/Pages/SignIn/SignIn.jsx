@@ -11,6 +11,7 @@ import {
   Button,
   SignInForm,
   Wrap,
+  SignUpText,
 } from './SignIn.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -29,6 +30,7 @@ function Signin() {
   };
 
   const onSubmit = e => {
+    e.preventDefault();
     dispatch(apiLoginUser(e));
   };
 
@@ -84,7 +86,9 @@ function Signin() {
         <Button type="submit" disabled={isLoading}>
           Sign in
         </Button>
-        <Link to="/signup">Signup</Link>
+        <Link to="/signup">
+          <SignUpText>Signup</SignUpText>
+        </Link>
       </SignInForm>
     </LayoutSignIn>
   );

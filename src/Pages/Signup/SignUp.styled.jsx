@@ -160,7 +160,7 @@ export const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  position: relative;
   @media screen and (min-width: 768px) {
     width: 336px;
   }

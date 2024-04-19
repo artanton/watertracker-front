@@ -53,7 +53,7 @@ export const SignInStyle = styled.div`
     background-size: 100%, auto;
     picture {
       position: absolute;
-      top: 5px;
+      top: -50px;
       right: 40px;
     }
   }
@@ -64,11 +64,13 @@ export const SignInStyle = styled.div`
     background-image: url(${bgSigninDes1x});
     background-repeat: no-repeat, no-repeat;
     background-position: center, center;
-    background-size: cover, cover;
+    background-size: contain;
     display: flex;
     justify-content: center;
     picture {
-      display: none;
+      position: absolute;
+      left: 0px;
+      top: -100px;
     }
   }
 
@@ -76,7 +78,6 @@ export const SignInStyle = styled.div`
     background-image: url(${bgSigninDes2x});
     background-size: cover;
     picture {
-      display: none;
     }
   }
 `;
