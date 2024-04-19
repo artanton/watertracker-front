@@ -10,12 +10,13 @@ export const LayoutSignIn = ({ children }) => {
   return (
     <SignInStyle>
       <ContainerSignin>
-        {children}
         <picture>
           <source
             media="(min-width: 768px)"
             srcSet={`${bgSigninTab1x} 1x, ${bgSigninTab2x} 2x`}
             type="image/png"
+            width="700"
+            height="650"
           />
           <source
             media="(max-width: 768px)"
@@ -24,6 +25,7 @@ export const LayoutSignIn = ({ children }) => {
           />
           <img src={bgSigninTab1x} alt="bottle" />
         </picture>
+        {children}
       </ContainerSignin>
     </SignInStyle>
   );

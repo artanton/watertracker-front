@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
+
 import { useFormik } from 'formik';
-// import { UseDispatch } from 'react-redux';
 import { signInSchema } from 'schemas/schemas';
 import { LayoutSignIn } from 'components/LayoutSignIn/LayoutSignIn';
 import {
@@ -12,23 +12,25 @@ import {
   SignInForm,
   Wrap,
 } from './SignIn.styled';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { apiLoginUser } from '../../redux/authorization/authReducer';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
+import { selectIsLoading } from '../../redux/selectors';
 
 function Signin() {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const swapPassword = () => {
     setShowPassword(!showPassword);
   };
-  // const dispatch = useDispatch();
-  // const isLoading = useSelector(isLoading);
 
-  // const onSubmit = e => {
-  //   dispatch(signInThunk(e));
-  // };
+  const onSubmit = e => {
+    dispatch(apiLoginUser(e));
+  };
 
   const { values, touched, errors, handleSubmit, handleChange, handleBlur } =
     useFormik({
@@ -37,8 +39,9 @@ function Signin() {
         password: '',
       },
       validationSchema: signInSchema,
-      // onSubmit,
+      onSubmit,
     });
+
   return (
     <LayoutSignIn>
       <SignInForm onSubmit={handleSubmit}>
@@ -78,7 +81,9 @@ function Signin() {
           )}
         </Label>
 
-        <Button type="submit">Sign in</Button>
+        <Button type="submit" disabled={isLoading}>
+          Sign in
+        </Button>
         <Link to="/signup">Signup</Link>
       </SignInForm>
     </LayoutSignIn>
