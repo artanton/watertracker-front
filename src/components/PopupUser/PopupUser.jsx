@@ -22,7 +22,7 @@ export const PopupUser = () => {
       closeOnDocumentClick
     >
       {close => (
-        <span>
+        <div>
           <button
             type="button"
             onClick={() => {
@@ -32,7 +32,7 @@ export const PopupUser = () => {
           >
             Settings
           </button>
-        </span>
+        </div>
       )}
     </Popup>
   );
