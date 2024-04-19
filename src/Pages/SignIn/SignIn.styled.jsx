@@ -98,5 +98,11 @@ export const SignInForm = styled.form`
   @media screen and (min-width: 1440px) {
     width: 384px;
     margin-left: auto;
+    margin-right: 140px;
+    padding-top: 100px;
   }
+`;
+
+export const SignUpText = styled.span`
+  color: ${theme.colors.primaryBlue};
 `;
