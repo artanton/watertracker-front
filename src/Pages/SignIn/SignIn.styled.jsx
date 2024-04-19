@@ -23,7 +23,6 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   gap: 8px;
   width: 100%;
 `;
@@ -34,7 +33,7 @@ export const Input = styled.input`
   line-height: 1.25em;
   border-radius: 6px;
   width: 100%;
-  color: ${theme.colors.primaryAccent};
+  color: ${theme.colors.primaryBlue};
   border: 1px solid ${theme.colors.secondaryGray};
   font-family: inherit;
   position: relative;
@@ -44,10 +43,7 @@ export const Input = styled.input`
   }
   &::placeholder {
     color: ${theme.colors.secondaryBlue};
-  }
-  &:not(:placeholder-shown):invalid {
-    color: ${theme.colors.secondaryRed};
-    border-color: ${theme.colors.secondaryRed};
+    text-color: ${theme.colors.secondaryBlue};
   }
 
   ${props =>
@@ -57,7 +53,7 @@ export const Input = styled.input`
           borderColor: 'red',
           '&::placeholder': { color: 'red' },
         }
-      : null}
+      : []}
 `;
 export const SignInTitle = styled.h2`
   font-size: 26px;
@@ -83,6 +79,7 @@ export const Button = styled.button`
   font-weight: 700;
   line-height: 1.33em;
   background-color: ${theme.colors.primaryBlue};
+  box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
   @media screen and (min-width: 768px) {
     font-size: 18px;
     height: 44px;
@@ -94,7 +91,7 @@ export const SignInForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  position: relative;
   @media screen and (min-width: 768px) {
     width: 336px;
   }

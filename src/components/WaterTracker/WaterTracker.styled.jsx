@@ -22,10 +22,10 @@ export const WaterTrackerTitle = styled.h2`
   line-height: 1.16em;
   color: ${theme.colors.primaryBlack};
   font-weight: 700;
-  font-size: 28px;
+  font-size: 26px;
   margin-bottom: 16px;
   margin-top: 0px;
-  @media only screen and (max-width: 767px) {
+  @media only screen and (min-width: 767px) {
     font-size: 36px;
     line-height: 1.28em;
   }

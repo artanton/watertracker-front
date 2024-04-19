@@ -3,21 +3,26 @@ const bgSignin1x = require('../../img/background/mobile/bg_signin@1x.png');
 const bgSignin2x = require('../../img/background/mobile/bg_signin@2x.png');
 const bgSigninDes1x = require('../../img/background/desktop/bg_signin@1x.png');
 const bgSigninDes2x = require('../../img/background/desktop/bg_signin@2x.png');
-const bgSigninTab1x = require('../../img/background/tablet/bottle_signin@1x.png');
-// import bgSigninTab2x = '../../img/background/tablet/bottle_signin@1x.png';
 
 export const ContainerSignin = styled.div`
-  // width: 320px;
-  // margin: 24px auto 0;
-  // padding: 0px 20px 40px;
+  display: flex;
+  width: 320px;
+  margin: 24px auto 0;
+  padding: 0px 20px 40px;
+  position: relative;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
 
   @media screen and (min-width: 768px) {
+    align-items: flex-start;
     width: 768px;
     margin: 40px auto 0;
     padding: 0px 32px 44px;
   }
 
   @media screen and (min-width: 1440px) {
+    display: block;
     width: 1440px;
     margin: 20px auto 0;
     padding: 0px 112px 56px;
@@ -25,15 +30,10 @@ export const ContainerSignin = styled.div`
 `;
 
 export const SignInStyle = styled.div`
-  display: flex;
-  align-items: centre;
   height: -webkit-fill-available;
   position: relative;
 
   @media screen and (max-width: 767px) {
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
     background-image: url(${bgSignin1x});
     background-size: cover;
   }
@@ -43,16 +43,18 @@ export const SignInStyle = styled.div`
   }
 
   @media screen and (min-width: 768px) and (max-width: 1439px) {
-    background-image: url(${bgSigninTab1x});
+    background-image: url(${bgSignin1x});
 
-    min-height: calc(100vh - 119px);
+    min-height: calc(100vh - 80px);
 
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100%, auto;
     picture {
-      display: none;
+      position: absolute;
+      top: 5px;
+      right: 40px;
     }
   }
   @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
@@ -65,6 +67,9 @@ export const SignInStyle = styled.div`
     background-size: cover, cover;
     display: flex;
     justify-content: center;
+    picture {
+      display: none;
+    }
   }
 
   @media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
