@@ -18,9 +18,5 @@ export const SettingsHeader = styled.h2`
   font-size: ${theme.fontSizes.subtitle};
   font-weight: ${theme.fontWeights.normal};
   line-height: ${theme.lineHeights.subtitle};
+  color: ${theme.colors.primaryBlack};
 `;
-
-export const UserSettings = styled.div``;
-
-export const UserInfo = styled.div``;
-export const UserPasswords = styled.div``;

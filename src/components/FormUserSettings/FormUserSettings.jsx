@@ -1,4 +1,13 @@
 import { Formik, Form, Field } from 'formik';
+import {
+  OptionTitle,
+  FieldContainer,
+  GenderContainer,
+  RadiosContainer,
+  RadioElement,
+  StyledRadio,
+  Label,
+} from './FormUserSettings.styled';
 
 export const FormUserSettings = () => {
   const handleSubmit = (values, actions) => {
@@ -10,28 +19,48 @@ export const FormUserSettings = () => {
     avatarURL: '',
     gender: '',
     userName: '',
-    email: 'halo@mail.com',
+    email: '',
     oldPassword: '',
     newPassword: '',
     repeatPassword: '',
   };
+
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <Form autoComplete="off">
-        {/* <img src="" alt="" /> */}
-        <label htmlFor="avatar">Your Photo</label>
-        <Field id="avatarURL" name="avatarURL" type="file" accept="image" />
-        <h3>Your gender identity</h3>
-        <Field type="radio" name="gender" id="Woman" value="Woman" />
-        <label htmlFor="Woman">Woman</label>
-        <Field type="radio" name="gender" id="Man" value="Man" />
-        <label htmlFor="Man">Man</label>
-        <label htmlFor="userName">Your name</label>
-        <Field type="text" name="userName" id="userName" />
-        <label htmlFor="email">E-mail</label>
-        <Field type="email" name="email" id="email" />
+        <FieldContainer>
+          {/* <img src="" alt="" /> */}
+          <OptionTitle htmlFor="avatar">Your Photo</OptionTitle>
+          <Field id="avatarURL" name="avatarURL" type="file" accept="image" />
+        </FieldContainer>
+        <GenderContainer>
+          <OptionTitle>Your gender identity</OptionTitle>
+          <RadiosContainer>
+            <RadioElement>
+              <StyledRadio
+                type="radio"
+                name="gender"
+                id="Woman"
+                value="Woman"
+              />
+              <Label htmlFor="Woman">Woman</Label>
+            </RadioElement>
+            <RadioElement>
+              <StyledRadio type="radio" name="gender" id="Man" value="Man" />
+              <Label htmlFor="Man">Man</Label>
+            </RadioElement>
+          </RadiosContainer>
+        </GenderContainer>
+        <FieldContainer>
+          <OptionTitle htmlFor="userName">Your name</OptionTitle>
+          <Field type="text" name="userName" id="userName" />
+        </FieldContainer>
+        <FieldContainer>
+          <OptionTitle htmlFor="email">E-mail</OptionTitle>
+          <Field type="email" name="email" id="email" />
+        </FieldContainer>
 
-        <h3>Password</h3>
+        <OptionTitle>Password</OptionTitle>
         <label htmlFor="oldPassword">Outdated password</label>
         <Field type="password" name="oldPassword" id="oldPassword" />
         <label htmlFor="newPassword">New password</label>

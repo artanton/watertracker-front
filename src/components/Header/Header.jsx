@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { PopupUser } from 'components';
+import { PopupUser, SettingModal } from 'components';
 import { Logo } from 'components/Icons/Logo';
-import { ModalUserSettings } from 'components';
 import {
   SignInText,
   HeaderContainer,
@@ -26,7 +25,7 @@ export const Header = () => {
         </Link>
         <PopupUser />
       </UserInfo>
-      <ModalUserSettings />
+      <SettingModal />
     </HeaderContainer>
   );
 };

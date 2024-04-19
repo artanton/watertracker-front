@@ -4,10 +4,9 @@ import {
   ModalContainer,
   SettingsHeader,
   ModalHeader,
-  UserSettings,
-} from './ModalUserSettings.styled';
+} from './SettingModal.styled';
 
-export const ModalUserSettings = () => {
+export const SettingModal = () => {
   return (
     <Modal modalId={modalNames.USER_SETTINGS}>
       <ModalContainer>
@@ -15,10 +14,8 @@ export const ModalUserSettings = () => {
           <SettingsHeader>Settings</SettingsHeader>
           <CloseModalCross />
         </ModalHeader>
-      </ModalContainer>
-      <UserSettings>
         <FormUserSettings />
-      </UserSettings>
+      </ModalContainer>
     </Modal>
   );
 };
