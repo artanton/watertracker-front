@@ -18,35 +18,53 @@ import { useState } from 'react';
 import { apiLoginUser } from '../../redux/authorization/authReducer';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
-import { selectIsLoading } from '../../redux/selectors';
+import { selectIsLoading, selectError } from '../../redux/selectors';
+import { toast } from 'react-toastify';
 
 function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   const swapPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
-    dispatch(apiLoginUser(e));
+  // const onSubmit = e => {
+  //   e.preventDefault();
+  //   dispatch(apiLoginUser(e));
+  // };
+
+  const { values, touched, errors, handleChange, handleBlur } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: signInSchema,
+    //onSubmit,
+  });
+
+  const onSubmit = event => {
+    event.preventDefault();
+    const email = event.currentTarget.elements.email.value;
+    const password = event.currentTarget.elements.password.value;
+
+    const formData = {
+      email,
+      password,
+    };
+    //console.log(formData);
+
+    dispatch(apiLoginUser(formData))
+      .unwrap()
+      .then(() => handleChange({ target: { name: 'email', value: '' } }))
+      .then(() => handleChange({ target: { name: 'password', value: '' } }))
+      .catch(() => toast.error('Please, write a correct email or password!'));
   };
-
-  const { values, touched, errors, handleSubmit, handleChange, handleBlur } =
-    useFormik({
-      initialValues: {
-        email: '',
-        password: '',
-      },
-      validationSchema: signInSchema,
-      onSubmit,
-    });
-
   return (
     <LayoutSignIn>
-      <SignInForm onSubmit={handleSubmit}>
+      <SignInForm onSubmit={onSubmit}>
         <SignInTitle>Sign in</SignInTitle>
         <Label>
           Enter email
@@ -78,6 +96,7 @@ function Signin() {
               {showPassword ? <Eye /> : <EyeSlash />}
             </button>
           </Wrap>
+          {error && <Error>{`Wrong email or password`}</Error>}
           {touched.password && errors.password && (
             <Error>{errors.password}</Error>
           )}

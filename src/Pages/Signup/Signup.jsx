@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { apiRegisterUser } from '../../redux/authorization/authReducer';
 import { useFormik } from 'formik';
 import { signUpSchema } from 'schemas/schemas';
 import { LayoutSignIn } from 'components/LayoutSignIn/LayoutSignIn';
-
+import { selectIsLoggedIn } from '../../redux/selectors';
 import { useState } from 'react';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
@@ -12,18 +12,21 @@ import { EyeSlash } from '../../components/Icons/EyeSlash';
 import {
   Label,
   SignUpTitle,
-  EmailInput,
-  PasswordInput,
-  RepeatPasswordInput,
+  Input,
+  // PasswordInput,
+  // RepeatPasswordInput,
   Error,
   Button,
   SignUpForm,
   Wrap,
+  SignUpText,
 } from './SignUp.styled';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
 
   const swapPassword = () => {
     setShowPassword(!showPassword);
@@ -76,6 +79,9 @@ const Signup = () => {
     //// event.currentTarget.reset();
   };
 
+  if (isLoggedIn) {
+    navigate('/signin');
+  }
   return (
     <>
       <LayoutSignIn>
@@ -83,7 +89,7 @@ const Signup = () => {
           <SignUpTitle>Sign up</SignUpTitle>
           <Label>
             Enter email
-            <EmailInput
+            <Input
               type="email"
               name="email"
               value={values.email}
@@ -98,7 +104,7 @@ const Signup = () => {
           <Label>
             Enter password
             <Wrap>
-              <PasswordInput
+              <Input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={values.password}
@@ -119,7 +125,7 @@ const Signup = () => {
           <Label>
             Repeat password
             <Wrap>
-              <RepeatPasswordInput
+              <Input
                 type={showRepeatPassword ? 'text' : 'password'}
                 name="repeatPassword"
                 value={values.repeatPassword}
@@ -140,8 +146,12 @@ const Signup = () => {
           <Button type="submit" disabled={!isValid}>
             Sign up
           </Button>
+          {/* {isLoggedIn && <Redirect to="/signin" />} */}
+
+          <Link to="/signin">
+            <SignUpText>Signin</SignUpText>
+          </Link>
         </SignUpForm>
-        <Link to="/signin">Signin</Link>
       </LayoutSignIn>
     </>
   );

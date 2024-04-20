@@ -1,18 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const Label = styled.label`
-  font-size: 18px;
-  line-height: 1.33em;
-  color: ${theme.colors.primaryBlack};
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  gap: 8px;
-  width: 100%;
-`;
-
 export const Wrap = styled.div`
   width: 100%;
   position: relative;
@@ -28,6 +16,45 @@ export const Wrap = styled.div`
   }
 `;
 
+export const Label = styled.label`
+  font-size: 18px;
+  line-height: 1.33em;
+  color: ${theme.colors.primaryBlack};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+`;
+
+export const Input = styled.input`
+  font-size: 16px;
+  padding: 11px 10px;
+  line-height: 1.25em;
+  border-radius: 6px;
+  width: 100%;
+  color: ${theme.colors.primaryBlue};
+  border: 1px solid ${theme.colors.secondaryGray};
+  font-family: inherit;
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: ${theme.colors.secondaryBlue};
+    text-color: ${theme.colors.secondaryBlue};
+  }
+
+  ${props =>
+    props.$error
+      ? {
+          color: 'red',
+          borderColor: 'red',
+          '&::placeholder': { color: 'red' },
+        }
+      : []}
+`;
 export const SignUpTitle = styled.h2`
   font-size: 26px;
   margin: 0;
@@ -41,103 +68,6 @@ export const Error = styled.p`
   line-height: 1.28em;
   color: ${theme.colors.secondaryRed};
 `;
-
-export const EmailInput = styled.input`
-  font-size: 16px;
-  padding: 11px 10px;
-  line-height: 1.25em;
-  border-radius: 6px;
-  width: 100%;
-  color: ${theme.colors.primaryAccent};
-  border: 1px solid ${theme.colors.secondaryGray};
-  font-family: inherit;
-  position: relative;
-
-  &:focus {
-    outline: none;
-  }
-  &::placeholder {
-    color: ${theme.colors.secondaryBlue};
-  }
-  &:not(:placeholder-shown):invalid {
-    color: ${theme.colors.secondaryRed};
-    border-color: ${theme.colors.secondaryRed};
-  }
-
-  ${props =>
-    props.$error
-      ? {
-          color: 'red',
-          borderColor: 'red',
-          '&::placeholder': { color: 'red' },
-        }
-      : null}
-`;
-
-export const PasswordInput = styled.input`
-  font-size: 16px;
-  padding: 11px 10px;
-  line-height: 1.25em;
-  border-radius: 6px;
-  width: 100%;
-  color: ${theme.colors.primaryAccent};
-  border: 1px solid ${theme.colors.secondaryGray};
-  font-family: inherit;
-  position: relative;
-
-  &:focus {
-    outline: none;
-  }
-  &::placeholder {
-    color: ${theme.colors.secondaryBlue};
-  }
-  &:not(:placeholder-shown):invalid {
-    color: ${theme.colors.secondaryRed};
-    border-color: ${theme.colors.secondaryRed};
-  }
-
-  ${props =>
-    props.$error
-      ? {
-          color: 'red',
-          borderColor: 'red',
-          '&::placeholder': { color: 'red' },
-        }
-      : null}
-`;
-
-export const RepeatPasswordInput = styled.input`
-  font-size: 16px;
-  padding: 11px 10px;
-  line-height: 1.25em;
-  border-radius: 6px;
-  width: 100%;
-  color: ${theme.colors.primaryAccent};
-  border: 1px solid ${theme.colors.secondaryGray};
-  font-family: inherit;
-  position: relative;
-
-  &:focus {
-    outline: none;
-  }
-  &::placeholder {
-    color: ${theme.colors.secondaryBlue};
-  }
-  &:not(:placeholder-shown):invalid {
-    color: ${theme.colors.secondaryRed};
-    border-color: ${theme.colors.secondaryRed};
-  }
-
-  ${props =>
-    props.$error
-      ? {
-          color: 'red',
-          borderColor: 'red',
-          '&::placeholder': { color: 'red' },
-        }
-      : null}
-`;
-
 export const Button = styled.button`
   width: 100%;
   height: 36px;
@@ -149,6 +79,7 @@ export const Button = styled.button`
   font-weight: 700;
   line-height: 1.33em;
   background-color: ${theme.colors.primaryBlue};
+  box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
   @media screen and (min-width: 768px) {
     font-size: 18px;
     height: 44px;
@@ -167,5 +98,11 @@ export const SignUpForm = styled.form`
   @media screen and (min-width: 1440px) {
     width: 384px;
     margin-left: auto;
+    margin-right: 140px;
+    padding-top: 100px;
   }
+`;
+
+export const SignUpText = styled.span`
+  color: ${theme.colors.primaryBlue};
 `;
