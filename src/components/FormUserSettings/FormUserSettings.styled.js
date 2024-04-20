@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import { Field } from 'formik';
+import { inputValidationStyler } from 'helpers/helpers';
 
 export const AvatarSettingsTitle = styled.h3`
   display: inline-block;
@@ -86,9 +87,11 @@ export const InputText = styled(Field)`
   &:focus {
     outline: none;
   }
+
+  ${props => inputValidationStyler(props)}
 `;
 
-export const StyledRadio = styled(Field)`
+export const InputRadio = styled(Field)`
   margin-right: 8px;
 `;
 
