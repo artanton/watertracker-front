@@ -32,6 +32,15 @@ export const PopupUser = () => {
           >
             Settings
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(openModal(modalNames.LOGOUT));
+              close();
+            }}
+          >
+            Log Out
+          </button>
         </div>
       )}
     </Popup>

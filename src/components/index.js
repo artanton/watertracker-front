@@ -8,4 +8,5 @@ export { ModalAddWater } from './ModalAddWater/AddWater.jsx';
 export { ModalMyDailyNorma } from './ModalMyDailyNorma/ModalMyDailyNorma.jsx';
 export { SettingModal } from './SettingModal/SettingModal.jsx';
 export { SaveModalButton } from './SaveModalButton/SaveModalButton.jsx';
-
+export { UserLogoutModal } from './UserLogoutModal/UserLogoutModal.jsx';
+export { YesNoButton } from './YesNoButton/YesNoButton.jsx';
