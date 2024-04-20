@@ -8,6 +8,7 @@ export const ModalBackdrop = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
+  overflow: scroll;
 `;
 export const ModalContent = styled.div`
   position: absolute;
