@@ -16,7 +16,7 @@ export const WaterTracker = () => {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate('/signUp');
+    navigate('/signup');
   };
 
   return (
@@ -34,7 +34,6 @@ export const WaterTracker = () => {
           View statistics
         </WaterTrackerLi>
         <WaterTrackerLi>
-          {' '}
           <PersonalSetingsSvg />
           Personal rate setting
         </WaterTrackerLi>
