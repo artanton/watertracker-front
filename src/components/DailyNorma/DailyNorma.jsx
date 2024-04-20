@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+
 import { openModal } from '../../redux/modal/modalSlice';
 
 import { modalNames } from 'constants/constants';
