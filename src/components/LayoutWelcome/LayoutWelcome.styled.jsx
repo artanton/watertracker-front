@@ -15,7 +15,7 @@ export const LayoutStyle = styled.section`
   background-image: url(${bgImageMob1x});
 
   min-height: calc(100vh - 119px);
-
+  background-attachment: fixed;
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;

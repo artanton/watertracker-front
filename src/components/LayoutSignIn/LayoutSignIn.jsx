@@ -14,23 +14,24 @@ export const LayoutSignIn = ({ children }) => {
       <ContainerSignin>
         <picture>
           <source
-            media="(min-width: 768px)"
+            media="(min-width: 1440px)"
+            srcSet={`${bgSigninDes1x} 1x, ${bgSigninDes2x} 2x`}
+            type="image/png"
+          />
+          <source
+            media="(min-width: 767px)"
             srcSet={`${bgSigninTab1x} 1x, ${bgSigninTab2x} 2x`}
             type="image/png"
             width="700"
             height="650"
           />
           <source
-            media="(max-width: 768px)"
+            media="(max-width: 767px)"
             srcSet={`${bgSigninMob1x} 1x, ${bgSigninMob2x} 2x`}
             type="image/png"
           />
-          <source
-            media="(max-width: 768px)"
-            srcSet={`${bgSigninDes1x} 1x, ${bgSigninDes2x} 2x`}
-            type="image/png"
-          />
-          <img src={bgSigninTab1x} alt="bottle" />
+
+          <img src={bgSigninDes1x} alt="bottle" />
         </picture>
         {children}
       </ContainerSignin>

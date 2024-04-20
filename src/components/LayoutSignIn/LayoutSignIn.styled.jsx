@@ -32,10 +32,12 @@ export const ContainerSignin = styled.div`
 export const SignInStyle = styled.div`
   height: -webkit-fill-available;
   position: relative;
+  background-position: center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain;
 
   @media screen and (max-width: 767px) {
     background-image: url(${bgSignin1x});
-    background-size: cover;
   }
 
   @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
@@ -44,13 +46,6 @@ export const SignInStyle = styled.div`
 
   @media screen and (min-width: 768px) and (max-width: 1439px) {
     background-image: url(${bgSignin1x});
-
-    min-height: calc(100vh - 80px);
-
-    background-size: cover;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-size: 100%, auto;
     picture {
       position: absolute;
       top: -50px;
@@ -62,22 +57,15 @@ export const SignInStyle = styled.div`
   }
   @media screen and (min-width: 1440px) {
     background-image: url(${bgSigninDes1x});
-    background-repeat: no-repeat, no-repeat;
-    background-position: center, center;
-    background-size: contain;
-    display: flex;
-    justify-content: center;
+
     picture {
       position: absolute;
-      left: 0px;
-      top: -100px;
+      top: -30px;
+      left: -70px;
     }
   }
 
   @media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
     background-image: url(${bgSigninDes2x});
-    background-size: cover;
-    picture {
-    }
   }
 `;
