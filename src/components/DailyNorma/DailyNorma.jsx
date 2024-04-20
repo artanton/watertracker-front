@@ -1,3 +1,11 @@
+import { useDispatch } from 'react-redux';
+
+import { openModal } from '../../redux/modal/modalSlice';
+
+import { modalNames } from 'constants/constants';
+
+import { ModalMyDailyNorma } from 'components';
+
 import {
   MyDailyNorma,
   MyDailyNormaAmount,
@@ -6,16 +14,21 @@ import {
   WaterNormaAmountEdit,
 } from './DailyNorma.styled';
 
-const DailyNorma = ({ HandleOpenModal }) => {
+const DailyNorma = () => {
+  const dispatch = useDispatch();
   return (
     <MyDailyNormaContainer>
       <MyDailyNorma>My daily norma</MyDailyNorma>
       <MyDailyNormaAmount>
         <WaterNormaAmount>2.0 L</WaterNormaAmount>
-        <WaterNormaAmountEdit onClick={HandleOpenModal}>
+        <WaterNormaAmountEdit
+          type="button"
+          onClick={() => dispatch(openModal(modalNames.DAILY_NORMA))}
+        >
           Edit
         </WaterNormaAmountEdit>
       </MyDailyNormaAmount>
+      <ModalMyDailyNorma />
     </MyDailyNormaContainer>
   );
 };
