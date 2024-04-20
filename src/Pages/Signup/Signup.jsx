@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiRegisterUser } from '../../redux/authorization/authReducer';
 import { useFormik } from 'formik';
@@ -8,6 +8,8 @@ import { selectIsLoggedIn } from '../../redux/selectors';
 import { useState } from 'react';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
+import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import {
   Label,
@@ -26,7 +28,8 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const navigate = useNavigate();
+  //const token = useSelector(selectToken);
+  //const navigate = useNavigate();
 
   const swapPassword = () => {
     setShowPassword(!showPassword);
@@ -62,8 +65,12 @@ const Signup = () => {
     const repeatPassword = event.currentTarget.elements.repeatPassword.value;
 
     if (password !== repeatPassword) {
-      return;
+      return toast.error('Please, write a correct email or password!');
     }
+
+    // if (token === null) {
+    //   return toast.error('You dont have token');
+    // }
 
     const formData = {
       email,
@@ -76,12 +83,21 @@ const Signup = () => {
     handleChange({ target: { name: 'password', value: '' } });
     handleChange({ target: { name: 'repeatPassword', value: '' } });
 
+    // dispatch(apiRegisterUser(formData))
+    //   .unwrap()
+    //   .then(() => handleChange({ target: { name: 'email', value: '' } }))
+    //   .then(() => handleChange({ target: { name: 'password', value: '' } }))
+    //   .then(() =>
+    //     handleChange({ target: { name: 'repeatPassword', value: '' } })
+    //   )
+    //   .catch(() => toast.error('Please, write a correct email or password!'));
+
     //// event.currentTarget.reset();
   };
 
-  if (isLoggedIn) {
-    navigate('/signin');
-  }
+  // if (isLoggedIn) {
+  //   navigate('/signin');
+  // }
   return (
     <>
       <LayoutSignIn>
@@ -146,7 +162,7 @@ const Signup = () => {
           <Button type="submit" disabled={!isValid}>
             Sign up
           </Button>
-          {/* {isLoggedIn && <Redirect to="/signin" />} */}
+          {isLoggedIn && <Navigate to="/signin" />}
 
           <Link to="/signin">
             <SignUpText>Signin</SignUpText>
