@@ -49,9 +49,9 @@ export const Input = styled.input`
   ${props =>
     props.$error
       ? {
-          color: 'red',
-          borderColor: 'red',
-          '&::placeholder': { color: 'red' },
+          color: '${theme.colors.secondaryRed}',
+          borderColor: '${theme.colors.secondaryRed}',
+          '&::placeholder': { color: '${theme.colors.secondaryRed}' },
         }
       : []}
 `;
