@@ -197,15 +197,11 @@ export const ButtonSave = styled.button`
   color: ${theme.colors.primaryWhite};
 
   @media screen and (min-width: 768px) {
-    margin-left: 384px;
+    margin: 0 0 0 auto;
     width: 160px;
     padding: 10px 30px;
     font-size: ${theme.fontSizes.listTitle};
     line-height: ${theme.lineHeights.info};
-  }
-
-  @media screen and (min-width: 1440px) {
-    margin-left: 496px;
   }
 
   &:hover {
