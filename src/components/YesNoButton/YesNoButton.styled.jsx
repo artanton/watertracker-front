@@ -3,7 +3,7 @@ import { theme } from '../../styles/theme';
 
 export const Button = styled.button`
   background-color: ${props =>
-    props.approve ? theme.colors.secondaryRed : theme.colors.secondaryGray};
+    props.approve ? theme.colors.secondaryRed : theme.colors.secondaryGrayBlue};
   color: ${props =>
     props.approve ? theme.colors.primaryWhite : theme.colors.primaryBlue};
   align-items: center;
