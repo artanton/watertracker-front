@@ -4,6 +4,13 @@ import { theme } from 'styles/theme';
 export const ModalContainer = styled.div`
   padding: 32px 12px;
   width: 280px;
+  @media screen and (min-width: 768px) {
+    padding: 32px 24px;
+    width: 704px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 1008px;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -13,7 +20,7 @@ export const ModalHeader = styled.div`
   margin-bottom: 24px;
 `;
 
-export const SettingsHeader = styled.h2`
+export const ModalTitle = styled.h2`
   font-family: Roboto;
   font-size: ${theme.fontSizes.subtitle};
   font-weight: ${theme.fontWeights.normal};
