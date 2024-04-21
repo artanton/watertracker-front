@@ -4,6 +4,7 @@ import { modalNames } from 'constants/constants';
 
 import {
   AmountOfWaterLabel,
+  ButtonSave,
   FormContainer,
   FormTitle,
   FormWrapper,
@@ -98,13 +99,14 @@ export const ModalMyDailyNorma = () => {
           <InputFormField
             type="number"
             name="amount"
-            min={1}
+            min={0}
             max={15}
             step={0.1}
+            placeholder="0"
             required
           />
         </FormContainer>
-        <button type="submit">Save</button>
+        <ButtonSave type="submit">Save</ButtonSave>
       </ModalContainer>
     </Modal>
   );
