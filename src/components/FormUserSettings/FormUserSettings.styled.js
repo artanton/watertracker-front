@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
-import { Field, Form } from 'formik';
+import { Field } from 'formik';
 import { inputValidationStyler } from 'helpers/helpers';
 
 export const InputWrapper = styled.div`
