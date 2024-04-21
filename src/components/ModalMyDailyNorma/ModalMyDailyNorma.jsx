@@ -1,5 +1,7 @@
-import { Modal, CloseModalCross } from 'components';
+import { useState, useEffect } from 'react';
 
+import { Modal, CloseModalCross } from 'components';
+import { calculateWaterRate } from './CalculateWaterRate';
 import { modalNames } from 'constants/constants';
 
 import {
@@ -27,6 +29,24 @@ import {
 } from './ModalMyDailyNorma.styled';
 
 export const ModalMyDailyNorma = () => {
+  const [waterRate, setWaterRate] = useState(calculateWaterRate());
+  const [inputValues, setInputValues] = useState({
+    gender: null,
+    weight: 0,
+    hours: 0,
+  });
+
+  useEffect(() => {
+    setWaterRate(calculateWaterRate(inputValues));
+  }, [inputValues]);
+
+  const handleChange = evt => {
+    setInputValues(prevValues => ({
+      ...prevValues,
+      [evt.target.name]: evt.target.value,
+    }));
+  };
+
   return (
     <Modal modalId={modalNames.DAILY_NORMA}>
       <ModalContainer>
@@ -54,11 +74,21 @@ export const ModalMyDailyNorma = () => {
           <FormTitle>Calculate your rate:</FormTitle>
           <RadioFormWraper>
             <RadioWoman>
-              <InputField type="radio" name="gender" value="female" />
+              <InputField
+                type="radio"
+                name="gender"
+                value="female"
+                onChange={handleChange}
+              />
               <LabelWrap>For woman</LabelWrap>
             </RadioWoman>
             <RadioMan>
-              <InputField type="radio" name="gender" value="male" />
+              <InputField
+                type="radio"
+                name="gender"
+                value="male"
+                onChange={handleChange}
+              />
               <LabelWrap>For man</LabelWrap>
             </RadioMan>
           </RadioFormWraper>
@@ -70,6 +100,7 @@ export const ModalMyDailyNorma = () => {
               max={200}
               min={0}
               placeholder="0"
+              onChange={handleChange}
             />
           </FormWrapper>
           <FormWrapper>
@@ -83,13 +114,16 @@ export const ModalMyDailyNorma = () => {
               max={24}
               min={0}
               placeholder="0"
+              onChange={handleChange}
             />
           </FormWrapper>
           <WaterPerDayWrapper>
             <WaterPerDayText>
               The required amount of water in liters per day:
             </WaterPerDayText>
-            <WaterPerDayValue>0 L</WaterPerDayValue>
+            <WaterPerDayValue>
+              {Math.round(waterRate * 10) / 10} L
+            </WaterPerDayValue>
           </WaterPerDayWrapper>
         </FormContainer>
         <FormContainer>
@@ -99,11 +133,11 @@ export const ModalMyDailyNorma = () => {
           <InputFormField
             type="number"
             name="amount"
-            min={0}
+            min={1}
             max={15}
-            step={0.1}
-            placeholder="0"
-            required
+            step={0.5}
+            placeholder="1"
+            onChange={handleChange}
           />
         </FormContainer>
         <ButtonSave type="submit">Save</ButtonSave>
