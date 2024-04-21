@@ -43,15 +43,14 @@ export const Input = styled.input`
   }
   &::placeholder {
     color: ${theme.colors.secondaryBlue};
-    text-color: ${theme.colors.secondaryBlue};
   }
 
   ${props =>
     props.$error
       ? {
-          color: '${theme.colors.secondaryRed}',
-          borderColor: '${theme.colors.secondaryRed}',
-          '&::placeholder': { color: '${theme.colors.secondaryRed}' },
+          color: theme.colors.secondaryRed,
+          borderColor: theme.colors.secondaryRed,
+          '&::placeholder': { color: theme.colors.secondaryRed },
         }
       : []}
 `;
