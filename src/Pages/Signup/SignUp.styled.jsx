@@ -43,7 +43,6 @@ export const Input = styled.input`
   }
   &::placeholder {
     color: ${theme.colors.secondaryBlue};
-    text-color: ${theme.colors.secondaryBlue};
   }
 
   ${props =>

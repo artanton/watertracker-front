@@ -23,12 +23,12 @@ export const signUpSchema = yup.object().shape({
 });
 
 export const userSettingsSchema = yup.object().shape({
-  email: yup.string().matches(emailRegexp, 'Email is not a valid email'),
+  email: yup.string().matches(emailRegexp, 'Email is not valid'),
   userName: yup
     .string()
     .matches(
       userNameRegexp,
-      'User name can contain only alphabet characters and numbers without spaces, punctuation'
+      'Username is not valid. Spaces and numbers are not allowed'
     )
     .max(64, 'User name should not exceed 64 characters'),
   gender: yup
