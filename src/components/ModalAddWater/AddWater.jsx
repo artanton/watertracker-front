@@ -8,7 +8,7 @@ export const ModalAddWater = () => {
     <Modal modalId={modalNames.ADD_WATER}>
       <ModalContainer>
         <ModalHeader>
-          <ModalTitle>Edit the entered amount of water</ModalTitle>
+          <ModalTitle>Add water</ModalTitle>
           <CloseModalCross />
         </ModalHeader>
       </ModalContainer>
