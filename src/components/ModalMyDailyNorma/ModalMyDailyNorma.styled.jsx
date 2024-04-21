@@ -10,12 +10,12 @@ export const ModalContainer = styled.div`
   max-width: 280px;
 
   @media screen and (min-width: 768px) {
-    min-width: 592px;
+    min-width: 704px;
     padding: 32px 24px;
   }
 
   @media screen and (min-width: 1440px) {
-    max-width: 704px;
+    min-width: 592px;
   }
 `;
 
@@ -62,7 +62,7 @@ export const FormulaText = styled.p`
 `;
 
 export const FormulasDescription = styled.div`
-  padding: 10px 8px;
+  padding: 10px 9px;
   word-wrap: initial;
   border-radius: 10px;
   border: solid 1px #d7e3ff;
