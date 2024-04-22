@@ -1,7 +1,13 @@
 import { Modal, CloseModalCross } from 'components';
 import { modalNames } from 'constants/constants';
+import { AddWaterForm } from './AddWaterForm/AddWaterForm';
 
-import { ModalContainer, ModalHeader, ModalTitle } from './AddWater.styled';
+import {
+  ModalContainer,
+  ModalHeader,
+  ModalSubTitle,
+  ModalTitle,
+} from './AddWater.styled';
 
 export const ModalAddWater = () => {
   return (
@@ -11,6 +17,8 @@ export const ModalAddWater = () => {
           <ModalTitle>Add water</ModalTitle>
           <CloseModalCross />
         </ModalHeader>
+        <ModalSubTitle>Choose a value:</ModalSubTitle>
+        <AddWaterForm />
       </ModalContainer>
     </Modal>
   );
