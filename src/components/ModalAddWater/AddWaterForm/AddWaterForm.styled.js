@@ -41,10 +41,35 @@ export const CountValue = styled.div`
 `;
 
 export const LabelSelect = styled.label`
+  display: block;
   margin-bottom: 12px;
 `;
 
 export const SelectInput = styled.select`
   display: block;
   width: 100%;
+  padding: 12px 10px;
+  border: 1px solid ${theme.colors.secondaryGrayBlue};
+  border-radius: 6px;
+  margin-bottom: 24px;
+  color: ${theme.colors.primaryBlue};
+`;
+
+export const LabelQuantityInput = styled.label`
+  display: block;
+  font-size: ${theme.fontSizes.listTitle};
+  font-weight: ${theme.fontWeights.medium};
+  margin-bottom: 16px;
+`;
+
+export const QuantityInput = styled.input`
+  display: block;
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid ${theme.colors.secondaryGrayBlue};
+  border-radius: 6px;
+  color: ${theme.colors.primaryBlue};
+  &::placeholder {
+    color: ${theme.colors.primaryBlue};
+  }
 `;
