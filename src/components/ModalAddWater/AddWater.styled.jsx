@@ -3,7 +3,6 @@ import { theme } from 'styles/theme';
 
 export const ModalContainer = styled.div`
   width: 592px;
-  height: 504px;
   padding: 32px 24px;
 `;
 
