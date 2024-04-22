@@ -18,14 +18,14 @@ import { useState } from 'react';
 import { apiLoginUser } from '../../redux/authorization/authReducer';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
-import { selectIsLoading, selectError } from '../../redux/selectors';
+import { selectIsLoading } from '../../redux/selectors';
 import { toast } from 'react-toastify';
 
 function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  //const error = useSelector(selectError);
 
   const swapPassword = () => {
     setShowPassword(!showPassword);
@@ -96,7 +96,7 @@ function Signin() {
               {showPassword ? <Eye /> : <EyeSlash />}
             </button>
           </Wrap>
-          {error && <Error>{`Wrong email or password`}</Error>}
+          {/* {error && <Error>{`Wrong email or password`}</Error>} */}
           {touched.password && errors.password && (
             <Error>{errors.password}</Error>
           )}

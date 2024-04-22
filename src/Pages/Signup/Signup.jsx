@@ -76,7 +76,7 @@ const Signup = () => {
       email,
       password,
     };
-    console.log(formData);
+    // console.log(formData);
     dispatch(apiRegisterUser(formData));
 
     handleChange({ target: { name: 'email', value: '' } });
