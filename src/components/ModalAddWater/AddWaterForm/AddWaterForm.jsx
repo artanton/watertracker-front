@@ -1,3 +1,4 @@
+import { SaveModalButton } from 'components';
 import {
   CountContainer,
   ButtonChange,
@@ -7,6 +8,8 @@ import {
   SelectInput,
   LabelQuantityInput,
   QuantityInput,
+  ButtonContainer,
+  WaterQuantityValue,
 } from './AddWaterForm.styled';
 import { Minus } from 'components/Icons/Minus';
 import { Plus } from 'components/Icons/Plus/Plus';
@@ -22,9 +25,12 @@ export const AddWaterForm = () => {
 
   function getDefaultTime() {
     const now = new Date();
-    const minutes = Math.ceil(now.getMinutes() / 5) * 5;
-    return `${now.getHours()}:${minutes < 10 ? '0' : ''}${minutes}`;
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+    return `${hour}:${minute}`;
   }
+
+  console.log(getDefaultTime());
 
   const handleChange = event => {
     setSelectedTime(event.target.value);
@@ -49,21 +55,21 @@ export const AddWaterForm = () => {
         {({ errors }) => (
           <Form autoComplete="off">
             <LabelSelect>Recording time:</LabelSelect>
-            <SelectInput value={selectedTime} onChange={handleChange}>
-              {Array.from({ length: 24 * 12 }).map((_, index) => {
+            <SelectInput onChange={handleChange}>
+              <option>{selectedTime}</option>
+              {Array.from({ length: 12 * 12 }).map((_, index) => {
                 const hour = Math.floor(index / 12);
                 const minute = (index % 12) * 5;
-                const hourStr = hour < 10 ? `0${hour}` : `${hour}`;
-                const minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
+                const hourStr = hour.toString().padStart(2, '0');
+                const minuteStr = minute.toString().padStart(2, '0');
                 return (
-                  <option
-                    key={index}
-                    value={`${hourStr}:${minuteStr}`}
-                  >{`${hourStr}:${minuteStr}`}</option>
+                  <option key={index} value={`${hourStr}:${minuteStr}`}>
+                    {`${hourStr}:${minuteStr}`}
+                  </option>
                 );
               })}
             </SelectInput>
-            <LabelQuantityInput>
+            <LabelQuantityInput htmlFor="quantity">
               Enter the value of the water used:
             </LabelQuantityInput>
             <QuantityInput
@@ -72,6 +78,10 @@ export const AddWaterForm = () => {
               id="quantity"
               placeholder="0"
             />
+            <ButtonContainer>
+              <WaterQuantityValue>50ml</WaterQuantityValue>
+              <SaveModalButton />
+            </ButtonContainer>
           </Form>
         )}
       </Formik>
