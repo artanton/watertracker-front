@@ -21,4 +21,5 @@ export const ModalTitle = styled.h2`
 export const ModalSubTitle = styled.p`
   font-size: ${theme.fontSizes.listTitle};
   font-weight: ${theme.fontWeights.medium};
+  margin-bottom: 16px;
 `;
