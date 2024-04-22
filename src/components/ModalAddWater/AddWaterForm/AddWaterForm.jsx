@@ -3,14 +3,29 @@ import {
   ButtonChange,
   CountValue,
   LabelCount,
+  LabelSelect,
+  SelectInput,
 } from './AddWaterForm.styled';
 import { Minus } from 'components/Icons/Minus';
 import { Plus } from 'components/Icons/Plus/Plus';
 import { Form, Formik } from 'formik';
+import { useState } from 'react';
 
 export const AddWaterForm = () => {
+  const [selectedTime, setSelectedTime] = useState(getDefaultTime());
+
   const handleSubmit = values => {
     console.log('values:', values);
+  };
+
+  function getDefaultTime() {
+    const now = new Date();
+    const minutes = Math.ceil(now.getMinutes() / 5) * 5;
+    return `${now.getHours()}:${minutes < 10 ? '0' : ''}${minutes}`;
+  }
+
+  const handleChange = event => {
+    setSelectedTime(event.target.value);
   };
 
   return (
@@ -29,7 +44,25 @@ export const AddWaterForm = () => {
         initialValues={{ time: '', quantity: '' }}
         onSubmit={handleSubmit}
       >
-        {({ errors }) => <Form autoComplete="off"></Form>}
+        {({ errors }) => (
+          <Form autoComplete="off">
+            <LabelSelect>Recording time:</LabelSelect>
+            <SelectInput value={selectedTime} onChange={handleChange}>
+              {Array.from({ length: 24 * 12 }).map((_, index) => {
+                const hour = Math.floor(index / 12);
+                const minute = (index % 12) * 5;
+                const hourStr = hour < 10 ? `0${hour}` : `${hour}`;
+                const minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
+                return (
+                  <option
+                    key={index}
+                    value={`${hourStr}:${minuteStr}`}
+                  >{`${hourStr}:${minuteStr}`}</option>
+                );
+              })}
+            </SelectInput>
+          </Form>
+        )}
       </Formik>
     </>
   );
