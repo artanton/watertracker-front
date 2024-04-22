@@ -15,7 +15,9 @@ import {
   WaterListTime,
 } from './TodayWaterList.styled';
 import { Plus } from 'components/Icons/Plus/Plus';
-// import { useDispatch } from 'react-redux';
+import { openModal } from '../../redux/modal/modalSlice';
+import { modalNames } from 'constants/constants';
+import { useDispatch } from 'react-redux';
 
 // const WaterListDisplay = () => {}
 
@@ -31,7 +33,9 @@ import { Plus } from 'components/Icons/Plus/Plus';
 // dispatch(delete)
 // };}
 
-const TodayWaterList = ({ HandleOpenModal }) => {
+const TodayWaterList = () => {
+  const dispatch = useDispatch();
+
   return (
     <TodayWaterListContainer>
       <Today>Today</Today>
@@ -61,7 +65,7 @@ const TodayWaterList = ({ HandleOpenModal }) => {
           </IconsContainer>
         </WaterListItem>
       </WaterList>
-      <AddWaterButton onClick={HandleOpenModal}>
+      <AddWaterButton onClick={() => dispatch(openModal(modalNames.ADD_WATER))}>
         <Plus />
         Add water
       </AddWaterButton>
