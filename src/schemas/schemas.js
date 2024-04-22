@@ -22,122 +22,71 @@ export const signUpSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-export const userSettingsSchema = yup.object().shape({
-  email: yup.string().matches(emailRegexp, 'Email is not valid'),
-  userName: yup
-    .string()
-    .matches(
-      userNameRegexp,
-      'Username is not valid. Spaces and numbers are not allowed'
-    )
-    .max(64, 'User name should not exceed 64 characters'),
-  gender: yup
-    .string()
-    .oneOf(['Man', 'Woman', null], 'Gender must be either Man or Woman')
-    .nullable(),
-  avatarURL: yup
-    .string()
-    .matches(
-      /\.(jpg|png|webp|jpeg)$/,
-      'Only .jpeg, .jpg, .webp and .png are allowed'
-    ),
-  oldPassword: yup.string(),
-  newPassword: yup.string(),
-  repeatPassword: yup.string(),
-
-  // oldPassword: yup
-  //   .string()
-  //   .min(8, 'Old password must be at least 8 characters long')
-  //   .max(64, 'Old password must be at most 64 characters long'),
-  // newPassword: yup.string().when(['oldPassword', 'repeatPassword'], {
-  //   is: (oldPassword, repeatPassword) => oldPassword || repeatPassword,
-  //   then: yup
-  //     .string()
-  //     .required('New password is required')
-  //     .min(8, 'New password must be at least 8 characters long')
-  //     .max(64, 'New password must be at most 64 characters long'),
-  //   otherwise: yup.string(),
-  // }),
-  // repeatPassword: yup.string().when(['oldPassword', 'newPassword'], {
-  //   is: (oldPassword, newPassword) => oldPassword || newPassword,
-  //   then: yup
-  //     .string()
-  //     .required('Repeat password is required')
-  //     .min(8, 'Repeat password must be at least 8 characters long')
-  //     .max(64, 'Repeat password must be at most 64 characters long')
-  //     .oneOf([yup.ref('newPassword')], 'Passwords must match'),
-  //   otherwise: yup.string(),
-  // }),
-  // oldPassword: yup
-  //   .string()
-  //   .when(['oldPassword', 'newPassword', 'repeatPassword'], {
-  //     is: (oldPassword, newPassword, repeatPassword) =>
-  //       oldPassword || newPassword || repeatPassword,
-  //     then: yup.string().required('Old password is required'),
-  //     otherwise: yup.string(),
-  //   }),
-  // newPassword: yup
-  //   .string()
-  //   .when(['oldPassword', 'newPassword', 'repeatPassword'], {
-  //     is: (oldPassword, newPassword, repeatPassword) =>
-  //       oldPassword || newPassword || repeatPassword,
-  //     then: yup
-  //       .string()
-  //       .required('New password is required')
-  //       .min(8, 'New password must be at least 8 characters long')
-  //       .max(64, 'New password must be at most 64 characters long'),
-  //     otherwise: yup.string(),
-  //   }),
-  // repeatPassword: yup
-  //   .string()
-  //   .when(['oldPassword', 'newPassword', 'repeatPassword'], {
-  //     is: (oldPassword, newPassword, repeatPassword) =>
-  //       oldPassword || newPassword || repeatPassword,
-  //     then: yup
-  //       .string()
-  //       .required('Repeat password is required')
-  //       .oneOf([yup.ref('newPassword')], 'Passwords must match'),
-  //     otherwise: yup.string(),
-  //   }),
-  //!
-  // oldPassword: yup.string().when(['newPassword', 'repeatPassword'], {
-  //   is: (newPassword, repeatPassword) => newPassword || repeatPassword,
-  //   then: yup.string().required('Old password is required'),
-  //   otherwise: yup.string(),
-  // }),
-  // newPassword: yup.string().when(['oldPassword', 'repeatPassword'], {
-  //   is: (oldPassword, repeatPassword) => oldPassword || repeatPassword,
-  //   then: yup
-  //     .string()
-  //     .required('New password is required')
-  //     .min(8, 'New password must be at least 8 characters long')
-  //     .max(64, 'New password must be at most 64 characters long'),
-  //   otherwise: yup.string(),
-  // }),
-  // repeatPassword: yup.string().when(['oldPassword', 'newPassword'], {
-  //   is: (oldPassword, newPassword) => oldPassword || newPassword,
-  //   then: yup
-  //     .string()
-  //     .required('Repeat password is required')
-  //     .oneOf([yup.ref('newPassword')], 'Passwords must match'),
-  //   otherwise: yup.string(),
-  // }),
-});
-
-// userSettingsSchema.test({
-//   name: 'passwords',
-//   test: function () {
-//     const { oldPassword, newPassword, repeatPassword } = this.parent;
-//     // Check if at least one password field is filled
-//     if (oldPassword || newPassword || repeatPassword) {
-//       // Check if all password fields are filled
-//       if (!oldPassword || !newPassword || !repeatPassword) {
-//         return this.createError({
-//           path: 'oldPassword',
-//           message: 'All password fields are required',
-//         });
-//       }
-//     }
-//     return true;
-//   },
-// });
+export const userSettingsSchema = yup.object().shape(
+  {
+    email: yup.string().matches(emailRegexp, 'Email is not valid'),
+    userName: yup
+      .string()
+      .matches(
+        userNameRegexp,
+        'Username is not valid. Spaces and punctuiation are not allowed'
+      )
+      .max(64, 'User name should not exceed 64 characters'),
+    gender: yup
+      .string()
+      .oneOf(['Man', 'Woman', null], 'Gender must be either Man or Woman')
+      .nullable(),
+    avatarURL: yup
+      .string()
+      .matches(
+        /\.(jpg|png|webp|jpeg)$/,
+        'Only .jpeg, .jpg, .webp and .png are allowed'
+      ),
+    oldPassword: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be less than 64 characters')
+      .when('newPassword', (newPassword, schema) => {
+        if (typeof newPassword[0] !== 'undefined') {
+          return schema
+            .notOneOf(
+              [yup.ref('newPassword'), null],
+              'New password must not match the old one'
+            )
+            .required('New password is required');
+        }
+        return schema;
+      }),
+    newPassword: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be less than 64 characters')
+      .when('oldPassword', (oldPassword, schema) => {
+        if (typeof oldPassword[0] !== 'undefined') {
+          return schema
+            .notOneOf(
+              [yup.ref('oldPassword'), null],
+              'New password must not match the old one'
+            )
+            .required('New password is required');
+        }
+        return schema;
+      }),
+    repeatPassword: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be less than 64 characters')
+      .when('newPassword', (newPassword, schema) => {
+        if (typeof newPassword[0] !== 'undefined') {
+          return schema
+            .oneOf(
+              [yup.ref('newPassword')],
+              'Repeted password must match new password'
+            )
+            .required('Repeted password is required');
+        }
+        return schema;
+      }),
+  },
+  ['newPassword', 'oldPassword']
+);
