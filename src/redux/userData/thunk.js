@@ -5,7 +5,7 @@ export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',
   async (waterId, thunkApi) => {
     try {
-      const { data } = await authInstance.get(`/water/${waterId}`);
+      const { data } = await authInstance.get(`/water/today/${waterId}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -17,7 +17,7 @@ export const deleteWater = createAsyncThunk(
   'water/deleteEntry',
   async (waterId, thunkApi) => {
     try {
-      await authInstance.delete(`/water/${waterId}`);
+      await authInstance.delete(`/water/remove/${waterId}`);
       return waterId;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -27,9 +27,23 @@ export const deleteWater = createAsyncThunk(
 
 export const updateWater = createAsyncThunk(
   'today/updateWater',
-  async (waterId, thunkApi) => {
+  async ({ waterId, waterData }, thunkApi) => {
     try {
-      const { data } = await authInstance.patch(`/water/${waterId}`, body);
+      const { data } = await authInstance.patch(
+        `/water/update/${waterId}`,
+        waterData
+      );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const patchWater = createAsyncThunk(
+  'today/patchWater',
+  async (waterData, thunkApi) => {
+    try {
+      const { data } = await authInstance.patch(`/water/waterrate/`, waterData);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -38,9 +52,9 @@ export const updateWater = createAsyncThunk(
 );
 export const addWater = createAsyncThunk(
   'today/addWater',
-  async (waterId, thunkApi) => {
+  async (waterData, thunkApi) => {
     try {
-      const { data } = await authInstance.post(`/water/${waterId}`);
+      const { data } = await authInstance.post(`/water/add`, waterData);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -50,9 +64,11 @@ export const addWater = createAsyncThunk(
 
 export const getMonthWater = createAsyncThunk(
   'today/getMonthWater',
-  async (waterId, thunkApi) => {
+  async (waterDate, thunkApi) => {
     try {
-      const { data } = await authInstance.get(`/water/?date=${waterId}`);
+      const { data } = await authInstance.get(
+        `/water/month/?date=${waterDate}`
+      );
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
