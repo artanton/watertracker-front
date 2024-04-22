@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const ModalContainer = styled.div`
-  width: 592px;
-  padding: 32px 24px;
+  width: 280px;
+  padding: 24px 12px;
+  @media screen and (min-width: 768px) {
+    width: 592px;
+    padding: 32px 24px;
+  }
 `;
 
 export const ModalHeader = styled.div`
