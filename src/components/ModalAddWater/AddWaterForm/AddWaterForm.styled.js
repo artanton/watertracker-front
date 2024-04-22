@@ -66,10 +66,26 @@ export const QuantityInput = styled.input`
   display: block;
   width: 100%;
   padding: 12px 10px;
+  margin-bottom: 24px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
   border-radius: 6px;
   color: ${theme.colors.primaryBlue};
   &::placeholder {
     color: ${theme.colors.primaryBlue};
   }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 32px;
+`;
+
+export const WaterQuantityValue = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${theme.fontSizes.listTitle};
+  font-weight: ${theme.fontWeights.bold};
+  color: ${theme.colors.primaryBlue};
 `;
