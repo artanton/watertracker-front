@@ -178,8 +178,6 @@ ${props =>
       @media (min-width: 768px) {
         width: 40px;
       }
-      @media (min-width: 1024px) {
-      }
     `}
 
 
