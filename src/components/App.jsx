@@ -25,7 +25,14 @@ export const App = () => {
         <Routes>
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/" element={<Layout />}>
-            <Route index element={<WelcomePage />} />
+            <Route
+              index
+              element={
+                <RestrictedRoute>
+                  <WelcomePage />
+                </RestrictedRoute>
+              }
+            />
             <Route
               path="signin"
               element={

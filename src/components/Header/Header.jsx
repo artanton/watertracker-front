@@ -9,8 +9,11 @@ import {
 } from './Header.styled';
 
 import { UserIcon } from 'components/Icons/UserIcon';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/selectors';
 
 export const Header = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <HeaderContainer>
       <Link to="/">
@@ -23,7 +26,8 @@ export const Header = () => {
             <UserIcon />
           </UserLogoContainer>
         </Link>
-        <PopupUser />
+        {isLoggedIn && <PopupUser />}
+        {/* <PopupUser /> */}
       </UserInfo>
       <SettingModal />
       <UserLogoutModal />
