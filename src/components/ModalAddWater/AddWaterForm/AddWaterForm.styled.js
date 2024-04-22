@@ -6,6 +6,7 @@ export const CountContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 7px;
+  margin-bottom: 24px;
 `;
 
 export const ButtonChange = styled.button`
@@ -37,4 +38,13 @@ export const CountValue = styled.div`
   color: ${theme.colors.primaryBlue};
   background-color: ${theme.colors.secondaryGrayBlue};
   border-radius: 40px;
+`;
+
+export const LabelSelect = styled.label`
+  margin-bottom: 12px;
+`;
+
+export const SelectInput = styled.select`
+  display: block;
+  width: 100%;
 `;
