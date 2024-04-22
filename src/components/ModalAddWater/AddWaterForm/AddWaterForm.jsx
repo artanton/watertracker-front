@@ -5,6 +5,8 @@ import {
   LabelCount,
   LabelSelect,
   SelectInput,
+  LabelQuantityInput,
+  QuantityInput,
 } from './AddWaterForm.styled';
 import { Minus } from 'components/Icons/Minus';
 import { Plus } from 'components/Icons/Plus/Plus';
@@ -61,6 +63,15 @@ export const AddWaterForm = () => {
                 );
               })}
             </SelectInput>
+            <LabelQuantityInput>
+              Enter the value of the water used:
+            </LabelQuantityInput>
+            <QuantityInput
+              name="quantityField"
+              type="number"
+              id="quantity"
+              placeholder="0"
+            />
           </Form>
         )}
       </Formik>
