@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 // import { selectIsLoading, selectError } from '../../redux/selectors';
-import { apiLogoutUser } from '../../redux/authorization/authReducer';
 import { Modal, CloseModalCross, YesNoButton } from 'components';
 import { closeModal } from '../../redux/modal/modalSlice';
 import { modalNames } from 'constants/constants';
@@ -11,17 +10,17 @@ export const UserLogoutModal = () => {
   // const isLoading = useSelector(selectIsLoading);
   // const error = useSelector(selectError);
 
-  const onLogout = async e => {
+  const onDelete = async e => {
     e.preventDefault();
-    dispatch(apiLogoutUser());
+
     dispatch(closeModal());
   };
   return (
     <Modal modalId={modalNames.LOGOUT}>
       <Wrapper>
         <CloseModalCross />
-        <Title>Log Out</Title>
-        <Subtitle>Do you really want to leave?</Subtitle>
+        <Title>Delete entry</Title>
+        <Subtitle>Are you sure you want to delete the entry?</Subtitle>
         <Buttons>
           <YesNoButton
             onBtnClick={() => dispatch(closeModal())}
@@ -29,7 +28,7 @@ export const UserLogoutModal = () => {
             approve={false}
           />
 
-          <YesNoButton onBtnClick={onLogout} approve={true} text="Log out" />
+          <YesNoButton onBtnClick={onDelete} approve={true} text="Delete" />
         </Buttons>
       </Wrapper>
     </Modal>
