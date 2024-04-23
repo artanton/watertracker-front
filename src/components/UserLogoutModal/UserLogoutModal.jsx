@@ -26,10 +26,10 @@ export const UserLogoutModal = () => {
           <YesNoButton
             onBtnClick={() => dispatch(closeModal())}
             text="Cancel"
-            approve={false}
+            approve="false"
           />
 
-          <YesNoButton onBtnClick={onLogout} approve={true} text="Log out" />
+          <YesNoButton onBtnClick={onLogout} approve="true" text="Log out" />
         </Buttons>
       </Wrapper>
     </Modal>

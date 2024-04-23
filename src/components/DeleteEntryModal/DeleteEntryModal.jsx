@@ -9,7 +9,7 @@ import {
   Title,
   Subtitle,
 } from '../UserLogoutModal/UserLogoutModal.styled';
-import { deleteWater } from '../../redux/userData/thunk';
+import { deleteWater } from '../../redux/waterData/thunk';
 
 const DeleteEntryModal = ({ waterId }) => {
   const dispatch = useDispatch();

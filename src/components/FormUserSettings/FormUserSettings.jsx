@@ -1,3 +1,9 @@
+import { useState } from 'react';
+
+import { apiUpdateUserSettings } from '../../redux/authorization/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserData } from '../../redux/selectors';
+
 import { Formik, Form, ErrorMessage } from 'formik';
 import { SaveModalButton } from 'components';
 import { UploadPhoto } from 'components/Icons/UploadPhoto';
@@ -5,7 +11,6 @@ import { userSettingsSchema } from 'schemas/schemas';
 
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
-import { defaultAvatar } from 'constants/constants';
 import {
   FormInfo,
   PersonalInfo,
@@ -31,38 +36,56 @@ import {
   SaveButtonContainer,
   Error,
 } from './FormUserSettings.styled';
-import { useState } from 'react';
 
 export const FormUserSettings = () => {
+  const dispatch = useDispatch();
+
+  const data = useSelector(selectUserData);
+
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-
+  const [localAvatarUrl, setlocalAvatarUrl] = useState(null);
+  const [avatarFile, setavatarFile] = useState(null);
   const swapOldPassword = () => {
     setShowOldPassword(!showOldPassword);
   };
-
   const swapNewPassword = () => {
     setShowNewPassword(!showNewPassword);
   };
-
   const swapRepeatPassword = () => {
     setShowRepeatPassword(!showRepeatPassword);
   };
 
+  const handleChange = e => {
+    setlocalAvatarUrl(URL.createObjectURL(e.currentTarget.files[0]));
+    setavatarFile(e.currentTarget.files[0]);
+  };
+
   const handleSubmit = (values, actions) => {
-    console.log('values', values);
-    console.log('actions', actions);
+    const formData = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (
+        value !== '' &&
+        value !== undefined &&
+        value !== null &&
+        key !== 'repeatPassword'
+      ) {
+        formData.append(key, value);
+      }
+    });
+    avatarFile && formData.append('avatarURL', avatarFile);
+    dispatch(apiUpdateUserSettings(formData));
   };
 
   const initialValues = {
     avatarURL: '',
-    gender: '',
-    userName: '',
-    email: '',
+    gender: data?.gender && data.gender,
+    userName: data?.userName ? data.userName : '',
+    email: data?.email ? data.email : '',
     oldPassword: '',
     newPassword: '',
-    repeatPassword: '',
   };
 
   return (
@@ -78,7 +101,13 @@ export const FormUserSettings = () => {
               <FieldContainer>
                 <AvatarSettingsTitle>Your Photo</AvatarSettingsTitle>
                 <AvatarLabel>
-                  <Avatar src={defaultAvatar} alt="" />
+                  <Avatar
+                    src={
+                      (localAvatarUrl && localAvatarUrl) ||
+                      (data?.avatarURL && data.avatarURL)
+                    }
+                    alt="avatar"
+                  />
                   <UploadPhoto />
                   <UploadPhotoText>Upload a photo</UploadPhotoText>
                   <AvatarInput
@@ -86,6 +115,7 @@ export const FormUserSettings = () => {
                     name="avatarURL"
                     type="file"
                     accept="image"
+                    onChange={handleChange}
                   />
                 </AvatarLabel>
                 <ErrorMessage name="avatarURL" component={Error} />

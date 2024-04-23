@@ -73,6 +73,18 @@ export const apiLogoutUser = createAsyncThunk(
   }
 );
 
+export const apiUpdateUserSettings = createAsyncThunk(
+  'user/getUserSettings',
+  async (formData, thunkApi) => {
+    try {
+      const { data } = await authInstance.patch('/updateProfile', formData);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   token: null,
   userData: null,
@@ -106,12 +118,17 @@ const authSlice = createSlice({
       .addCase(apiLogoutUser.fulfilled, () => {
         return initialState;
       })
+      .addCase(apiUpdateUserSettings.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
+      })
       .addMatcher(
         isAnyOf(
           apiRegisterUser.pending,
           apiLoginUser.pending,
           apiRefreshUser.pending,
-          apiLogoutUser.pending
+          apiLogoutUser.pending,
+          apiUpdateUserSettings.pending
         ),
         state => {
           state.isLoading = true;
@@ -123,7 +140,8 @@ const authSlice = createSlice({
           apiRegisterUser.rejected,
           apiLoginUser.rejected,
           apiRefreshUser.rejected,
-          apiLogoutUser.rejected
+          apiLogoutUser.rejected,
+          apiUpdateUserSettings.pending
         ),
         (state, action) => {
           state.isLoading = false;
