@@ -3,9 +3,13 @@ import { theme } from '../../styles/theme';
 
 export const Button = styled.button`
   background-color: ${props =>
-    props.approve ? theme.colors.secondaryRed : theme.colors.secondaryGrayBlue};
+    props.approve === 'true'
+      ? theme.colors.secondaryRed
+      : theme.colors.secondaryGrayBlue};
   color: ${props =>
-    props.approve ? theme.colors.primaryWhite : theme.colors.primaryBlue};
+    props.approve === 'true'
+      ? theme.colors.primaryWhite
+      : theme.colors.primaryBlue};
   align-items: center;
   display: inline-flex;
   justify-content: center;
