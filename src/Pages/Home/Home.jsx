@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   // DesktopContainer,
   ListContainer,
@@ -12,8 +12,13 @@ import { Container } from 'styles/GlobalStyle';
 import MonthStatsTable from 'components/MonthStatsTable/MonthStatsTable';
 import { LayoutHome } from 'components/LayoutHome/LayoutHome';
 import { ModalAddWater } from 'components';
-
+import { useDispatch } from 'react-redux';
+import { apiGetUserSettings } from '../../redux/authorization/authReducer';
 function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(apiGetUserSettings());
+  });
   return (
     <LayoutHome>
       <Container>
