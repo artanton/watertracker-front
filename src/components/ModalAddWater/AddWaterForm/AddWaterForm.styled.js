@@ -47,12 +47,15 @@ export const LabelSelect = styled.label`
 
 export const SelectInput = styled.select`
   display: block;
-  width: 100%;
+  width: 120px;
   padding: 12px 10px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
   border-radius: 6px;
   margin-bottom: 24px;
   color: ${theme.colors.primaryBlue};
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const LabelQuantityInput = styled.label`
@@ -64,12 +67,15 @@ export const LabelQuantityInput = styled.label`
 
 export const QuantityInput = styled.input`
   display: block;
-  width: 100%;
+  width: 120px;
   padding: 12px 10px;
   margin-bottom: 24px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
   border-radius: 6px;
   color: ${theme.colors.primaryBlue};
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
   &::placeholder {
     color: ${theme.colors.primaryBlue};
   }
@@ -77,8 +83,13 @@ export const QuantityInput = styled.input`
 
 export const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
-  gap: 32px;
+  gap: 16px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 32px;
+  }
 `;
 
 export const WaterQuantityValue = styled.p`
