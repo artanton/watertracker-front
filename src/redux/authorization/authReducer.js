@@ -19,8 +19,6 @@ export const apiRegisterUser = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.post('/auth/register', formData);
-      // data = {user: {name: 'Abra', email: 'abra@gmail.com'}, token: 'abrakadabra1223'}  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
       setToken(data.token);
       return data;
     } catch (error) {
@@ -80,7 +78,7 @@ export const apiUpdateUserSettings = createAsyncThunk(
       const { data } = await authInstance.patch('/updateProfile', formData);
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error);
     }
   }
 );
@@ -113,13 +111,13 @@ const authSlice = createSlice({
       .addCase(apiRegisterUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.userData = action.payload.user; //------------------------------ дані беруться з {data }-----------------------------------------
+        state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
         state.token = action.payload.token; //---------------------------------дані беруться з {data }------------------------------------------
       })
       .addCase(apiLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.userData = action.payload.user; //-------------------------------------------------------------------------------------------------------------
+        state.userData = action.payload; //-------------------------------------------------------------------------------------------------------------
         state.token = action.payload.token; //-------------------------------------------------------------------------------------------------------------
       })
       .addCase(apiRefreshUser.fulfilled, (state, action) => {

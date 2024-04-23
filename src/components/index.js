@@ -10,3 +10,4 @@ export { SettingModal } from './SettingModal/SettingModal.jsx';
 export { SaveModalButton } from './SaveModalButton/SaveModalButton.jsx';
 export { UserLogoutModal } from './UserLogoutModal/UserLogoutModal.jsx';
 export { YesNoButton } from './YesNoButton/YesNoButton.jsx';
+export { Loader } from './Loader/Loader.jsx';

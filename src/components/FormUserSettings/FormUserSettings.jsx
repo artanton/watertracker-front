@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import { apiUpdateUserSettings } from '../../redux/authorization/authReducer';
+import { closeModal } from '../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData } from '../../redux/selectors';
+import { selectUserData, selectIsLoading } from '../../redux/selectors';
 
 import { Formik, Form, ErrorMessage } from 'formik';
 import { SaveModalButton } from 'components';
@@ -37,11 +38,14 @@ import {
   Error,
 } from './FormUserSettings.styled';
 
+import { toast } from 'react-toastify';
+
 export const FormUserSettings = () => {
   const dispatch = useDispatch();
 
-  const data = useSelector(selectUserData);
+  const isLoading = useSelector(selectIsLoading);
 
+  const data = useSelector(selectUserData);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -76,12 +80,20 @@ export const FormUserSettings = () => {
       }
     });
     avatarFile && formData.append('avatarURL', avatarFile);
-    dispatch(apiUpdateUserSettings(formData));
+    dispatch(apiUpdateUserSettings(formData))
+      .unwrap()
+      .then(res => {
+        toast.success('Settings updated successfully');
+        dispatch(closeModal());
+      })
+      .catch(e => {
+        toast.error(e.response.data.message);
+      });
   };
 
   const initialValues = {
     avatarURL: '',
-    gender: data?.gender && data.gender,
+    gender: data?.gender ? data.gender : null,
     userName: data?.userName ? data.userName : '',
     email: data?.email ? data.email : '',
     oldPassword: '',
@@ -220,7 +232,7 @@ export const FormUserSettings = () => {
             </PasswordsContainer>
           </FormInfo>
           <SaveButtonContainer>
-            <SaveModalButton />
+            <SaveModalButton isLoading={isLoading} />
           </SaveButtonContainer>
         </Form>
       )}

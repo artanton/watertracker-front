@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { apiRefreshUser } from '../redux/authorization/authReducer';
 
 import { Layout } from './index';
+import { Loader } from './index';
 
 const WelcomePage = lazy(() => import('Pages/WelcomePage/WelcomePage'));
 const Signin = lazy(() => import('Pages/SignIn/SignIn'));
@@ -21,7 +22,7 @@ export const App = () => {
   }, [dispatch]);
   return (
     <div>
-      <Suspense fallback={<div>LOADING...</div>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/" element={<Layout />}>
