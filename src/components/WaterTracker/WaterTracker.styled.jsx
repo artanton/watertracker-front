@@ -91,8 +91,13 @@ export const Button = styled.button`
   font-size: 16px;
   font-weight: 700;
   line-height: 1.33em;
+
   background-color: ${theme.colors.primaryBlue};
-  font-family: @media screen and (min-width: 768px) {
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  @media screen and (min-width: 768px) {
     font-size: 18px;
     width: 336px;
     height: 44px;

@@ -27,7 +27,7 @@ export const LayoutStyle = styled.section`
   @media screen and (min-width: 768px) and (max-width: 1439px) {
     background-image: url(${bgMainTablet1x}), url(${bgImageTablet1x});
     background-repeat: no-repeat, no-repeat;
-    background-position: center, center;
+    background-position: bottom;
     background-size: cover, cover;
   }
   @media screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
