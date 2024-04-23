@@ -74,10 +74,22 @@ export const apiLogoutUser = createAsyncThunk(
 );
 
 export const apiUpdateUserSettings = createAsyncThunk(
-  'user/getUserSettings',
+  'user/UpdateUserSettings',
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.patch('/updateProfile', formData);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const apiGetUserSettings = createAsyncThunk(
+  'user/getUserSettings',
+  async (formData, thunkApi) => {
+    try {
+      const { data } = await authInstance.get('/updateProfile', formData);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -122,13 +134,18 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
       })
+      .addCase(apiGetUserSettings.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userData = action.payload;
+      })
       .addMatcher(
         isAnyOf(
           apiRegisterUser.pending,
           apiLoginUser.pending,
           apiRefreshUser.pending,
           apiLogoutUser.pending,
-          apiUpdateUserSettings.pending
+          apiUpdateUserSettings.pending,
+          apiGetUserSettings.pending
         ),
         state => {
           state.isLoading = true;
@@ -141,7 +158,8 @@ const authSlice = createSlice({
           apiLoginUser.rejected,
           apiRefreshUser.rejected,
           apiLogoutUser.rejected,
-          apiUpdateUserSettings.pending
+          apiUpdateUserSettings.rejected,
+          apiGetUserSettings.rejected
         ),
         (state, action) => {
           state.isLoading = false;
