@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import {
-  apiUpdateUserSettings,
-  apiRefreshUser,
-} from '../../redux/authorization/authReducer';
+import { apiUpdateUserSettings } from '../../redux/authorization/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserData } from '../../redux/selectors';
 
@@ -44,9 +41,7 @@ export const FormUserSettings = () => {
   const dispatch = useDispatch();
 
   const data = useSelector(selectUserData);
-  useEffect(() => {
-    dispatch(apiRefreshUser);
-  }, [dispatch]);
+
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);

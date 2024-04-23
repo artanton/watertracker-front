@@ -120,7 +120,7 @@ const authSlice = createSlice({
       })
       .addCase(apiUpdateUserSettings.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.userData = action.payload.user; //------------------------------ дані беруться з {data }-----------------------------------------
+        state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
       })
       .addMatcher(
         isAnyOf(
