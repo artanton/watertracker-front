@@ -63,6 +63,8 @@ export const Avatar = styled.img`
 
   border-radius: 100%;
   margin-right: 8px;
+
+  object-fit: cover;
 `;
 
 export const AvatarLabel = styled.label`
