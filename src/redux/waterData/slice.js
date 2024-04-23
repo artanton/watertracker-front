@@ -10,11 +10,12 @@ import {
 } from './thunk.js';
 
 const initialState = {
+  dailyNorma: 50,
+  persantRate: 0,
+  waterSavings: 0,
+  waterNotes: [],
   month: [],
-  today: {
-    dailyNorm: 0,
-    waterToday: [],
-  },
+
   loading: false,
   error: null,
 };
@@ -25,6 +26,66 @@ const waterSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+
+      .addCase(getWaterToday.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.waterNotes = action.payload;
+      })
+
+      .addCase(getMonthWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.month = action.payload;
+      })
+
+      .addCase(addWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const { waterNotes, dailyNorma, persantRate } = action.payload;
+
+        state.waterNotes.push(...waterNotes);
+
+        state.dailyNorma = dailyNorma;
+        state.persantRate = persantRate;
+      })
+
+      .addCase(updateWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const note = state.waterNotes.find(
+          item => item.id === action.payload.id
+        );
+        if (note) {
+          const { updatedData } = action.payload;
+          if (updatedData.createdDate) {
+            note.createdDate = updatedData.createdDate;
+          }
+          if (updatedData.waterDose) {
+            note.waterDose = updatedData.waterDose;
+          }
+        }
+      })
+
+      .addCase(patchWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const { dailyNorma, persantRate } = action.payload;
+
+        state.dailyNorma = dailyNorma;
+        state.persantRate = persantRate;
+      })
+
+      .addCase(deleteWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const {persantRate } = action.payload;
+        const index = state.waterNotes.findIndex(
+          item => item.id === action.payload.id
+        );
+        state.waterNotes.splice(index, 1);
+        state.persantRate = persantRate;
+      })
       .addMatcher(
         isAnyOf(
           getWaterToday.pending,
@@ -64,19 +125,8 @@ const waterSlice = createSlice({
           state.loading = false;
           state.error = action.payload;
         }
-      )
-      .addCase(deleteWater.fulfilled, (state, action) => {
-        state.today.waterToday = state.today.waterToday.filter(
-          item => item._id !== action.payload
-        );
-      })
-      .addCase(addWater.fulfilled, (state, action) => {
-        state.today.waterToday.push(action.payload);
-      })
-      .addCase(getMonthWater.fulfilled, (state, action) => {
-        state.month = action.payload;
-      });
+      );
   },
 });
 
-export default waterSlice.reducer;
+export const waterReducer = waterSlice.reducer;
