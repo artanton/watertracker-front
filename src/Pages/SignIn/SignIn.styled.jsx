@@ -79,6 +79,9 @@ export const Button = styled.button`
   line-height: 1.33em;
   background-color: ${theme.colors.primaryBlue};
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
   @media screen and (min-width: 768px) {
     font-size: 18px;
     height: 44px;
@@ -103,5 +106,12 @@ export const SignInForm = styled.form`
 `;
 
 export const SignUpText = styled.span`
+  font-size: 16px;
+  line-height: 1.25em;
   color: ${theme.colors.primaryBlue};
+  text-decoration: none;
+  &:hover {
+    color: ${theme.colors.secondaryOrange};
+    transition: color 0.3s ease;
+  }
 `;

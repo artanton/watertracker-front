@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authInstance } from 'redux/authorization/authReducer';
+import { authInstance } from '../authorization/authReducer';
 
 export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',

@@ -12,5 +12,7 @@ export const WrapperWelcomePg = styled.div`
   @media only screen and (min-width: 1440px) {
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding-left: 100px;
   }
 `;
