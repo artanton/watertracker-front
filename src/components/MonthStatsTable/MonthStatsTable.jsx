@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
   Border,
+  Container,
   DayPercentage,
   Month,
   MonthStatsTableContainer,
   StyledCalendar,
+  Trigger,
 } from './MonthStatsTable.styled';
+import Popup from 'components/PopupCalendar/PopupCalendar';
+// import { useSelector } from 'react-redux';
+
+// const TriggerButton = forwardRef((props, ref) => (
+//   <Trigger ref={ref} {...props} />
+// ));
 
 const MonthStatsTable = () => {
-  const dayPercentages = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+  const persantageRate = 50;
+  const [selectedDay, setSelectedDay] = useState(null); // Стан для зберігання обраного дня
+
+  const handleDayClick = date => {
+    setSelectedDay(date);
+  };
+
+  const triggerRef = useRef(null);
 
   return (
     <MonthStatsTableContainer>
@@ -21,15 +36,26 @@ const MonthStatsTable = () => {
         locale="en-US"
         tileContent={({ date, view }) => {
           if (view === 'month') {
-            const dayOfMonth = date.getDate();
-            const percentage = dayPercentages[dayOfMonth - 1];
-            const isVisible = percentage !== 100;
-
+            const isVisible = persantageRate !== 100;
             return (
-              <>
+              <Container>
                 <Border $isvisible={isVisible} />
-                <DayPercentage>{percentage}%</DayPercentage>
-              </>
+                {/* {dayData( */}
+                <DayPercentage>{persantageRate}%</DayPercentage>
+                {/* )} */}
+                <Popup
+                  isOpen={selectedDay === date.getDate()}
+                  onClose={() => setSelectedDay(null)}
+                  selectedDate={date}
+                  triggerRef={triggerRef}
+                >
+                  {/* <TriggerButton
+                    ref={triggerRef}
+                    onClick={() => handleDayClick(date)}
+                  /> */}
+                  <Trigger onClick={() => handleDayClick(date)} />
+                </Popup>
+              </Container>
             );
           }
           return null;
@@ -38,5 +64,4 @@ const MonthStatsTable = () => {
     </MonthStatsTableContainer>
   );
 };
-
 export default MonthStatsTable;

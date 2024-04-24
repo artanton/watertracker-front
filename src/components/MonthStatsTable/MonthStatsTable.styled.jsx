@@ -3,12 +3,13 @@ import { theme } from 'styles/theme';
 import Calendar from 'react-calendar';
 import { CalendarArrowLeft } from 'components/Icons/CalendarArrowLeft';
 import { CalendarArrowRight } from 'components/Icons/CalendarArrowRight';
+// import { PopupContainer } from 'components/PopupCalendar/PopupCalendar.styled';
 
 export const MonthStatsTableContainer = styled.div`
   width: 264px;
   margin-top: 24px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     width: 656px;
   }
 
@@ -61,7 +62,8 @@ export const StyledCalendar = styled(Calendar)`
   @media screen and (min-width: 1440px) {
    margin-top: -23px;
   }
-  }
+}
+
 
   .react-calendar__navigation__prev-button {
     background-color: transparent;
@@ -135,13 +137,13 @@ export const StyledCalendar = styled(Calendar)`
     row-gap: 36px !important;
     column-gap: 26px;
 
-    @media screen and (min-width: 768px) and (max-width: 1439px) {
+    @media screen and (min-width: 768px){
      row-gap: 44px !important;
      column-gap: 34px;
     }
 
     @media screen and (min-width: 1440px) {
-   row-gap: 42px !important;
+    row-gap: 42px !important;
      column-gap: 22px;
   }
 }
@@ -151,7 +153,7 @@ export const StyledCalendar = styled(Calendar)`
   }
 
 .react-calendar__month-view__days__day{
-  flex: initial !important;
+    flex: initial !important;
     width: 32px !important;
     height: 32px;
     border-color: transparent;
@@ -168,6 +170,7 @@ export const StyledCalendar = styled(Calendar)`
     &:hover{
       box-shadow: 0px 2px 4px 0px #407BFF4D;
     }
+
 
     @media screen and (min-width: 768px){
     width: 34px !important;
@@ -191,7 +194,7 @@ export const StyledCalendar = styled(Calendar)`
 
 export const DayPercentage = styled.span`
   position: absolute;
-  bottom: -20px;
+  bottom: -24px;
   left: 50%;
   transform: translateX(-50%);
   font-weight: ${theme.fontWeights.regular};
@@ -200,18 +203,18 @@ export const DayPercentage = styled.span`
   color: ${theme.colors.secondaryBlue};
   margin-left: 2px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     font-weight: ${theme.fontWeights.regular};
     font-size: 13px;
     line-height: 20px;
-    bottom: -24px;
+    bottom: -28px;
   }
 
   @media screen and (min-width: 1440px) {
     font-weight: ${theme.fontWeights.regular};
     font-size: ${theme.fontSizes.info};
     line-height: 20px;
-    bottom: -24px;
+    bottom: -28px;
   }
 `;
 
@@ -222,7 +225,7 @@ export const Border = styled.div`
   border: 1px solid #ff9d43;
   background-color: transparent;
   position: absolute;
-  bottom: 50%;
+  bottom: 9px;
   left: 50%;
   transform: translate(-50%, 50%);
   visibility: ${({ $isvisible }) => ($isvisible ? 'visible' : 'hidden')};
@@ -230,5 +233,20 @@ export const Border = styled.div`
   @media screen and (min-width: 768px) {
     width: 34px;
     height: 34px;
+    bottom: 10px;
   }
+`;
+
+export const Trigger = styled.div`
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  bottom: -1px;
+  left: -2px;
+  z-index: 1;
+  background-color: transparent;
+`;
+
+export const Container = styled.div`
+  position: relative;
 `;

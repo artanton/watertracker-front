@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  // DesktopContainer,
-  ListContainer,
-  WaterContainer,
-  // WrapperHomePage,
-} from './Home.styled';
+import { ListContainer, WaterContainer } from './Home.styled';
 import DailyNorma from '../../components/DailyNorma/DailyNorma';
 import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel';
 import TodayWaterList from 'components/TodayWaterList/TodayWaterList';
