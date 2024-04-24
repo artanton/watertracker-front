@@ -56,4 +56,7 @@ export const theme = Object.freeze({
     medium: '40px',
     normal: '10px',
   },
+  transition: {
+    normal: 'color 0.3s ease',
+  },
 });
