@@ -7,6 +7,7 @@ import {
   UserLogoContainer,
   UserInfo,
   UserAvatar,
+  UserNameText,
 } from './Header.styled';
 
 import { UserIcon } from 'components/Icons/UserIcon';
@@ -33,7 +34,7 @@ export const Header = () => {
             {isLoggedIn ? (
               userName ? (
                 <div>
-                  <SignInText>{userName}</SignInText>
+                  <UserNameText>{userName}</UserNameText>
                 </div>
               ) : (
                 <div>{userEmailSplit}</div>
@@ -46,12 +47,9 @@ export const Header = () => {
             ) : (
               <UserIcon />
             )}
-
-            {/* <UserIcon /> */}
           </UserLogoContainer>
         </Link>
         {isLoggedIn && <PopupUser />}
-        {/* <PopupUser /> */}
       </UserInfo>
       <SettingModal />
       <UserLogoutModal />

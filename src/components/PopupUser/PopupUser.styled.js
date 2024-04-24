@@ -5,7 +5,7 @@ export const PopupButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: 16px;
+  padding: 4px;
 `;
 
 export const MenuButton = styled.button`
