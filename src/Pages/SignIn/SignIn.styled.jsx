@@ -17,8 +17,8 @@ export const Wrap = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 18px;
-  line-height: 1.33em;
+  font-size: ${theme.fontSizes.listTitle};
+  line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlack};
   display: flex;
   flex-direction: column;
@@ -28,13 +28,13 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  font-size: 16px;
+  font-size: ${theme.fontSizes.text};
   padding: 11px 10px;
-  line-height: 1.25em;
+  line-height: ${theme.lineHeights.text};
   border-radius: 6px;
   width: 100%;
   color: ${theme.colors.primaryBlue};
-  border: 1px solid ${theme.colors.secondaryGray};
+  border: ${theme.border.secondary};
   font-family: inherit;
   position: relative;
 
@@ -55,35 +55,35 @@ export const Input = styled.input`
       : []}
 `;
 export const SignInTitle = styled.h2`
-  font-size: 26px;
+  font-size: ${theme.fontSizes.subtitle};
   margin: 0;
-  line-height: 1.23em;
-  font-weight: 500;
+  line-height: ${theme.lineHeights.subtitle};
+  font-weight: ${theme.fontWeights.medium};
   color: ${theme.colors.primaryBlack};
 `;
 
 export const Error = styled.p`
-  font-size: 14px;
-  line-height: 1.28em;
+  font-size: ${theme.fontSizes.info};
+  line-height: ${theme.lineHeights.info};
   color: ${theme.colors.secondaryRed};
 `;
 export const Button = styled.button`
   width: 100%;
   height: 36px;
   padding: 8px 30px;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   border: none;
   color: ${theme.colors.primaryWhite};
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.33em;
+  font-size: ${theme.fontSizes.text};
+  font-weight: ${theme.fontWeights.bold};
+  line-height: ${theme.lineHeights.text};
   background-color: ${theme.colors.primaryBlue};
-  box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+  box-shadow: ${theme.shadows.normalButton};
   &:hover {
-    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    box-shadow: ${theme.shadows.hoverButton};
   }
   @media screen and (min-width: 768px) {
-    font-size: 18px;
+    font-size: ${theme.fontSizes.listTitle};
     height: 44px;
   }
 `;
@@ -106,12 +106,12 @@ export const SignInForm = styled.form`
 `;
 
 export const SignUpText = styled.span`
-  font-size: 16px;
-  line-height: 1.25em;
+  font-size: ${theme.fontSizes.text};
+  line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlue};
   text-decoration: none;
   &:hover {
     color: ${theme.colors.secondaryOrange};
-    transition: color 0.3s ease;
+    transition: ${theme.transition.normal};
   }
 `;

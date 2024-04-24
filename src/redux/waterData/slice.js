@@ -10,9 +10,10 @@ import {
 } from './thunk.js';
 
 const initialState = {
-  dailyNorma: 50,
+  dailyNorma: 2000,
   persantRate: 0,
   waterSavings: 0,
+  targetMonth: '2020-01-01',
   waterNotes: [],
   month: [],
 
@@ -79,7 +80,7 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const {persantRate } = action.payload;
+        const { persantRate } = action.payload;
         const index = state.waterNotes.findIndex(
           item => item.id === action.payload.id
         );

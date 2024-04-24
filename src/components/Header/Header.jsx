@@ -6,14 +6,21 @@ import {
   HeaderContainer,
   UserLogoContainer,
   UserInfo,
+  UserAvatar,
 } from './Header.styled';
 
 import { UserIcon } from 'components/Icons/UserIcon';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../../redux/selectors';
+import { selectIsLoggedIn, selectUserData } from '../../redux/selectors';
 
 export const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userData = useSelector(selectUserData);
+  const userEmail = userData?.email ?? 'Sign in';
+  const userEmailSplit = userEmail.split('@')[0];
+  const userName = userData?.userName;
+  const userAvatar = userData?.avatarURL;
+
   return (
     <HeaderContainer>
       <Link to="/">
@@ -22,8 +29,25 @@ export const Header = () => {
       <UserInfo>
         <Link to="/signin">
           <UserLogoContainer>
-            <SignInText>Sign in</SignInText>
-            <UserIcon />
+            {/* <SignInText>Sign in</SignInText> */}
+            {isLoggedIn ? (
+              userName ? (
+                <div>
+                  <SignInText>{userName}</SignInText>
+                </div>
+              ) : (
+                <div>{userEmailSplit}</div>
+              )
+            ) : (
+              <SignInText>Sign in</SignInText>
+            )}
+            {isLoggedIn && userAvatar ? (
+              <UserAvatar src={userAvatar} alt="userPhoto" />
+            ) : (
+              <UserIcon />
+            )}
+
+            {/* <UserIcon /> */}
           </UserLogoContainer>
         </Link>
         {isLoggedIn && <PopupUser />}

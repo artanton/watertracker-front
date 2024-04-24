@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import React, { useEffect, useState } from 'react';
 import {
   AddWater,
   PanelContainer,
@@ -28,39 +27,33 @@ const ProgressBar = ({ percentage }) => {
 };
 
 const WaterRatioPanel = () => {
-  const [percentage, setPercentage] = useState(0);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setPercentage(percentage);
-  }, [percentage]);
-
-  const fakeProgress = 50;
+  const persantageRate = 30;
 
   return (
     <WaterRatioContainer>
       <PanelContainer>
         <WaterToday>Today</WaterToday>
         <ProgressBarContainer>
-          <ProgressBar percentage={fakeProgress} />
+          <ProgressBar percentage={persantageRate} />
         </ProgressBarContainer>
         <ProgressBarLabels>
           <ProgressBarLabel
             position="0%"
-            active={fakeProgress === 0 ? 'true' : 'false'}
+            active={persantageRate === 0 ? 'true' : 'false'}
           >
             0%
           </ProgressBarLabel>
           <ProgressBarLabel
             position="50%"
-            active={fakeProgress === 50 ? 'true' : 'false'}
+            active={persantageRate === 50 ? 'true' : 'false'}
           >
             50%
           </ProgressBarLabel>
           <ProgressBarLabel
             position="100%"
-            active={fakeProgress === 100 ? 'true' : 'false'}
+            active={persantageRate === 100 ? 'true' : 'false'}
           >
             100%
           </ProgressBarLabel>

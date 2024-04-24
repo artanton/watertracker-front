@@ -7,7 +7,7 @@ import { ReactComponent as Statistics } from '../../Pages/WelcomePage/icons/stat
 export const WaterTrackerContainer = styled.div`
   margin-bottom: 40px;
   color: ${theme.colors.primaryBlack};
-  font-size: 28px;
+  font-size: ${theme.fontSizes.subtitle};
   @media only screen and (min-width: 1440px) {
     margin-right: 81px;
     margin-bottom: 0;
@@ -15,44 +15,44 @@ export const WaterTrackerContainer = styled.div`
 
   @media only screen and (min-width: 767px) and (max-width: 1439px) {
     margin-bottom: 60px;
-    font-size: 36px;
+    font-size: ${theme.fontSizes.mainTitle};
   }
 `;
 export const WaterTrackerTitle = styled.h2`
-  line-height: 1.16em;
+  line-height: ${theme.lineHeights.mainTitle};
   color: ${theme.colors.primaryBlack};
-  font-weight: 700;
-  font-size: 26px;
+  font-weight: ${theme.fontWeights.medium};
+  font-size: ${theme.fontSizes.subtitle};
   margin-bottom: 16px;
   margin-top: 0px;
   @media only screen and (min-width: 767px) {
-    font-size: 36px;
-    line-height: 1.28em;
+    font-size: ${theme.fontSizes.mainTitle};
+    line-height: ${theme.lineHeights.text};
   }
 `;
 export const WaterTrackerInfo = styled.p`
   margin-bottom: 24px;
   margin-top: 0px;
-  line-height: 1.25em;
-  color: #2f2f2f;
-  font-size: 24px;
+  line-height: ${theme.lineHeights.text};
+  color: ${theme.colors.primaryBlack};
+  font-size: ${theme.fontSizes.text};
   @media only screen and (min-width: 768px) {
-    font-size: 26px;
-    line-height: 1.23em;
+    font-size: ${theme.fontSizes.subtitle};
+    line-height: ${theme.lineHeights.text};
   }
 `;
 
 export const WaterTrackerSubtitle = styled.h3`
   color: ${theme.colors.primaryBlack};
-  font-size: 18px;
+  font-size: ${theme.fontSizes.listTitle};
   margin-bottom: 24px;
   margin-top: 0px;
-  font-weight: 500;
-  line-height: 1.11em;
+  font-weight: ${theme.fontWeights.medium};
+  line-height: ${theme.lineHeights.listTitle};
 `;
 export const WaterTrackerList = styled.ul`
-  font-size: 16px;
-  line-height: 1.25em;
+  font-size: ${theme.fontSizes.text};
+  line-height: ${theme.lineHeights.text};
   margin-bottom: 24px;
   padding-inline-start: 0px;
   @media screen and (min-width: 768px) and (max-width: 1439px) {
@@ -63,8 +63,8 @@ export const WaterTrackerList = styled.ul`
 `;
 export const WaterTrackerLi = styled.li`
   color: ${theme.colors.primaryBlack};
-  font-size: 16px;
-  font-weight: 400;
+  font-size: ${theme.fontSizes.text};
+  font-weight: ${theme.fontWeights.regular};
   display: flex;
   align-items: center;
 
@@ -85,20 +85,20 @@ export const Button = styled.button`
   width: 280px;
   height: 36px;
   padding: 8px 30px;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   border: none;
   color: ${theme.colors.primaryWhite};
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.33em;
+  font-size: ${theme.fontSizes.text};
+  font-weight: ${theme.fontWeights.bold};
+  line-height: ${theme.lineHeights.text};
 
   background-color: ${theme.colors.primaryBlue};
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  box-shadow: ${theme.shadows.normalButton};
   &:hover {
-    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    box-shadow: ${theme.shadows.hoverButton};
   }
   @media screen and (min-width: 768px) {
-    font-size: 18px;
+    font-size: ${theme.fontSizes.listTitle};
     width: 336px;
     height: 44px;
   }

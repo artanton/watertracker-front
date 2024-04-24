@@ -16,11 +16,14 @@ import {
 
 const DailyNorma = () => {
   const dispatch = useDispatch();
+
+  const dailyNorma = 1000 / 1000;
+
   return (
     <MyDailyNormaContainer>
       <MyDailyNorma>My daily norma</MyDailyNorma>
       <MyDailyNormaAmount>
-        <WaterNormaAmount>2.0 L</WaterNormaAmount>
+        <WaterNormaAmount>{dailyNorma}L</WaterNormaAmount>
         <WaterNormaAmountEdit
           type="button"
           onClick={() => dispatch(openModal(modalNames.DAILY_NORMA))}
