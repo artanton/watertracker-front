@@ -53,3 +53,12 @@ export const SignInText = styled.p`
     line-height: 1.33;
   }
 `;
+
+export const UserAvatar = styled.img`
+  width: 28px;
+  height: 28px;
+
+  border-radius: 100%;
+
+  object-fit: cover;
+`;

@@ -28,6 +28,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
   //const token = useSelector(selectToken);
   //const navigate = useNavigate();
 
@@ -95,9 +96,6 @@ const Signup = () => {
     //// event.currentTarget.reset();
   };
 
-  // if (isLoggedIn) {
-  //   navigate('/signin');
-  // }
   return (
     <>
       <LayoutSignIn>
