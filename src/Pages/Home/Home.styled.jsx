@@ -30,7 +30,7 @@ export const ListContainer = styled.div`
   width: 280px;
   max-height: 836px;
   border: none;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   background: ${theme.colors.secondaryGray};
   padding: 24px 8px;
   box-shadow: ${theme.shadows.wrapper};

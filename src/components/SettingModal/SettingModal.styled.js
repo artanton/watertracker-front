@@ -21,7 +21,6 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalTitle = styled.h2`
-  font-family: Roboto;
   font-size: ${theme.fontSizes.subtitle};
   font-weight: ${theme.fontWeights.normal};
   line-height: ${theme.lineHeights.subtitle};

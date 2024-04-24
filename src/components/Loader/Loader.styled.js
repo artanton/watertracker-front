@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { HoopSpinner } from 'react-spinners-kit';
+import { theme } from 'styles/theme';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -15,7 +16,7 @@ export const ModalContent = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: ${theme.transform.middle};
 `;
 
 export const StyledLoader = styled(HoopSpinner)``;

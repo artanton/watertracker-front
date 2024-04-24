@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { theme } from "styles/theme";
-import { Minus } from "components/Icons/Minus";
+import styled from 'styled-components';
+import { theme } from 'styles/theme';
+import { Minus } from 'components/Icons/Minus';
 
 export const CountContainer = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const CountContainer = styled.div`
 export const ButtonChange = styled.button`
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: ${theme.radii.round};
   color: ${theme.colors.primaryBlue};
   border: 1px solid ${theme.colors.primaryBlue};
   background-color: transparent;
@@ -51,7 +51,7 @@ export const SelectInput = styled.select`
   width: 120px;
   padding: 12px 10px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
-  border-radius: 6px;
+  border-radius: ${theme.radii.small};
   margin-bottom: 24px;
   color: ${theme.colors.primaryBlue};
   @media screen and (min-width: 768px) {
@@ -72,7 +72,7 @@ export const QuantityInput = styled.input`
   padding: 12px 10px;
   margin-bottom: 24px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
-  border-radius: 6px;
+  border-radius: ${theme.radii.small};
   color: ${theme.colors.primaryBlue};
   @media screen and (min-width: 768px) {
     width: 100%;

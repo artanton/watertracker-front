@@ -6,7 +6,7 @@ export const MyDailyNormaContainer = styled.div`
   width: 164px;
   max-height: 74px;
   border: 1px solid #ecf2ff;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   box-shadow: ${theme.shadows.normaFrame};
   display: flex;
   flex-direction: column;

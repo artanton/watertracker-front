@@ -64,11 +64,11 @@ export const FormulaText = styled.p`
 export const FormulasDescription = styled.div`
   padding: 10px 9px;
   word-wrap: initial;
-  border-radius: 10px;
-  border: solid 1px #d7e3ff;
+  border-radius: ${theme.radii.normal};
+  border: solid 1px ${theme.colors.secondaryLightBlue};
   font-size: ${theme.fontSizes.info};
   line-height: ${theme.lineHeights.info};
-  color: #8f8f8f;
+  color: ${theme.colors.secondaryDarkGray};
 
   span {
     color: ${theme.colors.primaryBlue};
@@ -134,7 +134,7 @@ export const InputFormField = styled.input`
   font-size: ${theme.fontSizes.text};
   line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlue};
-  border-radius: 6px;
+  border-radius: ${theme.radii.small};
   border: solid 1px ${theme.colors.secondaryGrayBlue};
   outline: none;
 
@@ -195,7 +195,7 @@ export const ButtonSave = styled.button`
   height: 20px;
   background-color: ${theme.colors.primaryBlue};
   padding: 8px 30px;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   border: none;
   font-size: ${theme.fontSizes.text};
   font-weight: ${theme.fontWeights.medium};
@@ -212,6 +212,7 @@ export const ButtonSave = styled.button`
   }
 
   &:hover {
-    box-shadow: 0px 4px 14px 0px ${theme.colors.primaryBlue};
+    box-shadow: ${theme.shadows.hoverButton};
+    transition: ${theme.transition.normal};
   }
 `;

@@ -13,21 +13,22 @@ export const Button = styled.button`
   align-items: center;
   display: inline-flex;
   justify-content: center;
-  font-size: 16px;
-  line-height: 1.25em;
-  font-weight: 500;
+  font-size: ${theme.fontSizes.text};
+  line-height: ${theme.lineHeights.text};
+  font-weight: ${theme.fontWeights.normal};
   padding: 8px 30px;
   border: none;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   width: 232px;
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  box-shadow: ${theme.shadows.normalButton};
   &:hover {
-    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    box-shadow: ${theme.shadows.hoverButton};
+    transition: ${theme.transition.normal};
   }
   @media screen and (min-width: 768px) {
     padding: 10px 30px;
-    font-size: 18px;
-    line-height: 1.33em;
+    font-size: ${theme.fontSizes.listTitle};
+    line-height: ${theme.lineHeights.info};
     width: 160px;
   }
 `;
