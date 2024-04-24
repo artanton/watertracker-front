@@ -8,7 +8,7 @@ export const WaterContainer = styled.div`
     padding-top: 16px;
   }
 
-  @media only screen and (min-width: 1440px) {
+  @media screen and (min-width: 1440px) {
     padding-top: 30px;
     display: flex;
     flex-direction: column;
@@ -22,15 +22,13 @@ export const WaterContainer = styled.div`
   @media only screen and (min-device-pixel-ratio: 2) and (min-width: 1440px),
     only screen and (min-resolution: 192dpi) and (min-width: 1440px) {
     background-image: url(${BottleImageDesctop2x});
-    background-size: 1476px 1096px;
-    background-position: center, top 5px;
-  }
+    background-position: center top 5px;
   }
 `;
 
 export const ListContainer = styled.div`
   width: 280px;
-  height: 836px;
+  max-height: 836px;
   border: none;
   border-radius: 10px;
   background: ${theme.colors.secondaryGray};
@@ -40,14 +38,14 @@ export const ListContainer = styled.div`
 
   @media (min-width: 768px) {
     width: 704px;
-    height: 688px;
+    max-height: 688px;
     padding: 32px 24px;
     margin-top: 40px;
   }
 
   @media (min-width: 1440px) {
     width: 592px;
-    height: 680px;
+    max-height: 680px;
     margin-top: 0;
   }
 `;

@@ -85,7 +85,7 @@ export const WaterList = styled.ul`
     border-radius: 8px;
   }
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     width: 656px;
     max-height: 176px;
   }
@@ -104,7 +104,7 @@ export const WaterListItem = styled.li`
   border-top: 1px solid #d7e3ff;
   border-bottom: 1px solid #d7e3ff;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     width: 646px;
     height: 60px;
   }
@@ -119,7 +119,7 @@ export const WaterGlassIcon = styled(GlassOfWater)`
   width: 26px;
   height: 26px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     width: 36px;
     height: 36px;
   }
@@ -139,7 +139,7 @@ export const WaterListMl = styled.p`
   margin-left: 12px;
   margin-right: 12px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     margin-right: 16px;
   }
   @media screen and (min-width: 1440px) {
@@ -154,7 +154,7 @@ export const WaterListTime = styled.p`
   line-height: 24px;
   color: #2f2f2f;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     width: 82px;
   }
   @media screen and (min-width: 1440px) {
@@ -168,7 +168,7 @@ export const IconsContainer = styled.div`
   margin-left: 38px;
   gap: 18px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
+  @media screen and (min-width: 768px) {
     margin-left: 390px;
   }
 

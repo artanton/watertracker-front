@@ -3,13 +3,15 @@ import { GlobalStyle } from 'styles/GlobalStyle';
 import { theme } from 'styles/theme';
 
 export const MyDailyNormaContainer = styled.div`
-  width: 166px;
+  width: 164px;
   max-height: 74px;
   border: 1px solid #ecf2ff;
   border-radius: 10px;
   box-shadow: ${theme.shadows.normaFrame};
   display: flex;
   flex-direction: column;
+  padding-top: 8px;
+  padding-bottom: 8px;
 
   @media (min-width: 768px) {
     max-height: 76px;
@@ -28,7 +30,7 @@ export const MyDailyNorma = styled.h2`
   color: ${theme.colors.primaryBlack};
   margin: 0;
   text-align: center;
-  padding: 8px 20px 12px 20px;
+  margin-bottom: 12px;
 `;
 
 export const MyDailyNormaAmount = styled.div`
@@ -36,7 +38,7 @@ export const MyDailyNormaAmount = styled.div`
   gap: 12px;
   align-items: center;
   padding-left: 20px;
-  padding-bottom: 8px;
+  height: 22px;
 `;
 
 export const WaterNormaAmount = styled.h2`
