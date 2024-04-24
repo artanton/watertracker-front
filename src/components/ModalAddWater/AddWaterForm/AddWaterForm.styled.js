@@ -38,6 +38,7 @@ export const CountValue = styled.div`
   color: ${theme.colors.primaryBlue};
   background-color: ${theme.colors.secondaryGrayBlue};
   border-radius: 40px;
+  border: none;
 `;
 
 export const LabelSelect = styled.label`

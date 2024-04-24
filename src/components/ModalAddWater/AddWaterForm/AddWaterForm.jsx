@@ -13,108 +13,115 @@ import {
 } from './AddWaterForm.styled';
 import { Minus } from 'components/Icons/Minus';
 import { Plus } from 'components/Icons/Plus/Plus';
-import { Form, Formik, ErrorMessage } from 'formik';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addWater } from '../../../redux/waterData/thunk';
+import { toast } from 'react-toastify';
+import { closeModal } from '../../../redux/modal/modalSlice';
+import { selectIsLoading } from '../../../redux/selectors';
 
 export const AddWaterForm = () => {
-  const [selectedTime, setSelectedTime] = useState(getDefaultTime());
-  const [count, setCount] = useState(0);
-  const [inputValue, setInputValue] = useState('');
-  const [otherInputValue, setOtherInputValue] = useState('');
+  const [waterCount, setWaterCount] = useState(50);
+  const [timeValue, setTimeValue] = useState(new Date());
+  const dispatch = useDispatch();
 
-  const handleBlur = event => {
-    setOtherInputValue(event.target.value);
+  const isLoading = useSelector(selectIsLoading);
+
+  const hours = timeValue.getHours().toString().padStart(2, '0');
+  const minutes = timeValue.getMinutes().toString().padStart(2, '0');
+
+  const increment = () => {
+    setWaterCount(state => state + 50);
   };
 
   const decrement = () => {
-    setCount(count - 50);
+    setWaterCount(state => Math.max(state - 50));
   };
 
-  const increment = () => {
-    setCount(count + 50);
+  const selectChange = event => {
+    const [hourStr, minuteStr] = event.target.value.split(':');
+    const hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr, 10);
+    const currentDate = new Date();
+    currentDate.setHours(hour);
+    currentDate.setMinutes(minute);
+    setTimeValue(currentDate);
   };
-
-  const handleSubmit = (values, actions) => {
-    console.log('values:', values);
-    console.log('actions:', actions);
-  };
-
-  function getDefaultTime() {
-    const now = new Date();
-    const hour = now.getHours().toString().padStart(2, '0');
-    const minute = now.getMinutes().toString().padStart(2, '0');
-    return `${hour}:${minute}`;
-  }
-
-  console.log(getDefaultTime());
 
   const handleChange = event => {
-    setSelectedTime(event.target.value);
+    if (event.target.value.length > 4) {
+      return;
+    }
+    const value = Math.floor(event.target.value);
+    if (value || value === 0) {
+      setWaterCount(value);
+    }
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const formData = {
+      date: timeValue,
+      waterVolume: waterCount,
+    };
+    dispatch(addWater(formData))
+      .then(res => {
+        toast.success('Record added successfully');
+        dispatch(closeModal());
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
   };
 
   return (
-    <>
+    <form autoComplete="off" onSubmit={handleSubmit}>
       <LabelCount>Amount of water:</LabelCount>
       <CountContainer>
-        <ButtonChange onClick={decrement}>
+        <ButtonChange
+          type="button"
+          onClick={decrement}
+          disabled={waterCount <= 49 ? true : false}
+        >
           <Minus />
         </ButtonChange>
-        <CountValue>
-          {otherInputValue ? `${otherInputValue}ml` : `${count}ml`}
-        </CountValue>
-        <ButtonChange onClick={increment}>
+        <CountValue>{`${waterCount}ml`}</CountValue>
+        <ButtonChange
+          type="button"
+          onClick={increment}
+          disabled={waterCount >= 1451 ? true : false}
+        >
           <Plus />
         </ButtonChange>
       </CountContainer>
-      <Formik
-        initialValues={{ time: '', quantity: '' }}
-        onSubmit={handleSubmit}
-      >
-        {({ errors }) => (
-          <Form autoComplete="off">
-            <LabelSelect>Recording time:</LabelSelect>
-            <SelectInput
-              name="time"
-              onChange={handleChange}
-              $error={errors.time}
-            >
-              <option>{selectedTime}</option>
-              {Array.from({ length: 12 * 12 }).map((_, index) => {
-                const hour = Math.floor(index / 12);
-                const minute = (index % 12) * 5;
-                const hourStr = hour.toString().padStart(2, '0');
-                const minuteStr = minute.toString().padStart(2, '0');
-                return (
-                  <option key={index} value={`${hourStr}:${minuteStr}`}>
-                    {`${hourStr}:${minuteStr}`}
-                  </option>
-                );
-              })}
-            </SelectInput>
-            <ErrorMessage name="time" component={Error} />
-            <LabelQuantityInput htmlFor="quantity">
-              Enter the value of the water used:
-            </LabelQuantityInput>
-            <QuantityInput
-              name="quantity"
-              type="number"
-              id="quantity"
-              placeholder="0"
-              $error={errors.quantity}
-              value={inputValue}
-              onChange={event => setInputValue(event.target.value)}
-              onBlur={handleBlur}
-            />
-            <ErrorMessage name="quantity" component={Error} />
-            <ButtonContainer>
-              <WaterQuantityValue>
-                {otherInputValue ? `${otherInputValue}ml` : `${count}ml`}
-              </WaterQuantityValue>
-              <SaveModalButton />
-            </ButtonContainer>
-          </Form>
-        )}
-      </Formik>
-    </>
+      <LabelSelect>Recording time:</LabelSelect>
+      <SelectInput name="time" onChange={selectChange}>
+        <option value={`${hours}:${minutes}`}>{`${hours}:${minutes}`}</option>
+        {Array.from({ length: 24 * 12 }).map((_, index) => {
+          const hour = Math.floor(index / 12);
+          const minute = (index % 12) * 5;
+          const hourStr = hour.toString().padStart(2, '0');
+          const minuteStr = minute.toString().padStart(2, '0');
+          return (
+            <option key={index} value={`${hourStr}:${minuteStr}`}>
+              {`${hourStr}:${minuteStr}`}
+            </option>
+          );
+        })}
+      </SelectInput>
+      <LabelQuantityInput htmlFor="amount">
+        Enter the value of the water used:
+      </LabelQuantityInput>
+      <QuantityInput
+        name="amount"
+        type="number"
+        value={waterCount}
+        onChange={handleChange}
+      />
+      <ButtonContainer>
+        <WaterQuantityValue>{`${waterCount}ml`}</WaterQuantityValue>
+        <SaveModalButton isLoading={isLoading} />
+      </ButtonContainer>
+    </form>
   );
 };
