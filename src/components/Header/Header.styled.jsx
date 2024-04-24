@@ -54,6 +54,13 @@ export const SignInText = styled.p`
   }
 `;
 
+export const UserNameText = styled.p`
+  color: ${theme.colors.primaryBlack};
+  @media (min-width: 768px) {
+    width: auto;
+    line-height: 1.33;
+`;
+
 export const UserAvatar = styled.img`
   width: 28px;
   height: 28px;
