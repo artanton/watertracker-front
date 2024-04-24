@@ -10,6 +10,7 @@ import {
   ServingsAmount,
   StyledPopup,
 } from './PopupCalendar.styled';
+// import { selectorMonth } from '../../redux/selectors';
 
 const Popup = ({ isOpen, onClose, selectedDate }) => {
   const [mobilePosition, setMobilePosition] = useState({ top: 0, left: 0 });
@@ -212,6 +213,7 @@ const Popup = ({ isOpen, onClose, selectedDate }) => {
   ];
 
   const filteredData = monthData.find(item => {
+    // console.log(selectorMonth);
     const itemDate = new Date(item.date);
     return (
       itemDate.getDate() === selectedDate.getDate() &&
@@ -255,7 +257,7 @@ const Popup = ({ isOpen, onClose, selectedDate }) => {
           <Data>{formatDate(new Date(filteredData.date))}</Data>
           <DailyNorma>
             Daily norma:{' '}
-            <DailyNormaMl>{filteredData.dailyNorma} Ml</DailyNormaMl>
+            <DailyNormaMl>{filteredData.dailyNorma / 1000} L</DailyNormaMl>
           </DailyNorma>
           <Fulfillment>
             Fulfillment of the daily norm:{' '}
