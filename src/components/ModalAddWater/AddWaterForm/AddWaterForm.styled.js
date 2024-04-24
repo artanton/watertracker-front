@@ -28,9 +28,6 @@ export const LabelCount = styled.p`
 `;
 
 export const CountValue = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 92px;
   height: 36px;
   font-size: ${theme.fontSizes.listTitle};
@@ -38,6 +35,8 @@ export const CountValue = styled.div`
   color: ${theme.colors.primaryBlue};
   background-color: ${theme.colors.secondaryGrayBlue};
   border-radius: 40px;
+  border: none;
+  text-align: center;
 `;
 
 export const LabelSelect = styled.label`
