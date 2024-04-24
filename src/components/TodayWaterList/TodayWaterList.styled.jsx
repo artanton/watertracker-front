@@ -20,8 +20,8 @@ export const TodayWaterListContainer = styled.div`
   }
 `;
 export const Today = styled.h2`
-  font-weight: 500;
-  font-size: 24px;
+  font-weight: ${theme.fontWeights.normal};
+  font-size: ${theme.fontSizes.daystitle};
   line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlack};
 
@@ -36,13 +36,13 @@ export const PlusIcon = styled(Plus)`
   height: 16px;
   margin: 0;
   margin-right: 8px;
-  font-size: 18px;
+  font-size: ${theme.fontSizes.listTitle};
   line-height: 24px;
 `;
 
 export const AddWaterButton = styled.button`
   margin-top: 12px;
-  font-weight: 500;
+  font-weight: ${theme.fontWeights.normal};
   font-size: ${theme.fontSizes.listTitle};
   line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryBlue};
@@ -53,6 +53,7 @@ export const AddWaterButton = styled.button`
 
   &:hover {
     color: ${theme.colors.secondaryOrange};
+    transition: ${theme.transition.normal};
   }
 `;
 
@@ -73,15 +74,15 @@ export const WaterList = styled.ul`
     margin-left: 4px;
     width: 4px;
     border-radius: 8px;
-    background-color: #d7e3ff;
+    background-color: ${theme.colors.secondaryLightBlue};
     border-style: solid;
-    border-color: #ecf2ff;
+    border-color: ${theme.colors.secondaryGray};
     border-width: 1px 1px 1px 1px;
   }
 
   &::-webkit-scrollbar-thumb {
     width: 8px;
-    background-color: #9ebbff;
+    background-color: ${theme.colors.secondaryBlue};
     border-radius: 8px;
   }
 
@@ -101,8 +102,8 @@ export const WaterListItem = styled.li`
   height: 50px;
   width: 254px;
   align-items: center;
-  border-top: 1px solid #d7e3ff;
-  border-bottom: 1px solid #d7e3ff;
+  border-top: 1px solid ${theme.colors.secondaryLightBlue};
+  border-bottom: 1px solid ${theme.colors.secondaryLightBlue};
 
   @media screen and (min-width: 768px) {
     width: 646px;
@@ -132,10 +133,10 @@ export const WaterGlassIcon = styled(GlassOfWater)`
 
 export const WaterListMl = styled.p`
   width: 60px;
-  font-weigth: 400px;
-  font-size: 18px;
+  font-weight: ${theme.fontWeights.regular};
+  font-size: ${theme.fontSizes.listTitle};
   line-height: 24px;
-  color: #407bff;
+  color: ${theme.colors.primaryBlue};
   margin-left: 12px;
   margin-right: 12px;
 
@@ -149,10 +150,10 @@ export const WaterListMl = styled.p`
 
 export const WaterListTime = styled.p`
   width: 56px;
-  font-weight: 400px;
-  font-size: 12px;
+  font-weight: ${theme.fontWeights.regular};
+  font-size: ${theme.fontSizes.info};
   line-height: 24px;
-  color: #2f2f2f;
+  color: ${theme.colors.primaryBlack};
 
   @media screen and (min-width: 768px) {
     width: 82px;
@@ -164,7 +165,7 @@ export const WaterListTime = styled.p`
 
 export const IconsContainer = styled.div`
   display: flex;
-  alig-items: center;
+  align-items: center;
   margin-left: 38px;
   gap: 18px;
 
@@ -190,12 +191,12 @@ export const EditButton = styled.button`
     width: 100%;
     height: 1px;
     background-color: ${theme.colors.secondaryBlue};
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform: ${theme.transform.small};
+    transition: ${theme.transition.normal};
   }
 
   &:hover::after {
-    transform: scaleX(1);
+    transform: ${theme.transform.large};
   }
 `;
 
@@ -212,12 +213,12 @@ export const DeleteButton = styled.button`
     width: 100%;
     height: 1px;
     background-color: ${theme.colors.secondaryRed};
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform: ${theme.transform.small};
+    transition: ${theme.transition.normal};
   }
 
   &:hover::after {
-    transform: scaleX(1);
+    transform: ${theme.transform.large};
   }
 `;
 

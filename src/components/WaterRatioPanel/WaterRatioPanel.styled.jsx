@@ -61,7 +61,7 @@ export const StyledProgressBar = styled.input`
   height: 8px;
   background-color: ${theme.colors.secondaryGrayBlue};
   border: none;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -73,7 +73,7 @@ export const StyledProgressBar = styled.input`
     height: 14px;
     background-color: ${theme.colors.primaryWhite};
     border: ${theme.border.normal};
-    border-radius: 50%;
+    border-radius: ${theme.radii.round};
     -webkit-appearance: none;
     position: relative;
     z-index: 1;
@@ -84,7 +84,7 @@ export const StyledProgressBar = styled.input`
     height: 14px;
     background-color: ${theme.colors.primaryWhite};
     border: ${theme.border.normal};
-    border-radius: 50%;
+    border-radius: ${theme.radii.round};
     -webkit-appearance: none;
     position: relative;
   }
@@ -135,7 +135,7 @@ export const ProgressBarLabel = styled.span`
   line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryBlue};
   opacity: 1;
-  transition: transform 0.3s ease;
+  transition: ${theme.transition.normal};
   cursor: default;
   text-align: center;
 
@@ -187,7 +187,7 @@ ${props =>
     position: absolute;
     top: -10px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: ${theme.transform.translateX};
     width: 1px;
     height: 8px;
     background-color: ${theme.colors.secondaryGrayBlue};
@@ -197,7 +197,7 @@ ${props =>
 export const AddWater = styled.button`
   width: 280px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: ${theme.radii.normal};
   background-color: ${theme.colors.primaryBlue};
   color: ${theme.colors.primaryWhite};
   border: none;
@@ -220,7 +220,7 @@ export const AddWater = styled.button`
   @media (min-width: 768px) {
     width: 336px;
     height: 44px;
-    border-radius: 10px;
+    border-radius: ${theme.radii.normal};
     margin-left: 12px;
   }
 
@@ -241,8 +241,8 @@ export const PlusIcon = styled(PlusCircle)`
 `;
 
 export const AddWaterText = styled.p`
-  font-weight: 500;
+  font-weight: ${theme.fontWeights.normal};
   font-size: ${theme.fontSizes.listTitle};
-  line-height: ${theme.lineHeights.info}
-  color: ${theme.colors.primaryWhite}
+  line-height: ${theme.lineHeights.info};
+  color: ${theme.colors.primaryWhite};
 `;

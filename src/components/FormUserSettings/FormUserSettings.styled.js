@@ -17,7 +17,7 @@ export const IconButton = styled.button`
   position: absolute;
   right: 10px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: ${theme.transform.translateY};
   border: none;
   background-color: transparent;
   align-items: center;
@@ -27,7 +27,7 @@ export const InputPassword = styled(Field)`
   width: 256px;
   padding: 12px 10px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
-  border-radius: 6px;
+  border-radius: ${theme.radii.small};
   color: ${theme.colors.primaryBlue};
   @media screen and (min-width: 768px) {
     width: 392px;
@@ -43,11 +43,9 @@ export const InputPassword = styled(Field)`
 
 export const AvatarSettingsTitle = styled.h3`
   display: inline-block;
-  font-family: Roboto;
   font-size: ${theme.fontSizes.listTitle};
   font-weight: ${theme.fontWeights.normal};
   line-height: ${theme.lineHeights.listTitle};
-
   margin-bottom: 8px;
 `;
 
@@ -60,10 +58,8 @@ export const AvatarInput = styled(Field)`
 export const Avatar = styled.img`
   width: 80px;
   height: 80px;
-
   border-radius: 100%;
   margin-right: 8px;
-
   object-fit: cover;
 `;
 
@@ -75,18 +71,14 @@ export const AvatarLabel = styled.label`
 
 export const UploadPhotoText = styled.span`
   margin-left: 8px;
-
-  font-family: Roboto;
   font-size: 14px;
   font-weight: ${theme.fontWeights.normal};
   line-height: 1.28;
-
   color: ${theme.colors.primaryBlue};
 `;
 
 export const OptionTitle = styled.label`
   display: inline-block;
-  font-family: Roboto;
   font-size: ${theme.fontSizes.listTitle};
   font-weight: ${theme.fontWeights.normal};
   line-height: ${theme.lineHeights.listTitle};
@@ -132,7 +124,7 @@ export const InputText = styled(Field)`
   width: 256px;
   padding: 12px 10px;
   border: 1px solid ${theme.colors.secondaryGrayBlue};
-  border-radius: 6px;
+  border-radius: ${theme.radii.small};
   color: ${theme.colors.primaryBlue};
   &::placeholder {
     color: ${theme.colors.secondaryBlue};
@@ -153,7 +145,6 @@ export const InputRadio = styled(Field)`
 `;
 
 export const Label = styled.label`
-  font-family: Roboto;
   font-size: ${theme.fontSizes.text};
   font-weight: ${theme.fontWeights.regular};
   line-height: ${theme.lineHeights.text};
@@ -167,11 +158,9 @@ export const PasswordsContainer = styled.div`
 
 export const PasswordTitle = styled.h3`
   display: inline-block;
-  font-family: Roboto;
   font-size: ${theme.fontSizes.listTitle};
   font-weight: ${theme.fontWeights.normal};
   line-height: ${theme.lineHeights.listTitle};
-
   margin-bottom: 12px;
 `;
 
@@ -199,7 +188,6 @@ export const FormInfo = styled.div`
 export const Error = styled.div`
   margin-top: 4px;
   color: ${theme.colors.secondaryRed};
-  font-family: Roboto;
   font-size: 13px;
   font-weight: ${theme.fontWeights.regular};
 `;

@@ -42,13 +42,13 @@ export const Month = styled.h2`
 export const ArrowLeft = styled(CalendarArrowLeft)`
   width: 14px;
   height: 14px;
-  fill: #407bff;
+  fill: ${theme.colors.primaryBlue};
 `;
 
 export const ArrowRight = styled(CalendarArrowRight)`
   width: 14px;
   height: 14px;
-  fill: #407bff;
+  fill: ${theme.colors.primaryBlue};
 `;
 
 export const StyledCalendar = styled(Calendar)`
@@ -108,7 +108,7 @@ export const StyledCalendar = styled(Calendar)`
 
 
   .react-calendar__navigation__arrow--month-button {
-    border-radius: 50%;
+    border-radius: ${theme.radii.round};
     width: 20px;
     height: 20px;
     padding: 0;
@@ -168,7 +168,7 @@ export const StyledCalendar = styled(Calendar)`
     position: relative;
 
     &:hover{
-      box-shadow: 0px 2px 4px 0px #407BFF4D;
+      box-shadow: ${theme.shadows.table};
     }
 
 
@@ -196,7 +196,7 @@ export const DayPercentage = styled.span`
   position: absolute;
   bottom: -24px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: ${theme.transform.translateX};
   font-weight: ${theme.fontWeights.regular};
   font-size: 10px;
   line-height: 16px;
@@ -221,13 +221,13 @@ export const DayPercentage = styled.span`
 export const Border = styled.div`
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  border: 1px solid #ff9d43;
+  border-radius: ${theme.radii.round};
+  border: 1px solid ${theme.colors.secondaryOrange};
   background-color: transparent;
   position: absolute;
   bottom: 9px;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: ${theme.transform.middle};
   visibility: ${({ $isvisible }) => ($isvisible ? 'visible' : 'hidden')};
 
   @media screen and (min-width: 768px) {

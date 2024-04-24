@@ -50,15 +50,13 @@ export const SignInText = styled.p`
   color: ${theme.colors.primaryBlue};
   @media (min-width: 768px) {
     width: 54px;
-    line-height: 1.33;
+    line-height: ${theme.lineHeights.info};
   }
 `;
 
 export const UserAvatar = styled.img`
   width: 28px;
   height: 28px;
-
   border-radius: 100%;
-
   object-fit: cover;
 `;

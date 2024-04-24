@@ -20,14 +20,14 @@ export const StyledPopup = styled(({ mobilePosition, ...props }) => (
     background-color: #fff;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 
-    transform: translateX(-49%) translateY(-115%);
+    transform: ${theme.transform.calendar};
     position: absolute;
     left: 50%;
 
     @media (max-width: 768px) {
       width: 280px !important;
       padding: 24px 13px !important;
-      transform: translate(-50%, -144%) !important;
+      transform: ${theme.transform.calendarmed}!important;
       position: fixed !important;
       top: ${props =>
         props.mobilePosition
@@ -59,7 +59,7 @@ export const DailyNorma = styled.p`
 export const DailyNormaMl = styled.span`
   font-weight: ${theme.fontWeights.normal};
   font-size: ${theme.fontSizes.listTitle};
-  line-heigth: ${theme.lineHeights.info};
+  line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryBlue};
 `;
 
@@ -75,7 +75,7 @@ export const Fulfillment = styled.p`
 export const FulfillmentPercentage = styled.span`
   font-weight: ${theme.fontWeights.normal};
   font-size: ${theme.fontSizes.listTitle};
-  line-heigth: ${theme.lineHeights.info};
+  line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryBlue};
 `;
 
@@ -90,6 +90,6 @@ export const Servings = styled.p`
 export const ServingsAmount = styled.span`
   font-weight: ${theme.fontWeights.normal};
   font-size: ${theme.fontSizes.listTitle};
-  line-heigth: ${theme.lineHeights.info};
+  line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryBlue};
 `;

@@ -6,8 +6,8 @@ export const Wrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
+  transform: ${theme.transform.middle};
+  border-radius: ${theme.border.normal};
   width: 280px;
   padding: 32px 24px;
   flex-direction: column;
@@ -27,14 +27,11 @@ export const Buttons = styled.div`
     flex-direction: row;
     justify-content: flex-end;
   }
-  @media screen and (min-width: 1440px) {
-    justify-content: flex-start;
-  }
 `;
 
 export const Title = styled.h2`
   font-size: 26px;
-  font-weight: 500;
+  font-weight: ${theme.fontWeights.normal};
   margin-bottom: 24px;
   display: flex;
   flex-direction: row;
@@ -42,8 +39,8 @@ export const Title = styled.h2`
 `;
 
 export const Subtitle = styled.p`
-  font-size: 18px;
+  font-size: ${theme.fontSizes.listTitle};
   margin-bottom: 24px;
   line-height: 20px;
-  font-weight: 500;
+  font-weight: ${theme.fontWeights.normal};
 `;
