@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { theme } from 'styles/theme';
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -95,11 +95,13 @@ export const RadioFormWraper = styled.div`
 
 export const RadioWoman = styled.div`
   display: flex;
+  align-items: center;
   gap: 8px;
 `;
 
 export const RadioMan = styled.div`
   display: flex;
+  align-items: center;
   gap: 6px;
 `;
 
@@ -112,7 +114,7 @@ export const InputField = styled.input`
   }
 `;
 
-export const LabelWrap = styled.p`
+export const LabelWrap = styled.label`
   font-size: ${theme.fontSizes.text};
   line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlack};
@@ -186,7 +188,11 @@ export const AmountOfWaterLabel = styled.div`
 `;
 
 export const ButtonSave = styled.button`
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 256px;
+  height: 20px;
   background-color: ${theme.colors.primaryBlue};
   padding: 8px 30px;
   border-radius: 10px;
@@ -199,6 +205,7 @@ export const ButtonSave = styled.button`
   @media screen and (min-width: 768px) {
     margin: 0 0 0 auto;
     width: 160px;
+    height: 44px;
     padding: 10px 30px;
     font-size: ${theme.fontSizes.listTitle};
     line-height: ${theme.lineHeights.info};
