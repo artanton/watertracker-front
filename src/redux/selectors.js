@@ -22,7 +22,7 @@ export const selectorLoading = state => state.water.loading;
 export const selectorError = state => state.water.error;
 
 /**
- *water selectors end
+ *  end water selectors 
  */
 
 
