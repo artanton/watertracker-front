@@ -40,11 +40,12 @@ import {
 } from './ModalMyDailyNorma.styled';
 
 export const ModalMyDailyNorma = () => {
-  const [waterRate, setWaterRate] = useState(() => calculateWaterRate());
+  const [waterRate, setWaterRate] = useState(0);
   const [inputValues, setInputValues] = useState({
     gender: null,
-    weight: 0,
-    hours: 0,
+    weight: '',
+    hours: '',
+    amount: '',
   });
   const dispatch = useDispatch();
   const isLoading = useSelector(selectorLoading);
@@ -61,8 +62,7 @@ export const ModalMyDailyNorma = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const dailyNorma = waterRate * 1000;
-    console.log(dailyNorma);
+    const dailyNorma = Math.round(waterRate * 1000);
     dispatch(patchWater({ dailyNorma }))
       .unwrap()
       .then(res => {
@@ -108,7 +108,9 @@ export const ModalMyDailyNorma = () => {
                 type="radio"
                 name="gender"
                 value="female"
+                checked={inputValues.gender === 'female'}
                 onChange={handleChange}
+                required={inputValues.amount === ''}
               />
               <LabelWrap htmlFor="woman">For woman</LabelWrap>
             </RadioWoman>
@@ -118,6 +120,8 @@ export const ModalMyDailyNorma = () => {
                 type="radio"
                 name="gender"
                 value="male"
+                checked={inputValues.gender === 'male'}
+                required={inputValues.amount === ''}
                 onChange={handleChange}
               />
               <LabelWrap htmlFor="man">For man</LabelWrap>
@@ -126,11 +130,13 @@ export const ModalMyDailyNorma = () => {
           <FormWrapper>
             <LabelWrap>Your weight in kilograms:</LabelWrap>
             <InputFormField
+              value={inputValues.weight}
               type="number"
               name="weight"
               max={200}
               min={0}
               placeholder="0"
+              required={inputValues.amount === ''}
               onChange={handleChange}
             />
           </FormWrapper>
@@ -140,11 +146,13 @@ export const ModalMyDailyNorma = () => {
               with a high physical. Load in hours:
             </LabelWrap>
             <InputFormField
+              value={inputValues.hours}
               type="number"
               name="hours"
               max={24}
               min={0}
               placeholder="0"
+              required={inputValues.amount === ''}
               onChange={handleChange}
             />
           </FormWrapper>
@@ -163,11 +171,11 @@ export const ModalMyDailyNorma = () => {
           </AmountOfWaterLabel>
           <InputFormField
             type="number"
+            value={inputValues.amount}
             name="amount"
             min={1}
             max={15}
-            step={0.5}
-            placeholder="1"
+            placeholder="0"
             onChange={handleChange}
           />
         </FormContainer>
