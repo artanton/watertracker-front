@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { toast } from 'react-toastify';
+
+import { patchWater } from '../../redux/waterData/thunk';
+import { selectorLoading } from '../../redux/selectors';
+
+import { closeModal } from '../../redux/modal/modalSlice';
 import { Modal, CloseModalCross } from 'components';
-import { calculateWaterRate } from './CalculateWaterRate';
 import { modalNames } from 'constants/constants';
+
+import { calculateWaterRate } from './CalculateWaterRate';
+
+import { ClapSpinner } from 'react-spinners-kit';
 
 import {
   AmountOfWaterLabel,
@@ -29,13 +40,14 @@ import {
 } from './ModalMyDailyNorma.styled';
 
 export const ModalMyDailyNorma = () => {
-  const [waterRate, setWaterRate] = useState(calculateWaterRate());
+  const [waterRate, setWaterRate] = useState(() => calculateWaterRate());
   const [inputValues, setInputValues] = useState({
     gender: null,
     weight: 0,
     hours: 0,
   });
-
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectorLoading);
   useEffect(() => {
     setWaterRate(calculateWaterRate(inputValues));
   }, [inputValues]);
@@ -47,9 +59,26 @@ export const ModalMyDailyNorma = () => {
     }));
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    const dailyNorma = waterRate * 1000;
+    console.log(dailyNorma);
+    dispatch(patchWater({ dailyNorma }))
+      .unwrap()
+      .then(res => {
+        toast.success('Daily norma updated successfully');
+        dispatch(closeModal());
+      })
+      .catch(e => {
+        toast.error(
+          'Some error occurred while updating. Please try again later'
+        );
+      });
+  };
+
   return (
     <Modal modalId={modalNames.DAILY_NORMA}>
-      <ModalContainer>
+      <ModalContainer onSubmit={handleSubmit}>
         <ModalTitleWrapper>
           <ModalTitle>My daily norma</ModalTitle>
           <CloseModalCross />
@@ -75,21 +104,23 @@ export const ModalMyDailyNorma = () => {
           <RadioFormWraper>
             <RadioWoman>
               <InputField
+                id="woman"
                 type="radio"
                 name="gender"
                 value="female"
                 onChange={handleChange}
               />
-              <LabelWrap>For woman</LabelWrap>
+              <LabelWrap htmlFor="woman">For woman</LabelWrap>
             </RadioWoman>
             <RadioMan>
               <InputField
+                id="man"
                 type="radio"
                 name="gender"
                 value="male"
                 onChange={handleChange}
               />
-              <LabelWrap>For man</LabelWrap>
+              <LabelWrap htmlFor="man">For man</LabelWrap>
             </RadioMan>
           </RadioFormWraper>
           <FormWrapper>
@@ -140,7 +171,9 @@ export const ModalMyDailyNorma = () => {
             onChange={handleChange}
           />
         </FormContainer>
-        <ButtonSave type="submit">Save</ButtonSave>
+        <ButtonSave type="submit">
+          {isLoading ? <ClapSpinner size={16} frontColor={'#fff'} /> : 'Save'}
+        </ButtonSave>
       </ModalContainer>
     </Modal>
   );
