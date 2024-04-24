@@ -16,11 +16,16 @@ import { Plus } from 'components/Icons/Plus/Plus';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addWater } from '../../../redux/waterData/thunk';
+import { toast } from 'react-toastify';
+import { closeModal } from '../../../redux/modal/modalSlice';
+import { selectIsLoading } from '../../../redux/selectors';
 
 export const AddWaterForm = () => {
   const [waterCount, setWaterCount] = useState(50);
   const [timeValue, setTimeValue] = useState(new Date());
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectIsLoading);
 
   const hours = timeValue.getHours().toString().padStart(2, '0');
   const minutes = timeValue.getMinutes().toString().padStart(2, '0');
@@ -55,8 +60,18 @@ export const AddWaterForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(timeValue.toISOString());
-    console.log(waterCount);
+    const formData = {
+      date: timeValue,
+      waterVolume: waterCount,
+    };
+    dispatch(addWater(formData))
+      .then(res => {
+        toast.success('Record added successfully');
+        dispatch(closeModal());
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -94,7 +109,7 @@ export const AddWaterForm = () => {
           );
         })}
       </SelectInput>
-      <LabelQuantityInput htmlFor="quantity">
+      <LabelQuantityInput htmlFor="amount">
         Enter the value of the water used:
       </LabelQuantityInput>
       <QuantityInput
@@ -105,7 +120,7 @@ export const AddWaterForm = () => {
       />
       <ButtonContainer>
         <WaterQuantityValue>{`${waterCount}ml`}</WaterQuantityValue>
-        <SaveModalButton />
+        <SaveModalButton isLoading={isLoading} />
       </ButtonContainer>
     </form>
   );
