@@ -13,12 +13,20 @@ const Button = styled.button`
   border: none;
   color: white;
 
+  font-weight: ${theme.fontWeights.normal};
+  font-size: ${theme.fontSizes.text};
+  line-height: ${theme.lineHeights.text};
+
   &:hover {
     box-shadow: 0px 4px 14px 0px #407bff8a;
   }
   @media (min-width: 768px) {
     width: 160px;
     padding: 10px 30px;
+
+    font-weight: ${theme.fontWeights.normal};
+    font-size: ${theme.fontSizes.listTitle};
+    line-height: ${theme.lineHeights.info};
   }
 `;
 
