@@ -5,6 +5,28 @@ export const selectError = state => state.auth.error;
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 export const selectToken = state => state.auth.token;
 export const selectUserData = state => state.auth.userData;
+
+
+
+/**
+ * water selectors
+ */
+
+export const selectorDailyNorma = state => state.water.dailyNorma;
+export const selectorPersantRate = state => state.water.persantRate;
+export const selectorWaterSavings = state => state.water.waterSavings;
+export const selectorWaterNotes = state => state.water.waterNotes;
+export const selectorMonth = state => state.water.month;
+
+export const selectorLoading = state => state.water.loading;
+export const selectorError = state => state.water.error;
+
+/**
+ *water selectors end
+ */
+
+
+
 // // user selectors
 // export const selectUser = state => state.auth.user;
 // export const selectIsLoggedIn = state => state.auth.isLoggedIn;
