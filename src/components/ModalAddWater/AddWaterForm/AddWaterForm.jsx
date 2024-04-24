@@ -16,7 +16,6 @@ import { Plus } from 'components/Icons/Plus/Plus';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addWater } from '../../../redux/waterData/thunk';
-import { onChange } from 'react-toastify/dist/core/store';
 
 export const AddWaterForm = () => {
   const [waterCount, setWaterCount] = useState(50);
@@ -34,12 +33,30 @@ export const AddWaterForm = () => {
     setWaterCount(state => Math.max(state - 50));
   };
 
-  const onChange = event => {
-    setTimeValue(event.target.value);
+  const selectChange = event => {
+    const [hourStr, minuteStr] = event.target.value.split(':');
+    const hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr, 10);
+    const currentDate = new Date();
+    currentDate.setHours(hour);
+    currentDate.setMinutes(minute);
+    setTimeValue(currentDate);
   };
 
-  const handleSubmit = () => {
-    console.log(timeValue);
+  const handleChange = event => {
+    if (event.target.value.length > 4) {
+      return;
+    }
+    const value = Math.floor(event.target.value);
+    if (value || value === 0) {
+      setWaterCount(value);
+    }
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(timeValue.toISOString());
+    console.log(waterCount);
   };
 
   return (
@@ -53,7 +70,7 @@ export const AddWaterForm = () => {
         >
           <Minus />
         </ButtonChange>
-        <CountValue>{waterCount}</CountValue>
+        <CountValue>{`${waterCount}ml`}</CountValue>
         <ButtonChange
           type="button"
           onClick={increment}
@@ -63,7 +80,7 @@ export const AddWaterForm = () => {
         </ButtonChange>
       </CountContainer>
       <LabelSelect>Recording time:</LabelSelect>
-      <SelectInput name="time" onChange={onChange}>
+      <SelectInput name="time" onChange={selectChange}>
         <option value={`${hours}:${minutes}`}>{`${hours}:${minutes}`}</option>
         {Array.from({ length: 24 * 12 }).map((_, index) => {
           const hour = Math.floor(index / 12);
@@ -77,25 +94,17 @@ export const AddWaterForm = () => {
           );
         })}
       </SelectInput>
-      {/* <ErrorMessage name="time" component={Error} /> */}
       <LabelQuantityInput htmlFor="quantity">
         Enter the value of the water used:
       </LabelQuantityInput>
       <QuantityInput
-        name="number"
+        name="amount"
         type="number"
-        id="quantity"
-        placeholder="0"
-        // $error={errors.quantity}
-        // value={inputValue}
-        // onChange={event => setInputValue(event.target.value)}
-        // onBlur={handleBlur}
+        value={waterCount}
+        onChange={handleChange}
       />
-      {/* <ErrorMessage name="quantity" component={Error} /> */}
       <ButtonContainer>
-        <WaterQuantityValue>
-          {/* {otherInputValue ? `${otherInputValue}ml` : `${count}ml`} */}
-        </WaterQuantityValue>
+        <WaterQuantityValue>{`${waterCount}ml`}</WaterQuantityValue>
         <SaveModalButton />
       </ButtonContainer>
     </form>
