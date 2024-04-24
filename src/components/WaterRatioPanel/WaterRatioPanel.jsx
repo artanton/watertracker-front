@@ -13,6 +13,7 @@ import {
 } from './WaterRatioPanel.styled';
 import { openModal } from '../../redux/modal/modalSlice';
 import { modalNames } from 'constants/constants';
+// import { selectorPersantRate } from '../../redux/selectors';
 
 const ProgressBar = ({ percentage }) => {
   return (
@@ -28,8 +29,9 @@ const ProgressBar = ({ percentage }) => {
 
 const WaterRatioPanel = () => {
   const dispatch = useDispatch();
+  const persantageRate = 50;
 
-  const persantageRate = 30;
+  // const persantageRate = selectorPersantRate;
 
   return (
     <WaterRatioContainer>

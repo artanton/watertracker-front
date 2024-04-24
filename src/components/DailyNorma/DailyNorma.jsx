@@ -14,10 +14,12 @@ import {
   WaterNormaAmountEdit,
 } from './DailyNorma.styled';
 
+import { selectorDailyNorma } from '../../redux/selectors';
+
 const DailyNorma = () => {
   const dispatch = useDispatch();
 
-  const dailyNorma = 1000 / 1000;
+  const dailyNorma = selectorDailyNorma / 1000;
 
   return (
     <MyDailyNormaContainer>
