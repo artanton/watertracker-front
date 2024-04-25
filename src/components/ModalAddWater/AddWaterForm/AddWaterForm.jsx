@@ -61,10 +61,10 @@ export const AddWaterForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     const formData = {
-      date: timeValue,
+      date: timeValue.toISOString(),
       waterVolume: waterCount,
     };
-    dispatch(addWater(formData))
+    dispatch(addWater({ formData }))
       .then(res => {
         toast.success('Record added successfully');
         dispatch(closeModal());
