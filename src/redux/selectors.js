@@ -6,8 +6,6 @@ export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 export const selectToken = state => state.auth.token;
 export const selectUserData = state => state.auth.userData;
 
-
-
 /**
  * water selectors
  */
@@ -22,10 +20,8 @@ export const selectorLoading = state => state.water.loading;
 export const selectorError = state => state.water.error;
 
 /**
- *  end water selectors 
+ *  end water selectors
  */
-
-
 
 // // user selectors
 // export const selectUser = state => state.auth.user;
