@@ -12,16 +12,23 @@ import {
 } from '../UserLogoutModal/UserLogoutModal.styled';
 import { deleteWater } from '../../redux/waterData/thunk';
 
+import { toast } from 'react-toastify';
+
 export const DeleteEntryModal = () => {
   const dispatch = useDispatch();
   const waterId = useSelector(selectModalData);
-  console.log('waterId', waterId);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   const onDelete = async e => {
     e.preventDefault();
-    dispatch(deleteWater(waterId));
+    dispatch(deleteWater(waterId))
+      .unwrap()
+      .then(res => {
+        toast.success('Water record is deleted').catch(e => {
+          toast.error('Something went wrong. Try again later.');
+        });
+      });
     dispatch(closeModal());
   };
 
