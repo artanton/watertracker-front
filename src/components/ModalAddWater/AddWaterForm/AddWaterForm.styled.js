@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import { Minus } from 'components/Icons/Minus';
+import { TimePicker } from 'antd';
 
 export const CountContainer = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ export const LabelSelect = styled.label`
   margin-bottom: 12px;
 `;
 
-export const SelectInput = styled.select`
+export const SelectInput = styled(TimePicker)`
   display: block;
   width: 120px;
   padding: 12px 10px;
