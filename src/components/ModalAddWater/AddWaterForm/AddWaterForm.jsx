@@ -58,7 +58,14 @@ export const AddWaterForm = () => {
       date: timeValue,
       waterDose: waterCount,
     };
-    console.log(formData);
+    if (waterCount === 0) {
+      return toast.error('You cannot send 0 ml');
+    }
+
+    if (waterCount < 1 || waterCount > 1500) {
+      return toast.error('Enter a value between 1 and 1500');
+    }
+
     dispatch(addWater(formData))
       .then(res => {
         toast.success('Record added successfully');
