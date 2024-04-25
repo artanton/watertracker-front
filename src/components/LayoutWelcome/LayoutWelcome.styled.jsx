@@ -14,7 +14,7 @@ const bgMainTablet2x = require('../../img/background/tablet/bg_mainpage@2x.png')
 export const LayoutStyle = styled.section`
   background-image: url(${bgImageMob1x});
 
-  min-height: calc(100vh - 119px);
+  min-height: calc(100vh - 1px);
   background-attachment: fixed;
   background-size: cover;
   background-position: center bottom;
