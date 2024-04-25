@@ -21,7 +21,6 @@ import { modalNames } from 'constants/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorWaterNotes } from '../../redux/selectors';
 import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
-import { DeleteEntryModal } from 'components';
 
 const TodayWaterList = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,12 @@ const TodayWaterList = () => {
       <Today>Today</Today>
       <WaterList>
         {waterNotes.map((note, index) => (
-          <WaterListItem key={index}>
+          <WaterListItem
+            key={index}
+            water={note.waterDose}
+            date={new Date(note.createdDate)}
+            id={note._id}
+          >
             <WaterGlassIcon />
             <WaterListMl>{note.waterDose} ml</WaterListMl>
             <WaterListTime>{formatTime(note.createdDate)}</WaterListTime>
@@ -54,7 +58,7 @@ const TodayWaterList = () => {
               </EditButton>
               <DeleteButton
                 type="button"
-                onClick={() => dispatch(openModal(modalNames.DELETE_ENTRY))}
+                // onClick={() => dispatch(openModal())}
               >
                 <WaterDeleteIcon />
               </DeleteButton>
@@ -67,7 +71,6 @@ const TodayWaterList = () => {
         Add water
       </AddWaterButton>
       <ModalEditWater />
-      <DeleteEntryModal />
     </TodayWaterListContainer>
   );
 };
