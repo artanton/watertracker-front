@@ -38,21 +38,8 @@ export const AddWaterForm = () => {
     setWaterCount(state => Math.max(state - 50));
   };
 
-  const selectChange = event => {
-    const [hourStr, minuteStr] = event.target.value.split(':');
-    const hour = parseInt(hourStr, 10);
-    const minute = parseInt(minuteStr, 10);
-    const currentDate = new Date();
-    currentDate.setHours(hour);
-    currentDate.setMinutes(minute);
-    const year = String(currentDate.getFullYear());
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDay()).padStart(2, '0');
-    const hours = String(currentDate.getHours()).padStart(2, '0');
-    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-    const now = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-    setTimeValue(now);
+  const selectChange = selectDate => {
+    setTimeValue(selectDate.$d);
   };
 
   const handleChange = event => {
@@ -103,7 +90,7 @@ export const AddWaterForm = () => {
         </ButtonChange>
       </CountContainer>
       <LabelSelect>Recording time:</LabelSelect>
-      <SelectInput name="time" onChange={selectChange}>
+      {/* <SelectInput name="time" onChange={selectChange}>
         <option value={`${hours}:${minutes}`}>{`${hours}:${minutes}`}</option>
         {Array.from({ length: 24 * 12 }).map((_, index) => {
           const hour = Math.floor(index / 12);
@@ -116,7 +103,12 @@ export const AddWaterForm = () => {
             </option>
           );
         })}
-      </SelectInput>
+      </SelectInput> */}
+      <SelectInput
+        placeholder={`${hours}:${minutes}`}
+        format="HH:mm"
+        onChange={selectChange}
+      />
       <LabelQuantityInput htmlFor="amount">
         Enter the value of the water used:
       </LabelQuantityInput>
