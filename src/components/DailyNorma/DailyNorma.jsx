@@ -20,13 +20,13 @@ import { selectorDailyNorma } from '../../redux/selectors';
 const DailyNorma = () => {
   const dispatch = useDispatch();
 
-  const dailyNorma = useSelector(selectorDailyNorma) / 1000;
+  const dailyNorma = (useSelector(selectorDailyNorma) / 1000).toFixed(1);
 
   return (
     <MyDailyNormaContainer>
       <MyDailyNorma>My daily norma</MyDailyNorma>
       <MyDailyNormaAmount>
-        <WaterNormaAmount>{dailyNorma}L</WaterNormaAmount>
+        <WaterNormaAmount>{dailyNorma} L</WaterNormaAmount>
         <WaterNormaAmountEdit
           type="button"
           onClick={() => dispatch(openModal(modalNames.DAILY_NORMA))}
