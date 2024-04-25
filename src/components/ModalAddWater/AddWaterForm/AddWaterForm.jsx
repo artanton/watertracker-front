@@ -90,20 +90,6 @@ export const AddWaterForm = () => {
         </ButtonChange>
       </CountContainer>
       <LabelSelect>Recording time:</LabelSelect>
-      {/* <SelectInput name="time" onChange={selectChange}>
-        <option value={`${hours}:${minutes}`}>{`${hours}:${minutes}`}</option>
-        {Array.from({ length: 24 * 12 }).map((_, index) => {
-          const hour = Math.floor(index / 12);
-          const minute = (index % 12) * 5;
-          const hourStr = hour.toString().padStart(2, '0');
-          const minuteStr = minute.toString().padStart(2, '0');
-          return (
-            <option key={index} value={`${hourStr}:${minuteStr}`}>
-              {`${hourStr}:${minuteStr}`}
-            </option>
-          );
-        })}
-      </SelectInput> */}
       <SelectInput
         placeholder={`${hours}:${minutes}`}
         format="HH:mm"
