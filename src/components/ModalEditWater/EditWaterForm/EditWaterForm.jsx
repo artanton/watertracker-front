@@ -20,9 +20,9 @@ import { toast } from 'react-toastify';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { selectIsLoading } from '../../../redux/selectors';
 
-export const EditWaterForm = () => {
-  const [waterCount, setWaterCount] = useState(50);
-  const [timeValue, setTimeValue] = useState(new Date());
+export const EditWaterForm = ({ id, water, date }) => {
+  const [waterCount, setWaterCount] = useState(water);
+  const [timeValue, setTimeValue] = useState(new Date(date));
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectIsLoading);
@@ -66,7 +66,7 @@ export const EditWaterForm = () => {
       return toast.error('Enter a value between 1 and 1500');
     }
 
-    dispatch(updateWater(formData))
+    dispatch(updateWater({ waterId: id, ...formData }))
       .then(res => {
         toast.success('Record added successfully');
         dispatch(closeModal());
