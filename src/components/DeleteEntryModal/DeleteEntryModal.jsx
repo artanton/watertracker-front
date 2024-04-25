@@ -11,7 +11,7 @@ import {
 } from '../UserLogoutModal/UserLogoutModal.styled';
 import { deleteWater } from '../../redux/waterData/thunk';
 
-const DeleteEntryModal = ({ waterId }) => {
+export const DeleteEntryModal = ({ waterId }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -23,7 +23,7 @@ const DeleteEntryModal = ({ waterId }) => {
   };
 
   return (
-    <Modal modalId={modalNames.LOGOUT}>
+    <Modal modalId={modalNames.DELETE_ENTRY}>
       <Wrapper>
         <CloseModalCross />
         <Title>Delete entry</Title>
@@ -35,12 +35,12 @@ const DeleteEntryModal = ({ waterId }) => {
           <YesNoButton
             onBtnClick={() => dispatch(closeModal())}
             text="Cancel"
-            approve={false}
+            approve="false"
             disabled={isLoading}
           />
           <YesNoButton
             onBtnClick={onDelete}
-            approve={true}
+            approve="true"
             text="Delete"
             disabled={isLoading}
           />
@@ -50,5 +50,3 @@ const DeleteEntryModal = ({ waterId }) => {
     </Modal>
   );
 };
-
-export default DeleteEntryModal;
