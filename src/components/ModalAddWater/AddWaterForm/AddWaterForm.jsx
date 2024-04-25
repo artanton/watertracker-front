@@ -45,7 +45,14 @@ export const AddWaterForm = () => {
     const currentDate = new Date();
     currentDate.setHours(hour);
     currentDate.setMinutes(minute);
-    setTimeValue(currentDate);
+    const year = String(currentDate.getFullYear());
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDay()).padStart(2, '0');
+    const hours = String(currentDate.getHours()).padStart(2, '0');
+    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+    const now = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    setTimeValue(now);
   };
 
   const handleChange = event => {
@@ -62,8 +69,9 @@ export const AddWaterForm = () => {
     event.preventDefault();
     const formData = {
       date: timeValue,
-      waterVolume: waterCount,
+      waterDose: waterCount,
     };
+    console.log(formData);
     dispatch(addWater(formData))
       .then(res => {
         toast.success('Record added successfully');
