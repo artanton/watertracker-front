@@ -6,14 +6,17 @@ import TodayWaterList from 'components/TodayWaterList/TodayWaterList';
 import { Container } from 'styles/GlobalStyle';
 import MonthStatsTable from 'components/MonthStatsTable/MonthStatsTable';
 import { LayoutHome } from 'components/LayoutHome/LayoutHome';
-import { ModalAddWater } from 'components';
+import { DeleteEntryModal, ModalAddWater } from 'components';
 import { useDispatch } from 'react-redux';
 import { apiGetUserSettings } from '../../redux/authorization/authReducer';
+import { getWaterToday, getMonthWater } from '../../redux/waterData/thunk';
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(apiGetUserSettings());
-  });
+    dispatch(getWaterToday());
+    dispatch(getMonthWater());
+  }, [dispatch]);
   return (
     <LayoutHome>
       <Container>
@@ -27,6 +30,7 @@ function Home() {
         </ListContainer>
       </Container>
       <ModalAddWater />
+      <DeleteEntryModal />
     </LayoutHome>
   );
 }
