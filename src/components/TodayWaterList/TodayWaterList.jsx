@@ -40,12 +40,7 @@ const TodayWaterList = () => {
       <Today>Today</Today>
       <WaterList>
         {waterNotes.map((note, index) => (
-          <WaterListItem
-            key={index}
-            water={note.waterDose}
-            date={new Date(note.createdDate)}
-            id={note._id}
-          >
+          <WaterListItem key={note._id}>
             <WaterGlassIcon />
             <WaterListMl>{note.waterDose} ml</WaterListMl>
             <WaterListTime>{formatTime(note.createdDate)}</WaterListTime>
@@ -63,6 +58,11 @@ const TodayWaterList = () => {
                 <WaterDeleteIcon />
               </DeleteButton>
             </IconsContainer>
+            <ModalEditWater
+              id={note._id}
+              water={note.waterDose}
+              date={new Date(note.createdDate)}
+            />
           </WaterListItem>
         ))}
       </WaterList>
@@ -70,7 +70,6 @@ const TodayWaterList = () => {
         <Plus />
         Add water
       </AddWaterButton>
-      <ModalEditWater />
     </TodayWaterListContainer>
   );
 };
