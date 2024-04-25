@@ -12,7 +12,7 @@ export const selectUserData = state => state.auth.userData;
  * water selectors
  */
 
-export const selectorDailyNorma = state => state.water.dailyNorma;
+export const selectorDailyNorma = state => state.auth.userData.dailyNorma;
 export const selectorPersantRate = state => state.water.persantRate;
 export const selectorWaterSavings = state => state.water.waterSavings;
 export const selectorWaterNotes = state => state.water.waterNotes;

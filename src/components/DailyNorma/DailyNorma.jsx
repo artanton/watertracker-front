@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { openModal } from '../../redux/modal/modalSlice';
 
@@ -19,7 +20,7 @@ import { selectorDailyNorma } from '../../redux/selectors';
 const DailyNorma = () => {
   const dispatch = useDispatch();
 
-  const dailyNorma = selectorDailyNorma / 1000;
+  const dailyNorma = useSelector(selectorDailyNorma) / 1000;
 
   return (
     <MyDailyNormaContainer>
