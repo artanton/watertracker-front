@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading, selectError } from '../../redux/selectors';
 import { Modal, CloseModalCross, YesNoButton } from 'components';
 import { closeModal } from '../../redux/modal/modalSlice';
+import { selectModalData } from '../../redux/modal/modalSlice.selectors';
 import { modalNames } from 'constants/constants';
 import {
   Buttons,
@@ -11,8 +12,10 @@ import {
 } from '../UserLogoutModal/UserLogoutModal.styled';
 import { deleteWater } from '../../redux/waterData/thunk';
 
-export const DeleteEntryModal = ({ waterId }) => {
+export const DeleteEntryModal = () => {
   const dispatch = useDispatch();
+  const waterId = useSelector(selectModalData);
+  console.log('waterId', waterId);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
