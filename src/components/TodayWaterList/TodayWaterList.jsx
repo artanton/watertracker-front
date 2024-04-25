@@ -35,12 +35,19 @@ const TodayWaterList = () => {
     });
   };
 
+  console.log(waterNotes.createdDate);
+
   return (
     <TodayWaterListContainer>
       <Today>Today</Today>
       <WaterList>
         {waterNotes.map((note, index) => (
-          <WaterListItem key={index}>
+          <WaterListItem
+            key={index}
+            water={note.waterDose}
+            date={new Date(note.createdDate)}
+            id={note._id}
+          >
             <WaterGlassIcon />
             <WaterListMl>{note.waterDose} ml</WaterListMl>
             <WaterListTime>{formatTime(note.createdDate)}</WaterListTime>
