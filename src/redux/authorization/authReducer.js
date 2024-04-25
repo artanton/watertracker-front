@@ -95,6 +95,18 @@ export const apiGetUserSettings = createAsyncThunk(
   }
 );
 
+export const patchWater = createAsyncThunk(
+  'today/patchWater',
+  async (waterData, thunkApi) => {
+    try {
+      const { data } = await authInstance.patch(`/water/waterrate/`, waterData);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   token: null,
   userData: null,
@@ -133,6 +145,10 @@ const authSlice = createSlice({
         state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
       })
       .addCase(apiGetUserSettings.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userData = action.payload;
+      })
+      .addCase(patchWater.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userData = action.payload;
       })
