@@ -1,5 +1,12 @@
-import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { selectorWaterNotes } from '../../redux/selectors';
+import {
+  openModal,
+  addData,
+  addWaterDose,
+  addWaterDate,
+} from '../../redux/modal/modalSlice';
+// import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
 import {
   AddWaterButton,
   DeleteButton,
@@ -16,11 +23,7 @@ import {
   WaterListTime,
 } from './TodayWaterList.styled';
 import { Plus } from 'components/Icons/Plus/Plus';
-import { openModal, addData } from '../../redux/modal/modalSlice';
 import { modalNames } from 'constants/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectorWaterNotes } from '../../redux/selectors';
-import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
 
 const TodayWaterList = () => {
   const dispatch = useDispatch();
@@ -47,7 +50,12 @@ const TodayWaterList = () => {
             <IconsContainer>
               <EditButton
                 type="button"
-                onClick={() => dispatch(openModal(modalNames.EDIT_WATER))}
+                onClick={() => {
+                  dispatch(openModal(modalNames.EDIT_WATER));
+                  dispatch(addData(note._id));
+                  dispatch(addWaterDose(note.waterDose));
+                  dispatch(addWaterDate(note.createdDate));
+                }}
               >
                 <WaterEditIcon />
               </EditButton>
@@ -61,14 +69,10 @@ const TodayWaterList = () => {
                 <WaterDeleteIcon />
               </DeleteButton>
             </IconsContainer>
-            <ModalEditWater
-              id={note._id}
-              water={note.waterDose}
-              date={new Date(note.createdDate)}
-            />
           </WaterListItem>
         ))}
       </WaterList>
+
       <AddWaterButton onClick={() => dispatch(openModal(modalNames.ADD_WATER))}>
         <Plus />
         Add water

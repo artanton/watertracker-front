@@ -54,7 +54,6 @@ export const DeleteEntryModal = () => {
             text="Delete"
             disabled={isLoading}
           />
-          {isLoading && <span>Loading...</span>}
         </Buttons>
       </Wrapper>
     </Modal>
