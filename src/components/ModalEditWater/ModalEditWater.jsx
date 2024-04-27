@@ -8,7 +8,7 @@ import {
 } from 'components/ModalAddWater/AddWater.styled';
 import { EditWaterForm } from './EditWaterForm/EditWaterForm';
 
-export const ModalEditWater = ({ id, water, date }) => {
+export const ModalEditWater = () => {
   return (
     <Modal modalId={modalNames.EDIT_WATER}>
       <ModalContainer>
@@ -17,7 +17,7 @@ export const ModalEditWater = ({ id, water, date }) => {
           <CloseModalCross />
         </ModalHeader>
         <ModalSubTitle>Correct entered data:</ModalSubTitle>
-        <EditWaterForm id={id} water={water} date={date} />
+        <EditWaterForm />
       </ModalContainer>
     </Modal>
   );

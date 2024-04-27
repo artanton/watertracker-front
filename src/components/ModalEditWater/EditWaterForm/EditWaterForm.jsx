@@ -19,8 +19,17 @@ import { updateWater } from '../../../redux/waterData/thunk';
 import { toast } from 'react-toastify';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { selectIsLoading } from '../../../redux/selectors';
+import {
+  selectModalData,
+  selectWaterDate,
+  selectWaterDose,
+} from '../../../redux/modal/modalSlice.selectors';
 
-export const EditWaterForm = ({ id, water, date }) => {
+export const EditWaterForm = () => {
+  const waterId = useSelector(selectModalData);
+  const water = useSelector(selectWaterDose);
+  const date = useSelector(selectWaterDate);
+
   const [waterCount, setWaterCount] = useState(water);
   const [timeValue, setTimeValue] = useState(new Date(date));
   const dispatch = useDispatch();
@@ -54,19 +63,19 @@ export const EditWaterForm = ({ id, water, date }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const formData = {
-      date: timeValue,
+    const waterData = {
+      createdDate: timeValue.toISOString(),
       waterDose: waterCount,
     };
     if (waterCount === 0) {
       return toast.error('You cannot send 0 ml');
     }
 
-    if (waterCount < 1 || waterCount > 1500) {
+    if (waterCount < 1 || waterCount > 5000) {
       return toast.error('Enter a value between 1 and 1500');
     }
-
-    dispatch(updateWater({ waterId: id, ...formData }))
+    console.log(waterData);
+    dispatch(updateWater({ waterId, waterData }))
       .then(res => {
         toast.success('Record added successfully');
         dispatch(closeModal());
@@ -83,7 +92,7 @@ export const EditWaterForm = ({ id, water, date }) => {
         <ButtonChange
           type="button"
           onClick={decrement}
-          disabled={waterCount <= 49 ? true : false}
+          disabled={waterCount <= 1 ? true : false}
         >
           <Minus />
         </ButtonChange>
@@ -91,7 +100,7 @@ export const EditWaterForm = ({ id, water, date }) => {
         <ButtonChange
           type="button"
           onClick={increment}
-          disabled={waterCount >= 1451 ? true : false}
+          disabled={waterCount >= 5000 ? true : false}
         >
           <Plus />
         </ButtonChange>
@@ -110,6 +119,7 @@ export const EditWaterForm = ({ id, water, date }) => {
         type="number"
         value={waterCount}
         onChange={handleChange}
+        disabled={waterCount >= 5000 || waterCount <= 1 ? true : false}
       />
       <ButtonContainer>
         <WaterQuantityValue>{`${waterCount}ml`}</WaterQuantityValue>

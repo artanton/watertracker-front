@@ -10,6 +10,7 @@ import { DeleteEntryModal, ModalAddWater } from 'components';
 import { useDispatch } from 'react-redux';
 import { apiGetUserSettings } from '../../redux/authorization/authReducer';
 import { getWaterToday, getMonthWater } from '../../redux/waterData/thunk';
+import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,6 +32,7 @@ function Home() {
       </Container>
       <ModalAddWater />
       <DeleteEntryModal />
+      <ModalEditWater />
     </LayoutHome>
   );
 }
