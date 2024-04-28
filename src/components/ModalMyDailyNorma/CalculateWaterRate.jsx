@@ -1,21 +1,21 @@
-export const calculateWaterRate = (
-  { weight, hours, gender, amount } = {
-    gender: 'male',
-    hours: 0,
-    weight: 0,
-    amount: 0,
-  }
-) => {
-  if (weight === 0 || !weight) return 0;
-  if (amount) return amount;
+export const calculateWaterRate = ({
+  weight,
+  sportTime,
+  gender,
+  enteredWaterRate,
+}) => {
+  if (enteredWaterRate) return enteredWaterRate;
+  // if (weight === 0 || !weight) return 0;
+  // if (enteredWaterRate) return enteredWaterRate;
+  if (gender && sportTime && weight && !enteredWaterRate) {
+    switch (gender) {
+      case 'Man':
+        return (weight * 0.04 + sportTime * 0.6).toFixed(1);
+      case 'Woman':
+        return (weight * 0.03 + sportTime * 0.4).toFixed(1);
 
-  switch (gender) {
-    case 'male':
-      return weight * 0.04 + hours * 0.6;
-    case 'female':
-      return weight * 0.03 + hours * 0.4;
-
-    default:
-      return 0;
+      default:
+        return 0;
+    }
   }
 };
