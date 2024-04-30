@@ -10,3 +10,5 @@ export function inputValidationStyler(props) {
     return [];
   }
 }
+
+export function myDailyNormaValidation() {}

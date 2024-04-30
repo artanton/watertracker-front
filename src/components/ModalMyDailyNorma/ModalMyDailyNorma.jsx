@@ -8,13 +8,15 @@ import { patchWater } from '../../redux/waterData/thunk';
 import { selectorLoading, selectorDailyNorma } from '../../redux/selectors';
 
 import { closeModal } from '../../redux/modal/modalSlice';
-import { Modal, CloseModalCross } from 'components';
+import { Modal, CloseModalCross, InputError } from 'components';
 import { modalNames } from 'constants/constants';
 
 import { calculateWaterRate } from './CalculateWaterRate';
 
 import { ClapSpinner } from 'react-spinners-kit';
 
+import { myDailyNorma } from 'schemas/schemas';
+import { myDailyNormaValidation } from 'helpers/helpers';
 import {
   AmountOfWaterLabel,
   ButtonSave,
@@ -41,8 +43,9 @@ import {
 import { useFormik } from 'formik';
 
 export const ModalMyDailyNorma = () => {
+  const oldDailyNorma = useSelector(selectorDailyNorma);
   const [dailyNorma, setDailyNorma] = useState(0);
-  const oldDailyNorma = (useSelector(selectorDailyNorma) / 1000).toFixed(1);
+
   const dispatch = useDispatch();
   const isLoading = useSelector(selectorLoading);
 
@@ -61,10 +64,9 @@ export const ModalMyDailyNorma = () => {
       sportTime: '',
       enteredWaterRate: '',
     },
+    // validationSchema: myDailyNorma,
     onSubmit: e => {
-      console.log(values);
-      console.log('dailyNorma', dailyNorma);
-      dispatch(patchWater({ dailyNorma: dailyNorma * 1000 }))
+      dispatch(patchWater({ dailyNorma }))
         .unwrap()
         .then(res => {
           toast.success('Daily norma updated successfully');
@@ -115,7 +117,11 @@ export const ModalMyDailyNorma = () => {
                 value="Woman"
                 checked={values.gender === 'Woman'}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {touched.gender && errors.gender && (
+                <InputError>{errors.gender}</InputError>
+              )}
               <LabelWrap htmlFor="woman">For woman</LabelWrap>
             </RadioWoman>
             <RadioMan>
@@ -126,18 +132,28 @@ export const ModalMyDailyNorma = () => {
                 value="Man"
                 checked={values.gender === 'Man'}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {touched.gender && errors.gender && (
+                <InputError>{errors.gender}</InputError>
+              )}
               <LabelWrap htmlFor="man">For man</LabelWrap>
             </RadioMan>
           </RadioFormWraper>
           <FormWrapper>
             <LabelWrap>Your weight in kilograms:</LabelWrap>
             <InputFormField
-              value={values.weight}
               type="number"
+              min={1}
+              step={1}
+              value={values.weight}
               name="weight"
               onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {touched.weight && errors.weight && (
+              <InputError>{errors.weight}</InputError>
+            )}
           </FormWrapper>
           <FormWrapper>
             <LabelWrap>
@@ -145,33 +161,46 @@ export const ModalMyDailyNorma = () => {
               with a high physical. Load in hours:
             </LabelWrap>
             <InputFormField
-              value={values.sportTime}
               type="number"
+              min={1}
+              step={1}
+              value={values.sportTime}
               name="sportTime"
               onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {touched.sportTime && errors.sportTime && (
+              <InputError>{errors.sportTime}</InputError>
+            )}
           </FormWrapper>
           <WaterPerDayWrapper>
             <WaterPerDayText>
               The required amount of water in liters per day:
             </WaterPerDayText>
             <WaterPerDayValue>
-              {dailyNorma ? dailyNorma : oldDailyNorma} L
+              {dailyNorma
+                ? (dailyNorma / 1000).toFixed(1)
+                : (oldDailyNorma / 1000).toFixed(1)}
+              L
             </WaterPerDayValue>
           </WaterPerDayWrapper>
         </FormContainer>
         <FormContainer>
           <AmountOfWaterLabel>
-            Write down how much water you will drink:
+            Write down how much water you will drink (ml):
           </AmountOfWaterLabel>
           <InputFormField
             type="number"
             value={values.enteredWaterRate}
             name="enteredWaterRate"
             onChange={handleChange}
+            onBlur={handleBlur}
           />
+          {touched.enteredWaterRate && errors.enteredWaterRate && (
+            <InputError>{errors.enteredWaterRate}</InputError>
+          )}
         </FormContainer>
-        <ButtonSave type="submit">
+        <ButtonSave type="submit" disabled={!isValid}>
           {isLoading ? <ClapSpinner size={16} frontColor={'#fff'} /> : 'Save'}
         </ButtonSave>
       </ModalContainer>
