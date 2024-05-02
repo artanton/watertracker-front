@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { theme } from 'styles/theme';
 
+import { inputValidationStyler } from 'helpers/helpers';
+
 export const ModalContainer = styled.form`
   display: flex;
   flex-direction: column;
@@ -141,6 +143,7 @@ export const InputFormField = styled.input`
   &::placeholder {
     color: ${theme.colors.secondaryBlue};
   }
+  ${props => inputValidationStyler(props)};
 `;
 
 export const WaterPerDayWrapper = styled.div`

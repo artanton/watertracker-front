@@ -2,21 +2,23 @@ import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useFormik } from 'formik';
+
 import { toast } from 'react-toastify';
 
 import { patchWater } from '../../redux/waterData/thunk';
-import { selectorLoading, selectorDailyNorma } from '../../redux/selectors';
-
+import { selectorLoading } from '../../redux/selectors';
 import { closeModal } from '../../redux/modal/modalSlice';
+
 import { Modal, CloseModalCross, InputError } from 'components';
 import { modalNames } from 'constants/constants';
 
-import { calculateWaterRate } from './CalculateWaterRate';
-
 import { ClapSpinner } from 'react-spinners-kit';
 
+import { calculateWaterRate } from '../../helpers/helpers';
+
 import { myDailyNorma } from 'schemas/schemas';
-import { myDailyNormaValidation } from 'helpers/helpers';
+
 import {
   AmountOfWaterLabel,
   ButtonSave,
@@ -40,11 +42,9 @@ import {
   WaterPerDayValue,
   WaterPerDayWrapper,
 } from './ModalMyDailyNorma.styled';
-import { useFormik } from 'formik';
 
 export const ModalMyDailyNorma = () => {
-  const oldDailyNorma = useSelector(selectorDailyNorma);
-  const [dailyNorma, setDailyNorma] = useState(0);
+  const [calculatedDailyNorma, setCalculatedDailyNorma] = useState(0);
 
   const dispatch = useDispatch();
   const isLoading = useSelector(selectorLoading);
@@ -64,12 +64,18 @@ export const ModalMyDailyNorma = () => {
       sportTime: '',
       enteredWaterRate: '',
     },
-    // validationSchema: myDailyNorma,
     onSubmit: e => {
+      const dailyNorma = values.enteredWaterRate
+        ? values.enteredWaterRate * 1000
+        : calculatedDailyNorma;
       dispatch(patchWater({ dailyNorma }))
         .unwrap()
         .then(res => {
-          toast.success('Daily norma updated successfully');
+          toast.success(
+            `Daily norma was successfully chaged to ${(
+              dailyNorma / 1000
+            ).toFixed(1)} L`
+          );
           dispatch(closeModal());
         })
         .catch(e => {
@@ -78,10 +84,30 @@ export const ModalMyDailyNorma = () => {
           );
         });
     },
+    validationSchema: myDailyNorma,
   });
+
   useEffect(() => {
-    setDailyNorma(calculateWaterRate(values));
-  }, [values]);
+    const { gender, weight, sportTime, enteredWaterRate } = values;
+
+    if (gender && weight && sportTime) {
+      const calculatedDailyNorma = calculateWaterRate({
+        weight,
+        sportTime,
+        gender,
+      });
+
+      setCalculatedDailyNorma(calculatedDailyNorma);
+      if (!enteredWaterRate) {
+        handleChange({
+          target: {
+            name: 'enteredWaterRate',
+            value: calculatedDailyNorma.toFixed(1),
+          },
+        });
+      }
+    }
+  }, [calculatedDailyNorma, handleChange, values]);
 
   return (
     <Modal modalId={modalNames.DAILY_NORMA}>
@@ -119,9 +145,6 @@ export const ModalMyDailyNorma = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.gender && errors.gender && (
-                <InputError>{errors.gender}</InputError>
-              )}
               <LabelWrap htmlFor="woman">For woman</LabelWrap>
             </RadioWoman>
             <RadioMan>
@@ -134,25 +157,24 @@ export const ModalMyDailyNorma = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.gender && errors.gender && (
-                <InputError>{errors.gender}</InputError>
-              )}
               <LabelWrap htmlFor="man">For man</LabelWrap>
             </RadioMan>
           </RadioFormWraper>
+          {touched.gender && errors.gender && (
+            <InputError>{errors.gender}</InputError>
+          )}
           <FormWrapper>
             <LabelWrap>Your weight in kilograms:</LabelWrap>
             <InputFormField
               type="number"
-              min={1}
-              step={1}
               value={values.weight}
               name="weight"
               onChange={handleChange}
               onBlur={handleBlur}
+              $error={errors.weight}
             />
             {touched.weight && errors.weight && (
-              <InputError>{errors.weight}</InputError>
+              <InputError>{touched.weight && errors.weight}</InputError>
             )}
           </FormWrapper>
           <FormWrapper>
@@ -162,15 +184,14 @@ export const ModalMyDailyNorma = () => {
             </LabelWrap>
             <InputFormField
               type="number"
-              min={1}
-              step={1}
               value={values.sportTime}
               name="sportTime"
               onChange={handleChange}
               onBlur={handleBlur}
+              $error={errors.sportTime}
             />
             {touched.sportTime && errors.sportTime && (
-              <InputError>{errors.sportTime}</InputError>
+              <InputError>{touched.sportTime && errors.sportTime}</InputError>
             )}
           </FormWrapper>
           <WaterPerDayWrapper>
@@ -178,16 +199,13 @@ export const ModalMyDailyNorma = () => {
               The required amount of water in liters per day:
             </WaterPerDayText>
             <WaterPerDayValue>
-              {dailyNorma
-                ? (dailyNorma / 1000).toFixed(1)
-                : (oldDailyNorma / 1000).toFixed(1)}
-              L
+              {calculatedDailyNorma && calculatedDailyNorma.toFixed(1)}L
             </WaterPerDayValue>
           </WaterPerDayWrapper>
         </FormContainer>
         <FormContainer>
           <AmountOfWaterLabel>
-            Write down how much water you will drink (ml):
+            Write down how much water you will drink:
           </AmountOfWaterLabel>
           <InputFormField
             type="number"
@@ -195,6 +213,7 @@ export const ModalMyDailyNorma = () => {
             name="enteredWaterRate"
             onChange={handleChange}
             onBlur={handleBlur}
+            $error={touched.enteredWaterRate && errors.enteredWaterRate}
           />
           {touched.enteredWaterRate && errors.enteredWaterRate && (
             <InputError>{errors.enteredWaterRate}</InputError>
