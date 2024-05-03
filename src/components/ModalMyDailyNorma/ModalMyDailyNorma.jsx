@@ -2,18 +2,22 @@ import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useFormik } from 'formik';
+
 import { toast } from 'react-toastify';
 
 import { patchWater } from '../../redux/waterData/thunk';
 import { selectorLoading } from '../../redux/selectors';
-
 import { closeModal } from '../../redux/modal/modalSlice';
-import { Modal, CloseModalCross } from 'components';
+
+import { Modal, CloseModalCross, InputError } from 'components';
 import { modalNames } from 'constants/constants';
 
-import { calculateWaterRate } from './CalculateWaterRate';
-
 import { ClapSpinner } from 'react-spinners-kit';
+
+import { calculateWaterRate } from '../../helpers/helpers';
+
+import { myDailyNorma } from 'schemas/schemas';
 
 import {
   AmountOfWaterLabel,
@@ -40,41 +44,70 @@ import {
 } from './ModalMyDailyNorma.styled';
 
 export const ModalMyDailyNorma = () => {
-  const [waterRate, setWaterRate] = useState(0);
-  const [inputValues, setInputValues] = useState({
-    gender: null,
-    weight: '',
-    hours: '',
-    amount: '',
-  });
+  const [calculatedDailyNorma, setCalculatedDailyNorma] = useState(0);
+
   const dispatch = useDispatch();
   const isLoading = useSelector(selectorLoading);
+
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isValid,
+  } = useFormik({
+    initialValues: {
+      gender: '',
+      weight: '',
+      sportTime: '',
+      enteredWaterRate: '',
+    },
+    onSubmit: e => {
+      const dailyNorma = values.enteredWaterRate
+        ? values.enteredWaterRate * 1000
+        : calculatedDailyNorma;
+      dispatch(patchWater({ dailyNorma }))
+        .unwrap()
+        .then(res => {
+          toast.success(
+            `Daily norma was successfully chaged to ${(
+              dailyNorma / 1000
+            ).toFixed(1)} L`
+          );
+          dispatch(closeModal());
+        })
+        .catch(e => {
+          toast.error(
+            'Some error occurred while updating. Please try again later'
+          );
+        });
+    },
+    validationSchema: myDailyNorma,
+  });
+
   useEffect(() => {
-    setWaterRate(calculateWaterRate(inputValues));
-  }, [inputValues]);
+    const { gender, weight, sportTime, enteredWaterRate } = values;
 
-  const handleChange = evt => {
-    setInputValues(prevValues => ({
-      ...prevValues,
-      [evt.target.name]: evt.target.value,
-    }));
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const dailyNorma = Math.round(waterRate * 1000);
-    dispatch(patchWater({ dailyNorma }))
-      .unwrap()
-      .then(res => {
-        toast.success('Daily norma updated successfully');
-        dispatch(closeModal());
-      })
-      .catch(e => {
-        toast.error(
-          'Some error occurred while updating. Please try again later'
-        );
+    if (gender && weight && sportTime) {
+      const calculatedDailyNorma = calculateWaterRate({
+        weight,
+        sportTime,
+        gender,
       });
-  };
+
+      setCalculatedDailyNorma(calculatedDailyNorma);
+      if (!enteredWaterRate) {
+        handleChange({
+          target: {
+            name: 'enteredWaterRate',
+            value: calculatedDailyNorma.toFixed(1),
+          },
+        });
+      }
+    }
+  }, [calculatedDailyNorma, handleChange, values]);
 
   return (
     <Modal modalId={modalNames.DAILY_NORMA}>
@@ -107,10 +140,10 @@ export const ModalMyDailyNorma = () => {
                 id="woman"
                 type="radio"
                 name="gender"
-                value="female"
-                checked={inputValues.gender === 'female'}
+                value="Woman"
+                checked={values.gender === 'Woman'}
                 onChange={handleChange}
-                required={inputValues.amount === ''}
+                onBlur={handleBlur}
               />
               <LabelWrap htmlFor="woman">For woman</LabelWrap>
             </RadioWoman>
@@ -119,26 +152,30 @@ export const ModalMyDailyNorma = () => {
                 id="man"
                 type="radio"
                 name="gender"
-                value="male"
-                checked={inputValues.gender === 'male'}
-                required={inputValues.amount === ''}
+                value="Man"
+                checked={values.gender === 'Man'}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <LabelWrap htmlFor="man">For man</LabelWrap>
             </RadioMan>
           </RadioFormWraper>
+          {touched.gender && errors.gender && (
+            <InputError>{errors.gender}</InputError>
+          )}
           <FormWrapper>
             <LabelWrap>Your weight in kilograms:</LabelWrap>
             <InputFormField
-              value={inputValues.weight}
               type="number"
+              value={values.weight}
               name="weight"
-              max={200}
-              min={0}
-              placeholder="0"
-              required={inputValues.amount === ''}
               onChange={handleChange}
+              onBlur={handleBlur}
+              $error={errors.weight}
             />
+            {touched.weight && errors.weight && (
+              <InputError>{touched.weight && errors.weight}</InputError>
+            )}
           </FormWrapper>
           <FormWrapper>
             <LabelWrap>
@@ -146,22 +183,23 @@ export const ModalMyDailyNorma = () => {
               with a high physical. Load in hours:
             </LabelWrap>
             <InputFormField
-              value={inputValues.hours}
               type="number"
-              name="hours"
-              max={24}
-              min={0}
-              placeholder="0"
-              required={inputValues.amount === ''}
+              value={values.sportTime}
+              name="sportTime"
               onChange={handleChange}
+              onBlur={handleBlur}
+              $error={errors.sportTime}
             />
+            {touched.sportTime && errors.sportTime && (
+              <InputError>{touched.sportTime && errors.sportTime}</InputError>
+            )}
           </FormWrapper>
           <WaterPerDayWrapper>
             <WaterPerDayText>
               The required amount of water in liters per day:
             </WaterPerDayText>
             <WaterPerDayValue>
-              {Math.round(waterRate * 10) / 10} L
+              {calculatedDailyNorma && calculatedDailyNorma.toFixed(1)}L
             </WaterPerDayValue>
           </WaterPerDayWrapper>
         </FormContainer>
@@ -171,15 +209,17 @@ export const ModalMyDailyNorma = () => {
           </AmountOfWaterLabel>
           <InputFormField
             type="number"
-            value={inputValues.amount}
-            name="amount"
-            min={1}
-            max={15}
-            placeholder="0"
+            value={values.enteredWaterRate}
+            name="enteredWaterRate"
             onChange={handleChange}
+            onBlur={handleBlur}
+            $error={touched.enteredWaterRate && errors.enteredWaterRate}
           />
+          {touched.enteredWaterRate && errors.enteredWaterRate && (
+            <InputError>{errors.enteredWaterRate}</InputError>
+          )}
         </FormContainer>
-        <ButtonSave type="submit">
+        <ButtonSave type="submit" disabled={!isValid}>
           {isLoading ? <ClapSpinner size={16} frontColor={'#fff'} /> : 'Save'}
         </ButtonSave>
       </ModalContainer>

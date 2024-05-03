@@ -12,3 +12,4 @@ export { UserLogoutModal } from './UserLogoutModal/UserLogoutModal.jsx';
 export { YesNoButton } from './YesNoButton/YesNoButton.jsx';
 export { Loader } from './Loader/Loader.jsx';
 export { DeleteEntryModal } from './DeleteEntryModal/DeleteEntryModal.jsx';
+export { InputError } from './InputError/InputError.jsx';

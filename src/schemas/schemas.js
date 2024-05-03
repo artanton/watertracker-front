@@ -90,3 +90,21 @@ export const userSettingsSchema = yup.object().shape(
   },
   ['newPassword', 'oldPassword']
 );
+
+export const myDailyNorma = yup.object().shape({
+  gender: yup
+    .string()
+    .oneOf(['Man', 'Woman', null], 'Gender must be either Man or Woman')
+    .nullable(),
+  weight: yup
+    .number('Weight must be a number')
+    .positive('Weight must be positive'),
+  sportTime: yup
+    .number('Action time must be a number')
+    .positive('Sport time must be positive'),
+  enteredWaterRate: yup
+    .number('Water rate must be a number')
+    .required('This field is required')
+    .min(0.005, 'Minimum water rate is 50 ml or 0.005 L')
+    .max(15, 'Maximum water rate is 15 L'),
+});
