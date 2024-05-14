@@ -30,11 +30,11 @@ export const AddWaterForm = () => {
   const hours = timeValue.getHours().toString().padStart(2, '0');
   const minutes = timeValue.getMinutes().toString().padStart(2, '0');
 
-  const increment = () => {
+  const incrementWater = () => {
     setWaterCount(state => state + 50);
   };
 
-  const decrement = () => {
+  const decrementWater = () => {
     setWaterCount(state => Math.max(state - 50));
   };
 
@@ -42,7 +42,7 @@ export const AddWaterForm = () => {
     setTimeValue(selectDate.$d);
   };
 
-  const handleChange = event => {
+  const handleWaterChange = event => {
     if (event.target.value.length > 4) {
       return;
     }
@@ -51,22 +51,22 @@ export const AddWaterForm = () => {
       setWaterCount(value);
     }
   };
-
   const handleSubmit = event => {
     event.preventDefault();
-    const formData = {
+    const waterData = {
       date: timeValue,
       waterDose: waterCount,
     };
     if (waterCount === 0) {
-      return toast.error('You cannot send 0 ml');
+      return toast.error('Amount of water must be greater than zero');
     }
 
     if (waterCount < 1 || waterCount > 1500) {
       return toast.error('Enter a value between 1 and 1500');
     }
 
-    dispatch(addWater(formData))
+    dispatch(addWater(waterData))
+      .unwrap()
       .then(res => {
         toast.success('Record added successfully');
         dispatch(closeModal());
@@ -82,7 +82,7 @@ export const AddWaterForm = () => {
       <CountContainer>
         <ButtonChange
           type="button"
-          onClick={decrement}
+          onClick={decrementWater}
           disabled={waterCount <= 49 ? true : false}
         >
           <Minus />
@@ -90,7 +90,7 @@ export const AddWaterForm = () => {
         <CountValue>{`${waterCount}ml`}</CountValue>
         <ButtonChange
           type="button"
-          onClick={increment}
+          onClick={incrementWater}
           disabled={waterCount >= 1451 ? true : false}
         >
           <Plus />
@@ -109,7 +109,7 @@ export const AddWaterForm = () => {
         name="amount"
         type="number"
         value={waterCount}
-        onChange={handleChange}
+        onChange={handleWaterChange}
       />
       <ButtonContainer>
         <WaterQuantityValue>{`${waterCount}ml`}</WaterQuantityValue>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorWaterNotes } from '../../redux/selectors';
+import { selectorWaterNotes, selectWater } from '../../redux/selectors';
 import {
   openModal,
   addData,
@@ -27,7 +27,8 @@ import { modalNames } from 'constants/constants';
 
 const TodayWaterList = () => {
   const dispatch = useDispatch();
-
+  const water = useSelector(selectWater);
+  console.log('water', water);
   const waterNotes = useSelector(selectorWaterNotes);
   const formatTime = timeString => {
     const date = new Date(timeString);
@@ -42,35 +43,36 @@ const TodayWaterList = () => {
     <TodayWaterListContainer>
       <Today>Today</Today>
       <WaterList>
-        {waterNotes.map((note, index) => (
-          <WaterListItem key={note._id}>
-            <WaterGlassIcon />
-            <WaterListMl>{note.waterDose} ml</WaterListMl>
-            <WaterListTime>{formatTime(note.createdDate)}</WaterListTime>
-            <IconsContainer>
-              <EditButton
-                type="button"
-                onClick={() => {
-                  dispatch(openModal(modalNames.EDIT_WATER));
-                  dispatch(addData(note._id));
-                  dispatch(addWaterDose(note.waterDose));
-                  dispatch(addWaterDate(note.createdDate));
-                }}
-              >
-                <WaterEditIcon />
-              </EditButton>
-              <DeleteButton
-                type="button"
-                onClick={() => {
-                  dispatch(openModal(modalNames.DELETE_ENTRY));
-                  dispatch(addData(note._id));
-                }}
-              >
-                <WaterDeleteIcon />
-              </DeleteButton>
-            </IconsContainer>
-          </WaterListItem>
-        ))}
+        {waterNotes &&
+          waterNotes.map((note, index) => (
+            <WaterListItem key={note._id}>
+              <WaterGlassIcon />
+              <WaterListMl>{note.waterDose} ml</WaterListMl>
+              <WaterListTime>{formatTime(note.createdDate)}</WaterListTime>
+              <IconsContainer>
+                <EditButton
+                  type="button"
+                  onClick={() => {
+                    dispatch(openModal(modalNames.EDIT_WATER));
+                    dispatch(addData(note._id));
+                    dispatch(addWaterDose(note.waterDose));
+                    dispatch(addWaterDate(note.createdDate));
+                  }}
+                >
+                  <WaterEditIcon />
+                </EditButton>
+                <DeleteButton
+                  type="button"
+                  onClick={() => {
+                    dispatch(openModal(modalNames.DELETE_ENTRY));
+                    dispatch(addData(note._id));
+                  }}
+                >
+                  <WaterDeleteIcon />
+                </DeleteButton>
+              </IconsContainer>
+            </WaterListItem>
+          ))}
       </WaterList>
 
       <AddWaterButton onClick={() => dispatch(openModal(modalNames.ADD_WATER))}>

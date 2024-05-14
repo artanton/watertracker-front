@@ -101,10 +101,10 @@ export const myDailyNorma = yup.object().shape({
     .positive('Weight must be positive'),
   sportTime: yup
     .number('Action time must be a number')
-    .positive('Sport time must be positive'),
+    .min(0, 'Sport time must be non-negative'),
   enteredWaterRate: yup
     .number('Water rate must be a number')
     .required('This field is required')
-    .min(0.005, 'Minimum water rate is 50 ml or 0.005 L')
+    .min(0.05, 'Minimum water rate is 50 ml or 0.05 L')
     .max(15, 'Maximum water rate is 15 L'),
 });

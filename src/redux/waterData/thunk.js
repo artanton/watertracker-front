@@ -3,9 +3,10 @@ import { authInstance } from '../authorization/authReducer';
 
 export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',
-  async (waterId, thunkApi) => {
+  async thunkApi => {
     try {
-      const { data } = await authInstance.get(`/water/today/${waterId}`);
+      const date = Date.now();
+      const { data } = await authInstance.get(`/water/today?date=${date}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
