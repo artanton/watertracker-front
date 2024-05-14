@@ -90,7 +90,7 @@ export const ModalMyDailyNorma = () => {
   useEffect(() => {
     const { gender, weight, sportTime, enteredWaterRate } = values;
 
-    if (gender && weight && sportTime) {
+    if (gender && weight && sportTime !== '') {
       const calculatedDailyNorma = calculateWaterRate({
         weight,
         sportTime,
