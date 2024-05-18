@@ -150,7 +150,7 @@ const authSlice = createSlice({
       })
       .addCase(patchWater.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.userData = action.payload;
+        state.userData.dailyNorma = action.payload.dailyNorma;
       })
       .addMatcher(
         isAnyOf(
