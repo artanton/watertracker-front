@@ -16,15 +16,13 @@ import { modalNames } from 'constants/constants';
 
 import { selectorPersantRate } from '../../redux/selectors';
 
-
-
 const ProgressBar = ({ percentage }) => {
   return (
     <StyledProgressBar
       type="range"
       min="0"
       max="100"
-      value={percentage}
+      value={percentage <= 100 ? percentage : 100}
       readOnly
     />
   );
@@ -34,11 +32,7 @@ const WaterRatioPanel = () => {
   const dispatch = useDispatch();
   // const persantageRate = 50;
 
-
   const persantageRate = useSelector(selectorPersantRate);
-
-
-
 
   return (
     <WaterRatioContainer>
