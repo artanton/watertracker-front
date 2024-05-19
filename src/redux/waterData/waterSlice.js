@@ -43,12 +43,13 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const { waterNotes, dailyNorma, persantRate } = action.payload;
+        const { lastWaterDose, dailyNorma, persantRate, waterSavings } =
+          action.payload;
 
-        state.waterNotes.push(...waterNotes);
-
+        state.waterNotes.push(lastWaterDose);
         state.dailyNorma = dailyNorma;
         state.persantRate = persantRate;
+        state.waterSavings = waterSavings;
       })
 
       .addCase(updateWater.fulfilled, (state, action) => {
