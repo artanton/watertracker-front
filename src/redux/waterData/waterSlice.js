@@ -31,7 +31,13 @@ const waterSlice = createSlice({
       .addCase(getWaterToday.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state = action.payload;
+        const {waterTotal, persantRate, waterSavings, waterNotes}=action.payload;
+        state.waterTotal=waterTotal;
+        state.persantRate=persantRate;
+        state.waterSavings=waterSavings;
+        state.waterNotes=waterNotes;
+        console.log(state);
+
       })
 
       .addCase(getMonthWater.fulfilled, (state, action) => {
@@ -81,12 +87,12 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const { persantRate } = action.payload;
+        // const { persantRate } = action.payload;
         const index = state.waterNotes.findIndex(
           item => item.id === action.payload.id
         );
         state.waterNotes.splice(index, 1);
-        state.persantRate = persantRate;
+        // state.persantRate = persantRate;
       })
       .addMatcher(
         isAnyOf(
