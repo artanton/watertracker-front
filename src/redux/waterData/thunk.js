@@ -5,7 +5,9 @@ export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',
   async thunkApi => {
     try {
-      const date = Date.now();
+      const date = new Date();    
+  
+
       const { data } = await authInstance.get(`/water/today?date=${date}`);
       return data;
     } catch (error) {
