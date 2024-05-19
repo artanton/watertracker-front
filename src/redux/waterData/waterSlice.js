@@ -13,7 +13,7 @@ const initialState = {
   dailyNorma: 2000,
   persantRate: 0,
   waterSavings: 0,
-  targetMonth: '2020-01-01',
+  // targetMonth: '2020-01-01',
   waterNotes: [],
   month: [],
 
@@ -31,7 +31,7 @@ const waterSlice = createSlice({
       .addCase(getWaterToday.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterNotes = action.payload;
+        state = action.payload;
       })
 
       .addCase(getMonthWater.fulfilled, (state, action) => {
