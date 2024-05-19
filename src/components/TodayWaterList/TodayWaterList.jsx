@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorWaterNotes, selectWater } from '../../redux/selectors';
+import { selectorWaterNotes } from '../../redux/selectors';
 import {
   openModal,
   addData,
@@ -27,8 +27,8 @@ import { modalNames } from 'constants/constants';
 
 const TodayWaterList = () => {
   const dispatch = useDispatch();
-  const water = useSelector(selectWater);
-  console.log('water', water);
+  // const water = useSelector(selectWater);
+  // console.log('water', water);
   const waterNotes = useSelector(selectorWaterNotes);
   const formatTime = timeString => {
     const date = new Date(timeString);

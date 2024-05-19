@@ -53,6 +53,7 @@ export const AddWaterForm = () => {
   };
   const handleSubmit = event => {
     event.preventDefault();
+
     const waterData = {
       date: timeValue,
       waterDose: waterCount,
@@ -64,7 +65,6 @@ export const AddWaterForm = () => {
     if (waterCount < 1 || waterCount > 1500) {
       return toast.error('Enter a value between 1 and 1500');
     }
-
     dispatch(addWater(waterData))
       .unwrap()
       .then(res => {
