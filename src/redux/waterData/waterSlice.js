@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { isAnyOf } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+
 import {
   getWaterToday,
   deleteWater,
@@ -31,13 +31,12 @@ const waterSlice = createSlice({
       .addCase(getWaterToday.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const {waterTotal, persantRate, waterSavings, waterNotes}=action.payload;
-        state.waterTotal=waterTotal;
-        state.persantRate=persantRate;
-        state.waterSavings=waterSavings;
-        state.waterNotes=waterNotes;
-        console.log(state);
-
+        const { waterTotal, persantRate, waterSavings, waterNotes } =
+          action.payload;
+        state.waterTotal = waterTotal;
+        state.persantRate = persantRate;
+        state.waterSavings = waterSavings;
+        state.waterNotes = waterNotes;
       })
 
       .addCase(getMonthWater.fulfilled, (state, action) => {
@@ -57,21 +56,35 @@ const waterSlice = createSlice({
         state.persantRate = persantRate;
         state.waterSavings = waterSavings;
       })
+      // .addCase(updateWater.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.error = null;
+      //   const index = state.waterNotes.findIndex(
+      //     item => item._id === action.payload.waterId
+      //   );
+      //   if (state.waterNotes[index]) {
+      //     const { createdDate, waterDose } = action.payload.waterData;
+
+      //     createdDate && (state.waterNotes[index].createdDate = createdDate);
+      //     waterDose && (state.waterNotes[index].waterDose = waterDose);
+      //   }
+      // })
 
       .addCase(updateWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const note = state.waterNotes.find(
-          item => item.id === action.payload.id
-        );
+        const { waterTotal, persantRate, waterSavings } = action.payload;
+        console.log(action.payload);
+        const note = state.waterNotes.find(item => {
+          return item._id === action.payload.updatedWaterNote._id;
+        });
         if (note) {
-          const { updatedData } = action.payload;
-          if (updatedData.createdDate) {
-            note.createdDate = updatedData.createdDate;
-          }
-          if (updatedData.waterDose) {
-            note.waterDose = updatedData.waterDose;
-          }
+          const { createdDate, waterDose } = action.payload.updatedWaterNote;
+          if (createdDate) note.createdDate = createdDate;
+          if (waterDose) note.waterDose = waterDose;
+          state.waterTotal = waterTotal;
+          state.persantRate = persantRate;
+          state.waterSavings = waterSavings;
         }
       })
 
