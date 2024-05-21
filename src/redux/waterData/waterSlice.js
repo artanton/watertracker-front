@@ -74,7 +74,6 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = null;
         const { waterTotal, persantRate, waterSavings } = action.payload;
-        console.log(action.payload);
         const note = state.waterNotes.find(item => {
           return item._id === action.payload.updatedWaterNote._id;
         });
@@ -100,12 +99,12 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        // const { persantRate } = action.payload;
-        const index = state.waterNotes.findIndex(
-          item => item.id === action.payload.id
-        );
+        const { waterTotal, persantRate, waterSavings, id } = action.payload;
+        const index = state.waterNotes.findIndex(item => item._id === id);
         state.waterNotes.splice(index, 1);
-        // state.persantRate = persantRate;
+        state.persantRate = persantRate;
+        state.waterTotal = waterTotal;
+        state.waterSavings = waterSavings;
       })
       .addMatcher(
         isAnyOf(
