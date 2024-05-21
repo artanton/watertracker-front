@@ -5,8 +5,7 @@ export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',
   async thunkApi => {
     try {
-      const date = new Date();    
-  
+      const date = new Date();
 
       const { data } = await authInstance.get(`/water/today?date=${date}`);
       return data;
@@ -20,8 +19,8 @@ export const deleteWater = createAsyncThunk(
   'water/deleteEntry',
   async (waterId, thunkApi) => {
     try {
-      await authInstance.delete(`/water/remove/${waterId}`);
-      return waterId;
+      const response = await authInstance.delete(`/water/remove/${waterId}`);
+      return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

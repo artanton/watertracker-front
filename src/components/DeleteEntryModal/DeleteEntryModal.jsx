@@ -25,9 +25,10 @@ export const DeleteEntryModal = () => {
     dispatch(deleteWater(waterId))
       .unwrap()
       .then(res => {
-        toast.success('Water record is deleted').catch(e => {
-          toast.error('Something went wrong. Try again later.');
-        });
+        toast.success('Water record is deleted');
+      })
+      .catch(e => {
+        toast.error('Something went wrong. Try again later.');
       });
     dispatch(closeModal());
   };
