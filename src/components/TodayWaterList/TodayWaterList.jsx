@@ -26,6 +26,13 @@ import { Plus } from 'components/Icons/Plus/Plus';
 import { modalNames } from 'constants/constants';
 
 const TodayWaterList = () => {
+  const openEditModal = note => {
+    dispatch(addData(note._id));
+    dispatch(addWaterDose(note.waterDose));
+    dispatch(addWaterDate(note.createdDate));
+    dispatch(openModal(modalNames.EDIT_WATER));
+  };
+
   const dispatch = useDispatch();
   // const water = useSelector(selectWater);
   // console.log('water', water);
@@ -53,10 +60,11 @@ const TodayWaterList = () => {
                 <EditButton
                   type="button"
                   onClick={() => {
-                    dispatch(openModal(modalNames.EDIT_WATER));
-                    dispatch(addData(note._id));
-                    dispatch(addWaterDose(note.waterDose));
-                    dispatch(addWaterDate(note.createdDate));
+                    // dispatch(openModal(modalNames.EDIT_WATER));
+                    // dispatch(addData(note._id));
+                    // dispatch(addWaterDose(note.waterDose));
+                    // dispatch(addWaterDate(note.createdDate));
+                    openEditModal(note);
                   }}
                 >
                   <WaterEditIcon />
