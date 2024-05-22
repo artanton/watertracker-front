@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getMonthWater } from '../../redux/waterData/thunk';
 import {
   ArrowLeft,
   ArrowRight,
@@ -14,18 +16,12 @@ import {
 import Popup from 'components/PopupCalendar/PopupCalendar';
 import { selectorMonth } from '../../redux/selectors';
 
-// import { useSelector } from 'react-redux';
-// import { selectorMonth } from '../../redux/selectors';
-
-const MonthStatsTable = ({ date }) => {
-  // const month = useSelector(selectorMonth);
-  // console.log(month);
-  // const persantRate = month.persantRate;
-  // console.log(persantRate);
-
+const MonthStatsTable = () => {
+  const dispatch = useDispatch();
   const monthData = useSelector(selectorMonth);
 
   const [selectedDay, setSelectedDay] = useState(null);
+  console.log(selectedDay);
   const handleDayClick = date => {
     const day = date.getDate();
     const month = date.getMonth();
@@ -38,6 +34,11 @@ const MonthStatsTable = ({ date }) => {
     );
 
     setSelectedDay(currentDayData);
+  };
+
+  const handleMonthChange = newDate => {
+    const timestamp = newDate.getTime(); // Получаем метку времени текущей даты
+    dispatch(getMonthWater(timestamp)); // Вызываем thunk, передавая метку времени
   };
 
   const triggerRef = useRef(null);
@@ -75,6 +76,11 @@ const MonthStatsTable = ({ date }) => {
             );
           }
           return null;
+        }}
+        onActiveStartDateChange={({ activeStartDate }) => {
+          const newStartDate = new Date(activeStartDate); // Создаем копию объекта activeStartDate
+          newStartDate.setMonth(newStartDate.getMonth() + 1); // Добавляем 1 к текущему месяцу
+          handleMonthChange(newStartDate); // Вызываем функцию обработчика с новой датой
         }}
       />
     </MonthStatsTableContainer>

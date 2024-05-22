@@ -12,12 +12,13 @@ import { apiGetUserSettings } from '../../redux/authorization/authReducer';
 import { getWaterToday, getMonthWater } from '../../redux/waterData/thunk';
 import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
 function Home() {
+  const date = Date.now();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(apiGetUserSettings());
     dispatch(getWaterToday());
-    dispatch(getMonthWater());
-  }, [dispatch]);
+    dispatch(getMonthWater(date));
+  }, [date, dispatch]);
   return (
     <LayoutHome>
       <Container>
