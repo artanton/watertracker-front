@@ -140,6 +140,8 @@ export const WaterListMl = styled.p`
   margin-left: 12px;
   margin-right: 12px;
 
+  white-space: nowrap;
+
   @media screen and (min-width: 768px) {
     margin-right: 16px;
   }

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { GlobalStyle } from 'styles/GlobalStyle';
 import { theme } from 'styles/theme';
 
 export const MyDailyNormaContainer = styled.div`
@@ -50,7 +49,6 @@ export const WaterNormaAmount = styled.h2`
 `;
 
 export const WaterNormaAmountEdit = styled.button`
-  ${GlobalStyle}
   font-weight: ${theme.fontWeights.regular};
   font-size: ${theme.fontSizes.text};
   line-height: ${theme.lineHeights.text};
@@ -65,6 +63,5 @@ export const WaterNormaAmountEdit = styled.button`
 `;
 
 export const BottleImage = styled.img`
-  ${GlobalStyle}
   margin-top: 8px;
 `;

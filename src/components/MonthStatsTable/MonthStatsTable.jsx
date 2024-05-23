@@ -21,7 +21,6 @@ const MonthStatsTable = () => {
   const monthData = useSelector(selectorMonth);
 
   const [selectedDay, setSelectedDay] = useState(null);
-  console.log(selectedDay);
   const handleDayClick = date => {
     const day = date.getDate();
     const month = date.getMonth();

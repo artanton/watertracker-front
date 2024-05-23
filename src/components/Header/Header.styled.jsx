@@ -59,6 +59,7 @@ export const UserNameText = styled.p`
   @media (min-width: 768px) {
     width: auto;
     line-height: 1.33;
+  }
 `;
 
 export const UserAvatar = styled.img`

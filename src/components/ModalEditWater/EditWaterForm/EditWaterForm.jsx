@@ -74,7 +74,6 @@ export const EditWaterForm = () => {
     if (waterCount < 1 || waterCount > 5000) {
       return toast.error('Enter a value between 1 and 1500');
     }
-    console.log(waterData);
     dispatch(updateWater({ waterId, waterData }))
       .then(res => {
         toast.success('Record added successfully');

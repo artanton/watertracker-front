@@ -26,7 +26,9 @@ const DailyNorma = () => {
     <MyDailyNormaContainer>
       <MyDailyNorma>My daily norma</MyDailyNorma>
       <MyDailyNormaAmount>
-        <WaterNormaAmount>{isNaN(dailyNorma)? "0.0" :(dailyNorma)} L</WaterNormaAmount>
+        <WaterNormaAmount>
+          {isNaN(dailyNorma) ? '0.0' : dailyNorma} L
+        </WaterNormaAmount>
         <WaterNormaAmountEdit
           type="button"
           onClick={() => dispatch(openModal(modalNames.DAILY_NORMA))}
