@@ -2,17 +2,9 @@ import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
 export const Wrapper = styled.div`
-  background-color: ${theme.colors.primaryWhite};
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: ${theme.transform.middle};
-  border-radius: ${theme.border.normal};
   width: 280px;
   padding: 32px 24px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
+
   @media screen and (min-width: 768px) {
     width: 592px;
   }

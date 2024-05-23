@@ -43,20 +43,20 @@ const WaterRatioPanel = () => {
         </ProgressBarContainer>
         <ProgressBarLabels>
           <ProgressBarLabel
-            position="0%"
-            active={persantageRate === 0 ? 'true' : 'false'}
+            $position="0%"
+            $active={persantageRate === 0 ? 'true' : 'false'}
           >
             0%
           </ProgressBarLabel>
           <ProgressBarLabel
-            position="50%"
-            active={persantageRate === 50 ? 'true' : 'false'}
+            $position="50%"
+            $active={persantageRate === 50 ? 'true' : 'false'}
           >
             50%
           </ProgressBarLabel>
           <ProgressBarLabel
-            position="100%"
-            active={persantageRate === 100 ? 'true' : 'false'}
+            $position="100%"
+            $active={persantageRate === 100 ? 'true' : 'false'}
           >
             100%
           </ProgressBarLabel>

@@ -140,10 +140,10 @@ export const ProgressBarLabel = styled.span`
   text-align: center;
 
   ${props =>
-    props.position === '0%' &&
+    props.$position === '0%' &&
     css`
-      font-size: ${props.active === 'true' ? '16px' : '12px'};
-      font-weight: ${props.active === 'true' ? '500' : '400'};
+      font-size: ${props.$active === 'true' ? '16px' : '12px'};
+      font-weight: ${props.$active === 'true' ? '500' : '400'};
       margin-right: 93px;
       width: 22px;
       @media (min-width: 768px) {
@@ -155,10 +155,10 @@ export const ProgressBarLabel = styled.span`
     `}
 
   ${props =>
-    props.position === '50%' &&
+    props.$position === '50%' &&
     css`
-      font-size: ${props.active === 'true' ? '16px' : '12px'};
-      font-weight: ${props.active === 'true' ? '500' : '400'};
+      font-size: ${props.$active === 'true' ? '16px' : '12px'};
+      font-weight: ${props.$active === 'true' ? '500' : '400'};
       margin-right: 88px;
       width: 50px;
       @media (min-width: 768px) {
@@ -170,10 +170,10 @@ export const ProgressBarLabel = styled.span`
     `}
 
 ${props =>
-    props.position === '100%' &&
+    props.$position === '100%' &&
     css`
-      font-size: ${props.active === 'true' ? '16px' : '12px'};
-      font-weight: ${props.active === 'true' ? '500' : '400'};
+      font-size: ${props.$active === 'true' ? '16px' : '12px'};
+      font-weight: ${props.$active === 'true' ? '500' : '400'};
       width: 30px;
       @media (min-width: 768px) {
         width: 40px;

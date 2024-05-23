@@ -19,10 +19,10 @@ export const MonthStatsTableContainer = styled.div`
 `;
 
 export const MonthContainer = styled.div`
-  width: 100%
+  width: 100%;
   height: 30px;
 
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 768px) {
     height: 32px;
   }
 `;
@@ -59,11 +59,10 @@ export const StyledCalendar = styled(Calendar)`
     margin-left: auto;
     margin-top: -25px;
 
-  @media screen and (min-width: 1440px) {
-   margin-top: -23px;
+    @media screen and (min-width: 1440px) {
+      margin-top: -23px;
+    }
   }
-}
-
 
   .react-calendar__navigation__prev-button {
     background-color: transparent;
@@ -96,7 +95,7 @@ export const StyledCalendar = styled(Calendar)`
 
   .react-calendar__navigation__label {
     font-weight: ${theme.fontWeights.regular};
-    font:size: ${theme.fontSizes.text};
+    font-size: ${theme.fontSizes.text};
     line-height: ${theme.lineHeights.text};
     color: ${theme.colors.primaryBlue};
     width: 76px;
@@ -105,7 +104,6 @@ export const StyledCalendar = styled(Calendar)`
     background-color: transparent;
     pointer-events: none;
   }
-
 
   .react-calendar__navigation__arrow--month-button {
     border-radius: ${theme.radii.round};
@@ -119,47 +117,45 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
   }
 
-
-
   .react-calendar__month-view__weekdays {
     display: none !important;
   }
 
-/* дні поточного місяцю */
+  /* дні поточного місяцю */
 
   .react-calendar__month-view__days__day--neighboringMonth {
-  display: none;
-}
+    display: none;
+  }
 
-/* дні поточного місяцю */
+  /* дні поточного місяцю */
 
-.react-calendar__month-view__days{
+  .react-calendar__month-view__days {
     row-gap: 36px !important;
     column-gap: 26px;
 
-    @media screen and (min-width: 768px){
-     row-gap: 44px !important;
-     column-gap: 34px;
+    @media screen and (min-width: 768px) {
+      row-gap: 44px !important;
+      column-gap: 34px;
     }
 
     @media screen and (min-width: 1440px) {
-    row-gap: 42px !important;
-     column-gap: 22px;
+      row-gap: 42px !important;
+      column-gap: 22px;
+    }
   }
-}
 
-.react-calendar__tile {
+  .react-calendar__tile {
     position: relative;
   }
 
-.react-calendar__month-view__days__day{
+  .react-calendar__month-view__days__day {
     flex: initial !important;
     width: 32px !important;
     height: 32px;
     border-color: transparent;
     border-radius: 20px;
     background-color: ${theme.colors.primaryWhite};
-    
+
     font-weight: ${theme.fontWeights.regular};
     font-size: 14px;
     line-height: 18px;
@@ -167,29 +163,27 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
     position: relative;
 
-    &:hover{
+    &:hover {
       box-shadow: ${theme.shadows.table};
     }
 
-
-    @media screen and (min-width: 768px){
-    width: 34px !important;
-    height: 34px;
-    font-weight: ${theme.fontWeights.regular};
-    font-size: ${theme.fontSizes.text};
-    line-height: ${theme.lineHeights.text};
+    @media screen and (min-width: 768px) {
+      width: 34px !important;
+      height: 34px;
+      font-weight: ${theme.fontWeights.regular};
+      font-size: ${theme.fontSizes.text};
+      line-height: ${theme.lineHeights.text};
     }
+  }
 
-}
-
-.react-calendar__month-view__days__day abbr {
+  .react-calendar__month-view__days__day abbr {
     width: 20px;
-}
+  }
 
-.react-calendar__month-view__days__day {
+  .react-calendar__month-view__days__day {
     position: relative;
-     overflow: visible !important; 
-}
+    overflow: visible !important;
+  }
 `;
 
 export const DayPercentage = styled.span`

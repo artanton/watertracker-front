@@ -19,6 +19,7 @@ export const MenuButton = styled.button`
 
 export const ButtonText = styled.p`
   margin-left: 8px;
+  white-space: nowrap;
 
   color: ${theme.colors.primaryBlue};
   font-size: ${theme.fontSizes.text};
