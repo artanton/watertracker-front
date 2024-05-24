@@ -108,3 +108,14 @@ export const myDailyNorma = yup.object().shape({
     .min(0.05, 'Minimum water rate is 50 ml or 0.05 L')
     .max(15, 'Maximum water rate is 15 L'),
 });
+
+export const waterRecordSchema = yup.object().shape({
+  waterCount: yup
+    .number()
+    .min(50, 'Enter a value greater than 50')
+    .max(5000, 'Enter a value less than 5000')
+    .required('Water count is required'),
+  timeValue: yup
+    .string()
+    .matches(/^[0-2][0-9]:[0-5][0-9]$/, 'Enter a valid time in HH:mm format'),
+});

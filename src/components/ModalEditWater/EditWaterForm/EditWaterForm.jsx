@@ -1,4 +1,27 @@
-import { SaveModalButton } from 'components';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useFormik } from 'formik';
+
+import { toast } from 'react-toastify';
+
+import { updateWater } from '../../../redux/waterData/thunk';
+import { closeModal } from '../../../redux/modal/modalSlice';
+import { selectIsLoading } from '../../../redux/selectors';
+import {
+  selectModalData,
+  selectWaterDate,
+  selectWaterDose,
+} from '../../../redux/modal/modalSlice.selectors';
+
+import { waterRecordSchema } from 'schemas/schemas';
+
+import { formatToString, formatToTime } from 'helpers/helpers';
+
+import { SaveModalButton, InputError } from 'components';
+
+import { Minus } from 'components/Icons/Minus';
+import { Plus } from 'components/Icons/Plus/Plus';
+
 import {
   CountContainer,
   ButtonChange,
@@ -11,77 +34,54 @@ import {
   ButtonContainer,
   WaterQuantityValue,
 } from '../../ModalAddWater/AddWaterForm/AddWaterForm.styled';
-import { Minus } from 'components/Icons/Minus';
-import { Plus } from 'components/Icons/Plus/Plus';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateWater } from '../../../redux/waterData/thunk';
-import { toast } from 'react-toastify';
-import { closeModal } from '../../../redux/modal/modalSlice';
-import { selectIsLoading } from '../../../redux/selectors';
-import {
-  selectModalData,
-  selectWaterDate,
-  selectWaterDose,
-} from '../../../redux/modal/modalSlice.selectors';
 
 export const EditWaterForm = () => {
   const waterId = useSelector(selectModalData);
   const water = useSelector(selectWaterDose);
   const date = useSelector(selectWaterDate);
-
-  const [waterCount, setWaterCount] = useState(water);
-  const [timeValue, setTimeValue] = useState(new Date(date));
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(selectIsLoading);
+  const initialValues = {
+    waterCount: water,
+    timeValue: formatToTime(new Date(date)),
+  };
 
-  const hours = timeValue.getHours().toString().padStart(2, '0');
-  const minutes = timeValue.getMinutes().toString().padStart(2, '0');
+  const formik = useFormik({
+    initialValues,
+    validationSchema: waterRecordSchema,
+    validateOnChange: true,
+    onSubmit: (values, { setSubmitting }) => {
+      const { waterCount, timeValue } = values;
+      const waterData = {
+        createdDate: formatToString(timeValue),
+        waterDose: waterCount,
+      };
+
+      dispatch(updateWater({ waterId, waterData }))
+        .then(res => {
+          toast.success('Record was edited successfully');
+          dispatch(closeModal());
+        })
+        .catch(error => {
+          toast.error('Something went wrong, please try again');
+        })
+        .finally(() => {
+          setSubmitting(false);
+        });
+    },
+  });
+
+  const { values, errors, touched, handleChange, handleSubmit, setFieldValue } =
+    formik;
+  const { waterCount, timeValue } = values;
 
   const increment = () => {
-    setWaterCount(state => state + 50);
+    setFieldValue('waterCount', Math.min(waterCount) + 50);
   };
 
   const decrement = () => {
-    setWaterCount(state => Math.max(state - 50));
-  };
-
-  const selectChange = selectDate => {
-    setTimeValue(selectDate.$d);
-  };
-
-  const handleChange = event => {
-    if (event.target.value.length > 4) {
-      return;
-    }
-    const value = Math.floor(event.target.value);
-    if (value || value === 0) {
-      setWaterCount(value);
-    }
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    const waterData = {
-      createdDate: timeValue.toISOString(),
-      waterDose: waterCount,
-    };
-    if (waterCount === 0) {
-      return toast.error('You cannot send 0 ml');
-    }
-
-    if (waterCount < 1 || waterCount > 5000) {
-      return toast.error('Enter a value between 1 and 1500');
-    }
-    dispatch(updateWater({ waterId, waterData }))
-      .then(res => {
-        toast.success('Record added successfully');
-        dispatch(closeModal());
-      })
-      .catch(error => {
-        toast.error(error.message);
-      });
+    setFieldValue('waterCount', Math.max(waterCount - 50));
   };
 
   return (
@@ -91,7 +91,7 @@ export const EditWaterForm = () => {
         <ButtonChange
           type="button"
           onClick={decrement}
-          disabled={waterCount <= 1 ? true : false}
+          disabled={waterCount <= 50 ? true : false}
         >
           <Minus />
         </ButtonChange>
@@ -104,22 +104,33 @@ export const EditWaterForm = () => {
           <Plus />
         </ButtonChange>
       </CountContainer>
+
       <LabelSelect>Recording time:</LabelSelect>
       <SelectInput
-        placeholder={`${hours}:${minutes}`}
+        name="timeValue"
+        placeholder={timeValue}
         format="HH:mm"
-        onChange={selectChange}
+        onChange={date => {
+          setFieldValue('timeValue', formatToTime(date));
+        }}
       />
-      <LabelQuantityInput htmlFor="amount">
+      {touched.timeValue && errors.timeValue && (
+        <InputError>{errors.timeValue}</InputError>
+      )}
+      <LabelQuantityInput htmlFor="waterCount">
         Enter the value of the water used:
       </LabelQuantityInput>
       <QuantityInput
-        name="amount"
+        id="waterCount"
+        name="waterCount"
         type="number"
         value={waterCount}
         onChange={handleChange}
-        disabled={waterCount >= 5000 || waterCount <= 1 ? true : false}
+        $error={errors.waterCount}
       />
+      {touched.waterCount && errors.waterCount && (
+        <InputError>{errors.waterCount}</InputError>
+      )}
       <ButtonContainer>
         <WaterQuantityValue>{`${waterCount}ml`}</WaterQuantityValue>
         <SaveModalButton isLoading={isLoading} />
