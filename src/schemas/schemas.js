@@ -109,7 +109,7 @@ export const myDailyNorma = yup.object().shape({
     .max(15, 'Maximum water rate is 15 L'),
 });
 
-export const editWaterRecordSchema = yup.object().shape({
+export const waterRecordSchema = yup.object().shape({
   waterCount: yup
     .number()
     .min(50, 'Enter a value greater than 50')

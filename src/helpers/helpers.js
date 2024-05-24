@@ -5,7 +5,14 @@ export function inputValidationStyler(props) {
     return {
       color: theme.colors.secondaryRed,
       borderColor: theme.colors.secondaryRed,
-      '&::placeholder': { color: theme.colors.secondaryRed },
+      // '&::placeholder': {
+      //   color: theme.colors.secondaryRed,
+      //   backgroundColor: theme.colors.secondaryRed,
+      // },
+      '&:focus': {
+        outline: theme.colors.secondaryRed,
+        borderColor: theme.colors.secondaryRed,
+      },
     };
   } else {
     return [];

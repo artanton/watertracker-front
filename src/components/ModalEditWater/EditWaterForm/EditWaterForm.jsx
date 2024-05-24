@@ -13,7 +13,7 @@ import {
   selectWaterDose,
 } from '../../../redux/modal/modalSlice.selectors';
 
-import { editWaterRecordSchema } from 'schemas/schemas';
+import { waterRecordSchema } from 'schemas/schemas';
 
 import { formatToString, formatToTime } from 'helpers/helpers';
 
@@ -49,7 +49,8 @@ export const EditWaterForm = () => {
 
   const formik = useFormik({
     initialValues,
-    editWaterRecordSchema,
+    validationSchema: waterRecordSchema,
+    validateOnChange: true,
     onSubmit: (values, { setSubmitting }) => {
       const { waterCount, timeValue } = values;
       const waterData = {
@@ -59,7 +60,7 @@ export const EditWaterForm = () => {
 
       dispatch(updateWater({ waterId, waterData }))
         .then(res => {
-          toast.success('Record added successfully');
+          toast.success('Record was edited successfully');
           dispatch(closeModal());
         })
         .catch(error => {
@@ -76,7 +77,7 @@ export const EditWaterForm = () => {
   const { waterCount, timeValue } = values;
 
   const increment = () => {
-    setFieldValue('waterCount', Math.max(waterCount) + 50);
+    setFieldValue('waterCount', Math.min(waterCount) + 50);
   };
 
   const decrement = () => {
@@ -87,11 +88,19 @@ export const EditWaterForm = () => {
     <form autoComplete="off" onSubmit={handleSubmit}>
       <LabelCount>Amount of water:</LabelCount>
       <CountContainer>
-        <ButtonChange type="button" onClick={decrement}>
+        <ButtonChange
+          type="button"
+          onClick={decrement}
+          disabled={waterCount <= 50 ? true : false}
+        >
           <Minus />
         </ButtonChange>
         <CountValue>{`${waterCount}ml`}</CountValue>
-        <ButtonChange type="button" onClick={increment}>
+        <ButtonChange
+          type="button"
+          onClick={increment}
+          disabled={waterCount >= 5000 ? true : false}
+        >
           <Plus />
         </ButtonChange>
       </CountContainer>
@@ -102,7 +111,6 @@ export const EditWaterForm = () => {
         placeholder={timeValue}
         format="HH:mm"
         onChange={date => {
-          console.log(formatToTime(date));
           setFieldValue('timeValue', formatToTime(date));
         }}
       />
