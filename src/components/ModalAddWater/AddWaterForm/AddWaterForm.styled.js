@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import { Minus } from 'components/Icons/Minus';
 import { TimePicker } from 'antd';
+import { inputValidationStyler } from 'helpers/helpers';
 
 export const CountContainer = styled.div`
   display: flex;
@@ -81,6 +82,8 @@ export const QuantityInput = styled.input`
   &::placeholder {
     color: ${theme.colors.primaryBlue};
   }
+
+  ${props => inputValidationStyler(props)};
 `;
 
 export const ButtonContainer = styled.div`
