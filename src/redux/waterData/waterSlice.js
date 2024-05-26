@@ -13,7 +13,6 @@ const initialState = {
   dailyNorma: 2000,
   persantRate: 0,
   waterSavings: 0,
-  // targetMonth: '2020-01-01',
   waterNotes: [],
   month: [],
 
@@ -56,19 +55,7 @@ const waterSlice = createSlice({
         state.persantRate = persantRate;
         state.waterSavings = waterSavings;
       })
-      // .addCase(updateWater.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.error = null;
-      //   const index = state.waterNotes.findIndex(
-      //     item => item._id === action.payload.waterId
-      //   );
-      //   if (state.waterNotes[index]) {
-      //     const { createdDate, waterDose } = action.payload.waterData;
-
-      //     createdDate && (state.waterNotes[index].createdDate = createdDate);
-      //     waterDose && (state.waterNotes[index].waterDose = waterDose);
-      //   }
-      // })
+   
 
       .addCase(updateWater.fulfilled, (state, action) => {
         state.loading = false;

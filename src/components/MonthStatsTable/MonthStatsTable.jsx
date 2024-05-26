@@ -14,11 +14,11 @@ import {
   Trigger,
 } from './MonthStatsTable.styled';
 import Popup from 'components/PopupCalendar/PopupCalendar';
-import { selectorMonth } from '../../redux/selectors';
+import { selectActualMonth} from '../../redux/selectors';
 
 const MonthStatsTable = () => {
   const dispatch = useDispatch();
-  const monthData = useSelector(selectorMonth);
+  const monthData = useSelector(selectActualMonth);
 
   const [selectedDay, setSelectedDay] = useState(null);
   const handleDayClick = date => {
