@@ -58,11 +58,11 @@ const MonthStatsTable = () => {
             });
 
             const percentage = currentDayData ? currentDayData.persantRate : 0;
-            const isVisible = percentage !== 100;
+            const isVisible = percentage < 100;
             return (
               <Container>
                 <Border $isvisible={isVisible} />
-                <DayPercentage>{percentage}%</DayPercentage>
+                <DayPercentage>{percentage>100? "100":percentage}%</DayPercentage>
                 <Popup
                   isOpen={selectedDay === date.getDate()}
                   onClose={() => setSelectedDay(null)}
