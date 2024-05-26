@@ -14,3 +14,4 @@ export { Loader } from './Loader/Loader.jsx';
 export { DeleteEntryModal } from './DeleteEntryModal/DeleteEntryModal.jsx';
 export { InputError } from './InputError/InputError.jsx';
 export { ModalEditWater } from './ModalEditWater/ModalEditWater.jsx';
+export { LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher.jsx';

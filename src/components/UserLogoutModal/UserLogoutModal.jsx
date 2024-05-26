@@ -5,11 +5,25 @@ import { Modal, CloseModalCross, YesNoButton } from 'components';
 import { closeModal } from '../../redux/modal/modalSlice';
 import { modalNames } from 'constants/constants';
 import { Buttons, Wrapper, Title, Subtitle } from './UserLogoutModal.styled';
+import { useTranslation } from 'react-i18next';
 
 export const UserLogoutModal = () => {
   const dispatch = useDispatch();
   // const isLoading = useSelector(selectIsLoading);
   // const error = useSelector(selectError);
+  const { t } = useTranslation();
+
+  // const onLogout = async e => {
+  //   e.preventDefault();
+  //   dispatch(apiLogoutUser())
+  //    .unwrap()
+  //    .then(res => {
+  //       dispatch(closeModal());
+  //     })
+  //    .catch(e => {
+  //       toast.error('Something went wrong. Try again later.');
+  //     });
+  // };
 
   const onLogout = async e => {
     e.preventDefault();
@@ -20,16 +34,20 @@ export const UserLogoutModal = () => {
     <Modal modalId={modalNames.LOGOUT}>
       <Wrapper>
         <CloseModalCross />
-        <Title>Log Out</Title>
-        <Subtitle>Do you really want to leave?</Subtitle>
+        <Title>{t('managementCard.logoutCardTitle')}</Title>
+        <Subtitle>{t('managementCard.logoutCardDescription')}</Subtitle>
         <Buttons>
           <YesNoButton
             onBtnClick={() => dispatch(closeModal())}
-            text="Cancel"
-            $approve="false"
+            text={t('managementCard.cancelButton')}
+            approve="false"
           />
 
-          <YesNoButton onBtnClick={onLogout} $approve="true" text="Log out" />
+          <YesNoButton
+            onBtnClick={onLogout}
+            approve="true"
+            text={t('managementCard.logoutButton')}
+          />
         </Buttons>
       </Wrapper>
     </Modal>

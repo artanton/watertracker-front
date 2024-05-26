@@ -18,6 +18,11 @@ export const HeaderContainer = styled.header`
     padding: 12px 112px 0;
   }
 `;
+
+export const LogoLanguagesWrapper = styled.div`
+  display: flex;
+  gap: 30px;
+`;
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
@@ -49,7 +54,6 @@ export const DefaultNeme = styled.p`
 export const SignInText = styled.p`
   color: ${theme.colors.primaryBlue};
   @media (min-width: 768px) {
-    width: 54px;
     line-height: ${theme.lineHeights.info};
   }
 `;

@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useFormik } from 'formik';
 
+import { useTranslation } from 'react-i18next';
+
 import { toast } from 'react-toastify';
 
 import { addWater } from '../../../redux/waterData/thunk';
@@ -32,6 +34,8 @@ import {
 export const AddWaterForm = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+
+  const { t } = useTranslation();
 
   const initialValues = {
     waterCount: 50,
@@ -77,7 +81,7 @@ export const AddWaterForm = () => {
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <LabelCount>Amount of water:</LabelCount>
+      <LabelCount>{t('AddAndEditWaterCard.amountOfWater')}</LabelCount>
       <CountContainer>
         <ButtonChange type="button" onClick={decrementWater}>
           <Minus />
@@ -88,7 +92,7 @@ export const AddWaterForm = () => {
         </ButtonChange>
       </CountContainer>
 
-      <LabelSelect>Recording time:</LabelSelect>
+      <LabelSelect>{t('AddAndEditWaterCard.recordingTime')}</LabelSelect>
       <SelectInput
         name="timeValue"
         format="HH:mm"
@@ -97,7 +101,7 @@ export const AddWaterForm = () => {
       />
 
       <LabelQuantityInput htmlFor="waterCount">
-        Enter the value of the water used:
+        {t('AddAndEditWaterCard.enterTheValue')}
       </LabelQuantityInput>
       <QuantityInput
         id="waterCount"

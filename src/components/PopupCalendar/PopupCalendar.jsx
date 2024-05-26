@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import { useSelector } from 'react-redux';
+
+import { useTranslation } from 'react-i18next';
+
+import { selectActualMonth } from '../../redux/selectors';
+
 import { Trigger } from 'components/MonthStatsTable/MonthStatsTable.styled';
 import {
   DailyNorma,
@@ -12,10 +18,10 @@ import {
   StyledPopup,
 } from './PopupCalendar.styled';
 
-import { selectActualMonth } from '../../redux/selectors';
-
 const Popup = ({ isOpen, onClose, selectedDate }) => {
   const [mobilePosition, setMobilePosition] = useState({ top: 0, left: 0 });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,18 +50,18 @@ const Popup = ({ isOpen, onClose, selectedDate }) => {
 
   const formatDate = date => {
     const monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      t('calendar.January'),
+      t('calendar.February'),
+      t('calendar.March'),
+      t('calendar.April'),
+      t('calendar.May'),
+      t('calendar.June'),
+      t('calendar.July'),
+      t('calendar.August'),
+      t('calendar.September'),
+      t('calendar.October'),
+      t('calendar.November'),
+      t('calendar.December'),
     ];
     const formattedMonth = monthNames[date.getMonth()];
     const formattedDay = date.getDate();
@@ -76,17 +82,17 @@ const Popup = ({ isOpen, onClose, selectedDate }) => {
         <div key={filteredData.date}>
           <Data>{formatDate(new Date(filteredData.date))}</Data>
           <DailyNorma>
-            Daily norma:{' '}
+            {t('calendar.norm')}
             <DailyNormaMl>{filteredData.dailyNorma / 1000} L</DailyNormaMl>
           </DailyNorma>
           <Fulfillment>
-            Fulfillment of the daily norm:{' '}
+            {t('calendar.percent')}
             <FulfillmentPercentage>
               {filteredData.persantRate}%
             </FulfillmentPercentage>
           </Fulfillment>
           <Servings>
-            How many servings of water:{' '}
+            {t('calendar.quantity')}
             <ServingsAmount>{filteredData.waterSavings}</ServingsAmount>
           </Servings>
         </div>

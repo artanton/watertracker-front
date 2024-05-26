@@ -1,11 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useTranslation } from 'react-i18next';
 
 import { openModal } from '../../redux/modal/modalSlice';
-
-import { modalNames } from 'constants/constants';
+import { selectorDailyNorma } from '../../redux/selectors';
 
 import { ModalMyDailyNorma } from 'components';
+
+import { modalNames } from 'constants/constants';
 
 import {
   MyDailyNorma,
@@ -15,16 +17,16 @@ import {
   WaterNormaAmountEdit,
 } from './DailyNorma.styled';
 
-import { selectorDailyNorma } from '../../redux/selectors';
-
 const DailyNorma = () => {
   const dispatch = useDispatch();
 
   const dailyNorma = (useSelector(selectorDailyNorma) / 1000).toFixed(1);
 
+  const { t } = useTranslation();
+
   return (
     <MyDailyNormaContainer>
-      <MyDailyNorma>My daily norma</MyDailyNorma>
+      <MyDailyNorma>{t('MyDailyNorma.MyDailyNormaTitle')}</MyDailyNorma>
       <MyDailyNormaAmount>
         <WaterNormaAmount>
           {isNaN(dailyNorma) ? '0.0' : dailyNorma} L
@@ -33,7 +35,7 @@ const DailyNorma = () => {
           type="button"
           onClick={() => dispatch(openModal(modalNames.DAILY_NORMA))}
         >
-          Edit
+          {t('MyDailyNorma.MyDailyNormaButton')}
         </WaterNormaAmountEdit>
       </MyDailyNormaAmount>
       <ModalMyDailyNorma />

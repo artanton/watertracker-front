@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
+
+import { toast } from 'react-toastify';
+
+import { useTranslation } from 'react-i18next';
+
 import { signInSchema } from 'schemas/schemas';
 import { LayoutSignIn } from 'components/LayoutSignIn/LayoutSignIn';
 import {
@@ -19,12 +24,13 @@ import { apiLoginUser } from '../../redux/authorization/authReducer';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
 import { selectIsLoading } from '../../redux/selectors';
-import { toast } from 'react-toastify';
 
 function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+
+  const { t } = useTranslation();
   //const error = useSelector(selectError);
 
   const swapPassword = () => {
@@ -65,23 +71,23 @@ function Signin() {
   return (
     <LayoutSignIn>
       <SignInForm onSubmit={onSubmit}>
-        <SignInTitle>Sign in</SignInTitle>
+        <SignInTitle>{t('authForm.signinTitle')}</SignInTitle>
         <Label>
-          Enter email
+          {t('authForm.email')}
           <Input
             type="email"
             name="email"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Email"
+            placeholder={t('authForm.emailPlaceholder')}
             $error={touched.email && errors.email}
           />
           {touched.email && errors.email && <Error>{errors.email}</Error>}
         </Label>
 
         <Label>
-          Enter password
+          {t('authForm.password')}
           <Wrap>
             <Input
               type={showPassword ? 'text' : 'password'}
@@ -89,24 +95,23 @@ function Signin() {
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Password"
+              placeholder={t('authForm.passPlaceholder')}
               $error={touched.password && errors.password}
             />
             <button type="button" onClick={swapPassword}>
               {showPassword ? <Eye /> : <EyeSlash />}
             </button>
           </Wrap>
-          {/* {error && <Error>{`Wrong email or password`}</Error>} */}
           {touched.password && errors.password && (
             <Error>{errors.password}</Error>
           )}
         </Label>
 
         <Button type="submit" disabled={isLoading}>
-          Sign in
+          {t('authForm.signinBtnTitle')}
         </Button>
         <Link to="/signup">
-          <SignUpText>Signup</SignUpText>
+          <SignUpText>{t('authForm.signupLink')}</SignUpText>
         </Link>
       </SignInForm>
     </LayoutSignIn>

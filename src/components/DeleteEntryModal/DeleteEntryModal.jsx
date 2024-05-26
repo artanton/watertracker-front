@@ -13,13 +13,14 @@ import {
 import { deleteWater } from '../../redux/waterData/thunk';
 
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export const DeleteEntryModal = () => {
   const dispatch = useDispatch();
   const waterId = useSelector(selectModalData);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-
+  const { t } = useTranslation();
   const onDelete = async e => {
     e.preventDefault();
     dispatch(deleteWater(waterId))
@@ -37,22 +38,22 @@ export const DeleteEntryModal = () => {
     <Modal modalId={modalNames.DELETE_ENTRY}>
       <Wrapper>
         <CloseModalCross />
-        <Title>Delete entry</Title>
+        <Title>{t('managementCard.deleteCardTitle')}</Title>
         {error && <Subtitle>Error: {error}</Subtitle>}
         {!error && (
-          <Subtitle>Are you sure you want to delete the entry?</Subtitle>
+          <Subtitle>{t('managementCard.deleteCardDescription')}</Subtitle>
         )}
         <Buttons>
           <YesNoButton
             onBtnClick={() => dispatch(closeModal())}
-            text="Cancel"
+            text={t('managementCard.cancelButton')}
             approve="false"
             disabled={isLoading}
           />
           <YesNoButton
             onBtnClick={onDelete}
             approve="true"
-            text="Delete"
+            text={t('managementCard.deleteButton')}
             disabled={isLoading}
           />
         </Buttons>

@@ -8,6 +8,11 @@ export const PopupButton = styled.button`
   padding: 4px;
 `;
 
+export const MenuContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const MenuButton = styled.button`
   background: none;
   border: none;
@@ -28,6 +33,6 @@ export const ButtonText = styled.p`
 
 export const ButtonContent = styled.div`
   display: flex;
-  align-items: row;
+  /* align-items: row; */
   align-items: center;
 `;

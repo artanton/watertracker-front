@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import {
   WaterTrackerContainer,
   WaterTrackerTitle,
@@ -14,6 +16,7 @@ import {
 
 export const WaterTracker = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onClick = () => {
     navigate('/signup');
@@ -21,25 +24,27 @@ export const WaterTracker = () => {
 
   return (
     <WaterTrackerContainer>
-      <WaterTrackerTitle>Water consumption tracker</WaterTrackerTitle>
-      <WaterTrackerInfo>Record daily water intake and track</WaterTrackerInfo>
-      <WaterTrackerSubtitle>Tracker Benefits</WaterTrackerSubtitle>
+      <WaterTrackerTitle>{t('WelcomePage.mainTitle')}</WaterTrackerTitle>
+      <WaterTrackerInfo>{t('WelcomePage.slogan')}</WaterTrackerInfo>
+      <WaterTrackerSubtitle>
+        {t('WelcomePage.subtitleBenefits')}
+      </WaterTrackerSubtitle>
       <WaterTrackerList>
         <WaterTrackerLi>
           <CalendarSvg />
-          Habit drive
+          {t('WelcomePage.itemArrayBenefits.benefit1')}
         </WaterTrackerLi>
         <WaterTrackerLi>
           <StatisticsSvg />
-          View statistics
+          {t('WelcomePage.itemArrayBenefits.benefit2')}
         </WaterTrackerLi>
         <WaterTrackerLi>
           <PersonalSetingsSvg />
-          Personal rate setting
+          {t('WelcomePage.itemArrayBenefits.benefit3')}
         </WaterTrackerLi>
       </WaterTrackerList>
       <Button type="button" onClick={onClick}>
-        Try tracker
+        {t('WelcomePage.tryTreckerButton')}
       </Button>
     </WaterTrackerContainer>
   );

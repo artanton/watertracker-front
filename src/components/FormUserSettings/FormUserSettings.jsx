@@ -1,14 +1,21 @@
 import { useState } from 'react';
 
-import { apiUpdateUserSettings } from '../../redux/authorization/authReducer';
-import { closeModal } from '../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData, selectIsLoading } from '../../redux/selectors';
 
 import { Formik, Form, ErrorMessage } from 'formik';
+
+import { useTranslation } from 'react-i18next';
+
+import { toast } from 'react-toastify';
+
+import { apiUpdateUserSettings } from '../../redux/authorization/authReducer';
+import { closeModal } from '../../redux/modal/modalSlice';
+import { selectUserData, selectIsLoading } from '../../redux/selectors';
+
+import { userSettingsSchema } from 'schemas/schemas';
+
 import { SaveModalButton } from 'components';
 import { UploadPhoto } from 'components/Icons/UploadPhoto';
-import { userSettingsSchema } from 'schemas/schemas';
 
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
@@ -38,10 +45,10 @@ import {
   Error,
 } from './FormUserSettings.styled';
 
-import { toast } from 'react-toastify';
-
 export const FormUserSettings = () => {
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const isLoading = useSelector(selectIsLoading);
 
@@ -111,7 +118,9 @@ export const FormUserSettings = () => {
           <FormInfo>
             <PersonalInfo>
               <FieldContainer>
-                <AvatarSettingsTitle>Your Photo</AvatarSettingsTitle>
+                <AvatarSettingsTitle>
+                  {t('UserSettings.UserSettingsPhotoTitle')}
+                </AvatarSettingsTitle>
                 <AvatarLabel>
                   <Avatar
                     src={
@@ -121,7 +130,9 @@ export const FormUserSettings = () => {
                     alt="avatar"
                   />
                   <UploadPhoto />
-                  <UploadPhotoText>Upload a photo</UploadPhotoText>
+                  <UploadPhotoText>
+                    {t('UserSettings.UserSettingsPhotoUpload')}
+                  </UploadPhotoText>
                   <AvatarInput
                     id="avatarURL"
                     name="avatarURL"
@@ -133,7 +144,9 @@ export const FormUserSettings = () => {
                 <ErrorMessage name="avatarURL" component={Error} />
               </FieldContainer>
               <GenderContainer>
-                <OptionTitle>Your gender identity</OptionTitle>
+                <OptionTitle>
+                  {t('UserSettings.UserSettingsGenderTitle')}
+                </OptionTitle>
                 <RadiosContainer>
                   <RadioElement>
                     <InputRadio
@@ -143,7 +156,9 @@ export const FormUserSettings = () => {
                       value="Woman"
                     />
                     <ErrorMessage name="gender" component={Error} />
-                    <Label htmlFor="Woman">Woman</Label>
+                    <Label htmlFor="Woman">
+                      {t('UserSettings.UserSettingsGenderWoman')}
+                    </Label>
                   </RadioElement>
                   <RadioElement>
                     <InputRadio
@@ -152,43 +167,55 @@ export const FormUserSettings = () => {
                       id="Man"
                       value="Man"
                     />
-                    <Label htmlFor="Man">Man</Label>
+                    <Label htmlFor="Man">
+                      {t('UserSettings.UserSettingsGenderMan')}
+                    </Label>
                   </RadioElement>
                 </RadiosContainer>
               </GenderContainer>
               <FieldContainer>
-                <OptionTitle htmlFor="userName">Your name</OptionTitle>
+                <OptionTitle htmlFor="userName">
+                  {t('UserSettings.UserSettingsNameLabel')}
+                </OptionTitle>
                 <InputText
                   name="userName"
                   type="text"
                   id="userName"
-                  placeholder="Name"
+                  placeholder={t('UserSettings.UserSettingsNamePlaceholder')}
                   $error={errors.userName}
                 />
                 <ErrorMessage name="userName" component={Error} />
               </FieldContainer>
               <FieldContainerNoMargin>
-                <OptionTitle htmlFor="email">E-mail</OptionTitle>
+                <OptionTitle htmlFor="email">
+                  {t('UserSettings.UserSettingsEmailLabel')}
+                </OptionTitle>
                 <InputText
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="Email"
+                  placeholder={t('UserSettings.UserSettingsEmailPlaceholder')}
                   $error={errors.email}
                 />
                 <ErrorMessage name="email" component={Error} />
               </FieldContainerNoMargin>
             </PersonalInfo>
             <PasswordsContainer>
-              <PasswordTitle>Password</PasswordTitle>
+              <PasswordTitle>
+                {t('UserSettings.UserSettingsPasswordTitle')}
+              </PasswordTitle>
               <FieldContainer>
-                <Label htmlFor="oldPassword">Outdated password</Label>
+                <Label htmlFor="oldPassword">
+                  {t('UserSettings.UserSettingsOldPassLabel')}
+                </Label>
                 <InputWrapper>
                   <InputPassword
                     type={showOldPassword ? 'text' : 'password'}
                     name="oldPassword"
                     id="oldPassword"
-                    placeholder="Password"
+                    placeholder={t(
+                      'UserSettings.UserSettingsPasswordPlaceholder'
+                    )}
                     $error={errors.oldPassword}
                   />
                   <IconButton type="button" onClick={swapOldPassword}>
@@ -198,13 +225,17 @@ export const FormUserSettings = () => {
                 <ErrorMessage name="newPassword" component={Error} />
               </FieldContainer>
               <FieldContainer>
-                <Label htmlFor="newPassword">New password</Label>
+                <Label htmlFor="newPassword">
+                  {t('UserSettings.UserSettingsNewPassLabel')}
+                </Label>
                 <InputWrapper>
                   <InputPassword
                     type={showNewPassword ? 'text' : 'password'}
                     name="newPassword"
                     id="newPassword"
-                    placeholder="Password"
+                    placeholder={t(
+                      'UserSettings.UserSettingsPasswordPlaceholder'
+                    )}
                     $error={errors.newPassword}
                   />
                   <IconButton type="button" onClick={swapNewPassword}>
@@ -214,13 +245,17 @@ export const FormUserSettings = () => {
                 <ErrorMessage name="newPassword" component={Error} />
               </FieldContainer>
               <FieldContainerNoMargin>
-                <Label htmlFor="repeatPassword">Repeat password</Label>
+                <Label htmlFor="repeatPassword">
+                  {t('UserSettings.UserSettingsRepeatPassLabel')}
+                </Label>
                 <InputWrapper>
                   <InputPassword
                     type={showRepeatPassword ? 'text' : 'password'}
                     name="repeatPassword"
                     id="repeatPassword"
-                    placeholder="Password"
+                    placeholder={t(
+                      'UserSettings.UserSettingsPasswordPlaceholder'
+                    )}
                     $error={errors.repeatPassword}
                   />
                   <IconButton type="button" onClick={swapRepeatPassword}>

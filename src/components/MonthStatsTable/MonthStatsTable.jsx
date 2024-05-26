@@ -1,7 +1,14 @@
-import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useRef, useState } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useTranslation } from 'react-i18next';
+
 import { getMonthWater } from '../../redux/waterData/thunk';
+import { selectActualMonth } from '../../redux/selectors';
+
+import Popup from 'components/PopupCalendar/PopupCalendar';
+
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,11 +20,11 @@ import {
   StyledCalendar,
   Trigger,
 } from './MonthStatsTable.styled';
-import Popup from 'components/PopupCalendar/PopupCalendar';
-import { selectActualMonth} from '../../redux/selectors';
 
 const MonthStatsTable = () => {
   const dispatch = useDispatch();
+
+  const { t, i18n } = useTranslation();
   const monthData = useSelector(selectActualMonth);
 
   const [selectedDay, setSelectedDay] = useState(null);
@@ -42,13 +49,15 @@ const MonthStatsTable = () => {
 
   const triggerRef = useRef(null);
 
+  const locale = i18n.language;
+
   return (
     <MonthStatsTableContainer>
-      <Month>Month</Month>
+      <Month>{t('calendar.month')}</Month>
       <StyledCalendar
         prevLabel={<ArrowLeft />}
         nextLabel={<ArrowRight />}
-        locale="en-US"
+        locale={locale}
         tileContent={({ date, view }) => {
           if (view === 'month') {
             const currentDay = date.getDate();
@@ -62,7 +71,9 @@ const MonthStatsTable = () => {
             return (
               <Container>
                 <Border $isvisible={isVisible} />
-                <DayPercentage>{percentage>100? "100":percentage}%</DayPercentage>
+                <DayPercentage>
+                  {percentage > 100 ? '100' : percentage}%
+                </DayPercentage>
                 <Popup
                   isOpen={selectedDay === date.getDate()}
                   onClose={() => setSelectedDay(null)}
