@@ -1,5 +1,6 @@
 import { theme } from 'styles/theme';
 import { waterRateLimit } from '../constants/constants';
+
 export function inputValidationStyler(props) {
   if (props.$error) {
     return {
@@ -31,32 +32,39 @@ export const calculateWaterRate = ({ weight, sportTime, gender }) => {
   }
 };
 
-export const actualDate = () => {
-  const now = new Date();
+// export const actualDate = () => {
+//   const now = new Date();
 
-  const timeShift = now.getTimezoneOffset();
+//   const timeShift = now.getTimezoneOffset();
 
-  const offsetHours = Math.floor(Math.abs(timeShift) / 60);
-  const offsetMinutes = Math.abs(timeShift) % 60;
+//   const offsetHours = Math.floor(Math.abs(timeShift) / 60);
+//   const offsetMinutes = Math.abs(timeShift) % 60;
 
-  // Формируем строку смещения, например: "+02:00" или "-04:30"
-  const offsetSign = timeShift <= 0 ? '+' : '-';
-  const formattedOffset = `${offsetSign}${String(offsetHours).padStart(
-    2,
-    '0'
-  )}:${String(offsetMinutes).padStart(2, '0')}`;
+//   // Формируем строку смещения, например: "+02:00" или "-04:30"
+//   const offsetSign = timeShift <= 0 ? '+' : '-';
+//   const formattedOffset = `${offsetSign}${String(offsetHours).padStart(
+//     2,
+//     '0'
+//   )}:${String(offsetMinutes).padStart(2, '0')}`;
 
-  // Форматируем локальную дату и время
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
+//   // Форматируем локальную дату и время
+//   const year = now.getFullYear();
+//   const month = String(now.getMonth() + 1).padStart(2, '0');
+//   const day = String(now.getDate()).padStart(2, '0');
+//   const hours = String(now.getHours()).padStart(2, '0');
+//   const minutes = String(now.getMinutes()).padStart(2, '0');
+//   const seconds = String(now.getSeconds()).padStart(2, '0');
 
-  // Собираем строку даты и времени с учетом смещения
-  const localDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${formattedOffset}`;
-  return localDate;
+//   // Собираем строку даты и времени с учетом смещения
+//   const localDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${formattedOffset}`;
+//   return localDate;
+// };
+
+export const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 };
 
 export function formatToTime(dateString) {

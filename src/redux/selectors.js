@@ -1,4 +1,5 @@
-// import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
+import { formatDate } from 'helpers/helpers';
 
 export const selectIsLoading = state => state.auth.isLoading;
 export const selectError = state => state.auth.error;
@@ -14,11 +15,34 @@ export const selectorDailyNorma = state => state.auth.userData.dailyNorma;
 export const selectorPersantRate = state => state.wat.persantRate;
 export const selectorWaterSavings = state => state.wat.waterSavings;
 export const selectorWaterNotes = state => state.wat.waterNotes;
-// export const selectorWaterNotes = state => {
-//     console.log("State:", state); 
-//     return state.wat.waterNotes;
-//   };
+export const selectorWaterTotal = state => state.wat.waterTotal;
 export const selectorMonth = state => state.wat.month;
+
+export const selectActualMonth = createSelector(
+  [
+    selectorDailyNorma,
+    selectorPersantRate,
+    selectorWaterSavings,
+    selectorMonth,
+  ],
+  (dailyNorma, persantRate, waterSavings, monthData) => {
+    const actualDate = formatDate(new Date());
+
+    const updatedMonthData = monthData.map(day => {
+      if (day.date === actualDate) {
+        return {
+          ...day,
+          dailyNorma,
+          persantRate,
+          waterSavings,
+        };
+      }
+      return day;
+    });
+
+    return updatedMonthData;
+  }
+);
 
 export const selectorLoading = state => state.wat.loading;
 export const selectorError = state => state.wat.error;

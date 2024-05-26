@@ -12,7 +12,7 @@ import {
   StyledPopup,
 } from './PopupCalendar.styled';
 
-import { selectorMonth } from '../../redux/selectors';
+import { selectActualMonth } from '../../redux/selectors';
 
 const Popup = ({ isOpen, onClose, selectedDate }) => {
   const [mobilePosition, setMobilePosition] = useState({ top: 0, left: 0 });
@@ -31,7 +31,7 @@ const Popup = ({ isOpen, onClose, selectedDate }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const monthData = useSelector(selectorMonth);
+  const monthData = useSelector(selectActualMonth);
 
   const filteredData = monthData.find(item => {
     const itemDate = new Date(item.date);
