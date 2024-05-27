@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
+import { ClapSpinner } from 'react-spinners-kit';
+
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
-import { ClapSpinner } from 'react-spinners-kit';
 
 const Button = styled.button`
   display: flex;
@@ -31,11 +34,12 @@ const Button = styled.button`
 `;
 
 export const SaveModalButton = ({ isLoading }) => {
+  const { t } = useTranslation();
   return isLoading ? (
     <Button type="submit">
       {isLoading ? <ClapSpinner size={16} frontColor={'#fff'} /> : 'Save'}
     </Button>
   ) : (
-    <Button type="submit">Save</Button>
+    <Button type="submit">{t('AddAndEditWaterCard.saveButton')}</Button>
   );
 };

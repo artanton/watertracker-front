@@ -2,22 +2,15 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const MyDailyNormaContainer = styled.div`
-  width: 164px;
   max-height: 74px;
   border: 1px solid #ecf2ff;
   border-radius: ${theme.radii.normal};
   box-shadow: ${theme.shadows.normaFrame};
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px 20px;
 
   @media (min-width: 768px) {
-    max-height: 76px;
-  }
-
-  @media (min-width: 1440px) {
-    width: 166px;
     max-height: 76px;
   }
 `;

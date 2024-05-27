@@ -1,4 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+
+import { useTranslation } from 'react-i18next';
+
 import { selectorWaterNotes } from '../../redux/selectors';
 import {
   openModal,
@@ -6,7 +9,11 @@ import {
   addWaterDose,
   addWaterDate,
 } from '../../redux/modal/modalSlice';
-// import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
+
+import { Plus } from 'components/Icons/Plus/Plus';
+
+import { modalNames } from 'constants/constants';
+
 import {
   AddWaterButton,
   DeleteButton,
@@ -22,10 +29,9 @@ import {
   WaterListMl,
   WaterListTime,
 } from './TodayWaterList.styled';
-import { Plus } from 'components/Icons/Plus/Plus';
-import { modalNames } from 'constants/constants';
 
 const TodayWaterList = () => {
+  const { t } = useTranslation();
   const openEditModal = note => {
     dispatch(addData(note._id));
     dispatch(addWaterDose(note.waterDose));
@@ -34,8 +40,6 @@ const TodayWaterList = () => {
   };
 
   const dispatch = useDispatch();
-  // const water = useSelector(selectWater);
-  // console.log('water', water);
   const waterNotes = useSelector(selectorWaterNotes);
   const formatTime = timeString => {
     const date = new Date(timeString);
@@ -48,9 +52,9 @@ const TodayWaterList = () => {
 
   return (
     <TodayWaterListContainer>
-      <Today>Today</Today>
+      <Today>{t('TodayWater.TodayWaterTitle')}</Today>
       <WaterList>
-        {waterNotes &&
+        {waterNotes && waterNotes.length > 0 ? (
           waterNotes.map((note, index) => (
             <WaterListItem key={note._id}>
               <WaterGlassIcon />
@@ -80,12 +84,15 @@ const TodayWaterList = () => {
                 </DeleteButton>
               </IconsContainer>
             </WaterListItem>
-          ))}
+          ))
+        ) : (
+          <p>{t('TodayWater.TodayWaterMessage')}</p>
+        )}
       </WaterList>
 
       <AddWaterButton onClick={() => dispatch(openModal(modalNames.ADD_WATER))}>
         <Plus />
-        Add water
+        {t('TodayWater.TodayWaterButton')}
       </AddWaterButton>
     </TodayWaterListContainer>
   );

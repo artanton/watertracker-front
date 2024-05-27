@@ -1,22 +1,29 @@
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { apiRegisterUser } from '../../redux/authorization/authReducer';
-import { useFormik } from 'formik';
-import { signUpSchema } from 'schemas/schemas';
-import { LayoutSignIn } from 'components/LayoutSignIn/LayoutSignIn';
-import { selectIsLoggedIn } from '../../redux/selectors';
 import { useState } from 'react';
+
+import { Link, Navigate } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useTranslation } from 'react-i18next';
+
+import { useFormik } from 'formik';
+
+import { toast } from 'react-toastify';
+
+import { apiRegisterUser } from '../../redux/authorization/authReducer';
+import { selectIsLoggedIn } from '../../redux/selectors';
+
+import { signUpSchema } from 'schemas/schemas';
+
+import { LayoutSignIn } from 'components/LayoutSignIn/LayoutSignIn';
+
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
-import { Navigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import {
   Label,
   SignUpTitle,
   Input,
-  // PasswordInput,
-  // RepeatPasswordInput,
   Error,
   Button,
   SignUpForm,
@@ -29,9 +36,7 @@ const Signup = () => {
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  //const token = useSelector(selectToken);
-  //const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const swapPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -40,23 +45,15 @@ const Signup = () => {
     setShowRepeatPassword(!showRepeatPassword);
   };
 
-  const {
-    values,
-    touched,
-    errors,
-    //handleSubmit: formikHandleSubmit,
-    handleChange,
-    handleBlur,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      repeatPassword: '',
-    },
-    validationSchema: signUpSchema,
-    // onSubmit,
-  });
+  const { values, touched, errors, handleChange, handleBlur, isValid } =
+    useFormik({
+      initialValues: {
+        email: '',
+        password: '',
+        repeatPassword: '',
+      },
+      validationSchema: signUpSchema,
+    });
   const dispatch = useDispatch();
 
   const onSubmit = event => {
@@ -77,7 +74,6 @@ const Signup = () => {
       email,
       password,
     };
-    // console.log(formData);
     dispatch(apiRegisterUser(formData));
 
     handleChange({ target: { name: 'email', value: '' } });
@@ -100,23 +96,23 @@ const Signup = () => {
     <>
       <LayoutSignIn>
         <SignUpForm onSubmit={onSubmit}>
-          <SignUpTitle>Sign up</SignUpTitle>
+          <SignUpTitle>{t('authForm.signupTitle')}</SignUpTitle>
           <Label>
-            Enter email
+            {t('authForm.email')}
             <Input
               type="email"
               name="email"
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Email"
+              placeholder={t('authForm.emailPlaceholder')}
               $error={touched.email && errors.email}
             />
             {touched.email && errors.email && <Error>{errors.email}</Error>}
           </Label>
 
           <Label>
-            Enter password
+            {t('authForm.password')}
             <Wrap>
               <Input
                 type={showPassword ? 'text' : 'password'}
@@ -124,7 +120,7 @@ const Signup = () => {
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="Password"
+                placeholder={t('authForm.passPlaceholder')}
                 $error={touched.password && errors.password}
               />
               <button type="button" onClick={swapPassword}>
@@ -137,7 +133,7 @@ const Signup = () => {
           </Label>
 
           <Label>
-            Repeat password
+            {t('authForm.repeatePass')}
             <Wrap>
               <Input
                 type={showRepeatPassword ? 'text' : 'password'}
@@ -145,7 +141,7 @@ const Signup = () => {
                 value={values.repeatPassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="Repeat password"
+                placeholder={t('authForm.repeatePass')}
                 $error={touched.repeatPassword && errors.repeatPassword}
               />
               <button type="button" onClick={swapRepeatPassword}>
@@ -158,12 +154,12 @@ const Signup = () => {
           </Label>
 
           <Button type="submit" disabled={!isValid}>
-            Sign up
+            {t('authForm.signupBtnTitle')}
           </Button>
           {isLoggedIn && <Navigate to="/signin" />}
 
           <Link to="/signin">
-            <SignUpText>Signin</SignUpText>
+            <SignUpText>{t('authForm.signinLink')}</SignUpText>
           </Link>
         </SignUpForm>
       </LayoutSignIn>

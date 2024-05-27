@@ -1,5 +1,8 @@
 import React from 'react';
+
 import Popup from 'reactjs-popup';
+
+import { useTranslation } from 'react-i18next';
 
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice';
@@ -9,12 +12,15 @@ import { Settings } from 'components/Icons/Settings';
 import { Logout } from 'components/Icons/Logout';
 import {
   PopupButton,
+  MenuContent,
   MenuButton,
   ButtonText,
   ButtonContent,
 } from './PopupUser.styled';
 export const PopupUser = () => {
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const triggerComponent = open => (
     <PopupButton className="button">
@@ -27,15 +33,18 @@ export const PopupUser = () => {
       position="bottom right"
       closeOnDocumentClick
       contentStyle={{
-        width: '118px',
-        height: '88px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        width: 'auto',
+        height: 'auto',
         padding: '16px',
         borderRadius: '10px',
         gap: '16px',
       }}
     >
       {close => (
-        <div>
+        <MenuContent>
           <MenuButton
             type="button"
             onClick={() => {
@@ -45,7 +54,7 @@ export const PopupUser = () => {
           >
             <ButtonContent>
               <Settings />
-              <ButtonText>Settings</ButtonText>
+              <ButtonText>{t('popup.setting')}</ButtonText>
             </ButtonContent>
           </MenuButton>
           <MenuButton
@@ -57,10 +66,10 @@ export const PopupUser = () => {
           >
             <ButtonContent>
               <Logout />
-              <ButtonText>Log Out</ButtonText>
+              <ButtonText>{t('popup.logout')}</ButtonText>
             </ButtonContent>
           </MenuButton>
-        </div>
+        </MenuContent>
       )}
     </Popup>
   );

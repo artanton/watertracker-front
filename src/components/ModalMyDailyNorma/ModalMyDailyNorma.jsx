@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useFormik } from 'formik';
 
+import { useTranslation } from 'react-i18next';
+
 import { toast } from 'react-toastify';
 
 import { patchWater } from '../../redux/waterData/thunk';
@@ -49,6 +51,8 @@ export const ModalMyDailyNorma = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectorLoading);
 
+  const { t } = useTranslation();
+
   const {
     values,
     touched,
@@ -79,9 +83,7 @@ export const ModalMyDailyNorma = () => {
           dispatch(closeModal());
         })
         .catch(e => {
-          toast.error(
-            'Some error occurred while updating. Please try again later'
-          );
+          toast.error('Some error occurred while updating. Please try again.');
         });
     },
     validationSchema: myDailyNorma,
@@ -113,27 +115,27 @@ export const ModalMyDailyNorma = () => {
     <Modal modalId={modalNames.DAILY_NORMA}>
       <ModalContainer onSubmit={handleSubmit}>
         <ModalTitleWrapper>
-          <ModalTitle>My daily norma</ModalTitle>
+          <ModalTitle>{t('MyDailyNorma.MyDailyNormaTitle')}</ModalTitle>
           <CloseModalCross />
         </ModalTitleWrapper>
         <FormulasWrapper>
           <FormulasWrap>
             <FormulaText>
-              <span>For girl:</span>V=(M*0.03) + (T*0.4)
+              <span>{t('MyDailyNorma.MyDailyNormaModalForWoman')}</span>
+              V=(M*0.03) + (T*0.4)
             </FormulaText>
             <FormulaText>
-              <span>For man:</span>V=(M*0.04) + (T*0.6)
+              <span>{t('MyDailyNorma.MyDailyNormaModalForMan')}</span>
+              V=(M*0.04) + (T*0.6)
             </FormulaText>
           </FormulasWrap>
           <FormulasDescription>
-            <span>*</span> V is the volume of the water norm in liters per day,
-            M is your body weight, T is the time of active sports, or another
-            type of activity commensurate in terms of loads (in the absence of
-            these, you must set 0)
+            <span>*</span>
+            {t('MyDailyNorma.MyDailyNormaModalAccent')}
           </FormulasDescription>
         </FormulasWrapper>
         <FormContainer>
-          <FormTitle>Calculate your rate:</FormTitle>
+          <FormTitle>{t('MyDailyNorma.MyDailyNormaModalSubtitle')}</FormTitle>
           <RadioFormWraper>
             <RadioWoman>
               <InputField
@@ -145,7 +147,9 @@ export const ModalMyDailyNorma = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <LabelWrap htmlFor="woman">For woman</LabelWrap>
+              <LabelWrap htmlFor="woman">
+                {t('MyDailyNorma.MyDailyNormaModalForWoman')}
+              </LabelWrap>
             </RadioWoman>
             <RadioMan>
               <InputField
@@ -157,14 +161,16 @@ export const ModalMyDailyNorma = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <LabelWrap htmlFor="man">For man</LabelWrap>
+              <LabelWrap htmlFor="man">
+                {t('MyDailyNorma.MyDailyNormaModalForMan')}
+              </LabelWrap>
             </RadioMan>
           </RadioFormWraper>
           {touched.gender && errors.gender && (
             <InputError>{errors.gender}</InputError>
           )}
           <FormWrapper>
-            <LabelWrap>Your weight in kilograms:</LabelWrap>
+            <LabelWrap>{t('MyDailyNorma.MyDailyNormaModalWeight')}</LabelWrap>
             <InputFormField
               type="number"
               value={values.weight}
@@ -178,10 +184,7 @@ export const ModalMyDailyNorma = () => {
             )}
           </FormWrapper>
           <FormWrapper>
-            <LabelWrap>
-              The time of active participation in sports or other activities
-              with a high physical. Load in hours:
-            </LabelWrap>
+            <LabelWrap>{t('MyDailyNorma.MyDailyNormaModalActivity')}</LabelWrap>
             <InputFormField
               type="number"
               value={values.sportTime}
@@ -196,7 +199,7 @@ export const ModalMyDailyNorma = () => {
           </FormWrapper>
           <WaterPerDayWrapper>
             <WaterPerDayText>
-              The required amount of water in liters per day:
+              {t('MyDailyNorma.MyDailyNormaModalWater')}
             </WaterPerDayText>
             <WaterPerDayValue>
               {calculatedDailyNorma && calculatedDailyNorma.toFixed(1)}L
@@ -205,7 +208,7 @@ export const ModalMyDailyNorma = () => {
         </FormContainer>
         <FormContainer>
           <AmountOfWaterLabel>
-            Write down how much water you will drink:
+            {t('MyDailyNorma.MyDailyNormaModalNorma')}
           </AmountOfWaterLabel>
           <InputFormField
             type="number"
@@ -220,7 +223,11 @@ export const ModalMyDailyNorma = () => {
           )}
         </FormContainer>
         <ButtonSave type="submit" disabled={!isValid}>
-          {isLoading ? <ClapSpinner size={16} frontColor={'#fff'} /> : 'Save'}
+          {isLoading ? (
+            <ClapSpinner size={16} frontColor={'#fff'} />
+          ) : (
+            t('MyDailyNorma.MyDailyNormaModalButton')
+          )}
         </ButtonSave>
       </ModalContainer>
     </Modal>

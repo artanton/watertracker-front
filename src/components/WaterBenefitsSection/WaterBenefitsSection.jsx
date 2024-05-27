@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   WaterBenefitsContainer,
   WaterTitle,
@@ -6,22 +8,19 @@ import {
 } from './WaterBenefitsSection.styled';
 
 export const WaterBenefitsSection = () => {
+  const { t } = useTranslation();
   return (
     <>
       <WaterBenefitsContainer>
-        <WaterTitle>Why drink water</WaterTitle>
+        <WaterTitle>{t('WelcomePage.subtitleOptions')}</WaterTitle>
         <BenefitsList>
-          <BenefitsLi>Supply of nutrients to all organs</BenefitsLi>
-          <BenefitsLi>Providing oxygen to the lungs</BenefitsLi>
-          <BenefitsLi>Maintaining the work of the heart</BenefitsLi>
-          <BenefitsLi>Release of processed substances</BenefitsLi>
-          <BenefitsLi>
-            Ensuring the stabiInfoItemsty of the internal environment
-          </BenefitsLi>
-          <BenefitsLi>Maintaining within the normal temperature</BenefitsLi>
-          <BenefitsLi>
-            Maintaining an immune system capable of resisting disease
-          </BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option1')}</BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option2')}</BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option3')}</BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option4')}</BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option5')}</BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option6')}</BenefitsLi>
+          <BenefitsLi>{t('WelcomePage.itemArrayOptions.option7')}</BenefitsLi>
         </BenefitsList>
       </WaterBenefitsContainer>
     </>

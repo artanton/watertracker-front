@@ -147,13 +147,9 @@ export const InputFormField = styled.input`
 `;
 
 export const WaterPerDayWrapper = styled.div`
-  max-width: 253px;
   display: flex;
+  align-items: center;
   gap: 6px;
-
-  @media screen and (min-width: 768px) {
-    width: 376px;
-  }
 `;
 
 export const WaterPerDayText = styled.div`
@@ -161,7 +157,6 @@ export const WaterPerDayText = styled.div`
   line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlack};
   word-wrap: initial;
-  max-width: 190px;
 
   @media screen and (min-width: 768px) {
     min-width: 328px;

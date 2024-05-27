@@ -1,4 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+
+import { useTranslation } from 'react-i18next';
+
+import { openModal } from '../../redux/modal/modalSlice';
+import { selectorPersantRate } from '../../redux/selectors';
+
+import { modalNames } from 'constants/constants';
+
 import {
   AddWater,
   PanelContainer,
@@ -11,10 +19,6 @@ import {
   AddWaterText,
   ProgressBarContainer,
 } from './WaterRatioPanel.styled';
-import { openModal } from '../../redux/modal/modalSlice';
-import { modalNames } from 'constants/constants';
-
-import { selectorPersantRate } from '../../redux/selectors';
 
 const ProgressBar = ({ percentage }) => {
   return (
@@ -30,6 +34,8 @@ const ProgressBar = ({ percentage }) => {
 
 const WaterRatioPanel = () => {
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
   // const persantageRate = 50;
 
   const persantageRate = useSelector(selectorPersantRate);
@@ -37,7 +43,7 @@ const WaterRatioPanel = () => {
   return (
     <WaterRatioContainer>
       <PanelContainer>
-        <WaterToday>Today</WaterToday>
+        <WaterToday>{t('ProgressBar.ProgressBarTitle')}</WaterToday>
         <ProgressBarContainer>
           <ProgressBar percentage={persantageRate} />
         </ProgressBarContainer>
@@ -67,7 +73,7 @@ const WaterRatioPanel = () => {
         onClick={() => dispatch(openModal(modalNames.ADD_WATER))}
       >
         <PlusIcon />
-        <AddWaterText>Add Water</AddWaterText>
+        <AddWaterText>{t('ProgressBar.ProgressBarButton')}</AddWaterText>
       </AddWater>
     </WaterRatioContainer>
   );
