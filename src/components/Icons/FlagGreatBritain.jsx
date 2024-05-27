@@ -1,6 +1,8 @@
-export const FlagGreatBritain = () => {
+export const FlagGreatBritain = ({ width, height }) => {
   return (
     <svg
+      width={width}
+      height={height}
       xmlns="http://www.w3.org/2000/svg"
       id="flag-icon-css-gb"
       viewBox="0 0 640 480"

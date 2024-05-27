@@ -54,7 +54,7 @@ const TodayWaterList = () => {
     <TodayWaterListContainer>
       <Today>{t('TodayWater.TodayWaterTitle')}</Today>
       <WaterList>
-        {waterNotes && waterNotes.length > 0 ? (
+        {waterNotes &&
           waterNotes.map((note, index) => (
             <WaterListItem key={note._id}>
               <WaterGlassIcon />
@@ -84,10 +84,7 @@ const TodayWaterList = () => {
                 </DeleteButton>
               </IconsContainer>
             </WaterListItem>
-          ))
-        ) : (
-          <p>{t('TodayWater.TodayWaterMessage')}</p>
-        )}
+          ))}
       </WaterList>
 
       <AddWaterButton onClick={() => dispatch(openModal(modalNames.ADD_WATER))}>

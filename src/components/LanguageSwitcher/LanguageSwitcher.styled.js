@@ -4,7 +4,8 @@ import { theme } from 'styles/theme';
 
 export const ButtonContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
 
   gap: 2px;
 `;

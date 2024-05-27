@@ -10,6 +10,8 @@ export const MyDailyNormaContainer = styled.div`
   flex-direction: column;
   padding: 8px 20px;
 
+  width: fit-content;
+
   @media (min-width: 768px) {
     max-height: 76px;
   }
@@ -20,8 +22,6 @@ export const MyDailyNorma = styled.h2`
   font-size: ${theme.fontSizes.listTitle};
   line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryBlack};
-  margin: 0;
-  text-align: center;
   margin-bottom: 12px;
 `;
 
