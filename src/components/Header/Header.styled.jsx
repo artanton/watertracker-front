@@ -6,6 +6,7 @@ export const HeaderContainer = styled.header`
   padding: 8px 20px 0;
   width: 320px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   @media screen and (min-width: 768px) {
@@ -19,9 +20,9 @@ export const HeaderContainer = styled.header`
   }
 `;
 
-export const LogoLanguagesWrapper = styled.div`
+export const UserLanguagesWrapper = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 4px;
 `;
 export const UserInfo = styled.div`
   display: flex;

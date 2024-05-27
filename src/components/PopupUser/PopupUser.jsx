@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice';
 import { modalNames } from 'constants/constants';
+
+// import { LanguageSwitcher, LanguageSelector } from 'components';
+
 import { ArrowDown } from 'components/Icons/ArrowDown';
 import { Settings } from 'components/Icons/Settings';
 import { Logout } from 'components/Icons/Logout';
@@ -69,6 +72,7 @@ export const PopupUser = () => {
               <ButtonText>{t('popup.logout')}</ButtonText>
             </ButtonContent>
           </MenuButton>
+          {/* <LanguageSelector /> */}
         </MenuContent>
       )}
     </Popup>
