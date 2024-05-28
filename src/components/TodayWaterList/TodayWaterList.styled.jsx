@@ -169,7 +169,7 @@ export const WaterListTime = styled.p`
 export const IconsContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 38px;
+  margin-left: auto;
   gap: 18px;
 
   @media screen and (min-width: 768px) {
