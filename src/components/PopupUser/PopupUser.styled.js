@@ -11,15 +11,14 @@ export const PopupButton = styled.button`
 export const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  padding: 16px;
 `;
 
 export const MenuButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  &:first-child {
-    margin-bottom: 16px;
-  }
 `;
 
 export const ButtonText = styled.p`
@@ -34,5 +33,11 @@ export const ButtonText = styled.p`
 export const ButtonContent = styled.div`
   display: flex;
   /* align-items: row; */
-  align-items: center;
+  /* align-items: center; */
+
+  transition: ${theme.transition.normal};
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;

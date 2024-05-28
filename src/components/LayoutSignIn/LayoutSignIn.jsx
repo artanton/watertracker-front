@@ -19,7 +19,7 @@ export const LayoutSignIn = ({ children }) => {
             type="image/png"
           />
           <source
-            media="(min-width: 767px)"
+            media="(min-width: 768px)"
             srcSet={`${bgSigninTab1x} 1x, ${bgSigninTab2x} 2x`}
             type="image/png"
             width="700"

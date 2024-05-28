@@ -1,3 +1,5 @@
+import { keyframes } from 'styled-components';
+
 export const theme = Object.freeze({
   colors: {
     primaryWhite: '#FFFFFF',
@@ -75,3 +77,28 @@ export const theme = Object.freeze({
     calendarmed: ' translate(-50%, -144%)',
   },
 });
+
+export const pulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
+// Светящийся эффект
+export const glow = keyframes`
+  0% {
+    box-shadow: 0 0 5px ${theme.colors.primaryBlue};
+  }
+  50% {
+    box-shadow: 0 0 15px ${theme.colors.primaryBlue};
+  }
+  100% {
+    box-shadow: 0 0 5px ${theme.colors.primaryBlue};
+  }
+`;

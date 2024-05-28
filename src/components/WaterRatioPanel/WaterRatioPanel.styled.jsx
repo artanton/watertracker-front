@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { theme } from 'styles/theme';
+import { glow, pulse, theme } from 'styles/theme';
 import { PlusCircle } from 'components/Icons/PlusCircle';
 
 export const WaterRatioContainer = styled.div`
@@ -208,8 +208,8 @@ export const AddWater = styled.button`
   gap: 10px;
 
   &:hover {
-    cursor: pointer;
     box-shadow: ${theme.shadows.hoverButton};
+    animation: ${pulse} 0.8s infinite, ${glow} 1.5s infinite;
   }
 
   &:active {
@@ -245,4 +245,8 @@ export const AddWaterText = styled.p`
   font-size: ${theme.fontSizes.listTitle};
   line-height: ${theme.lineHeights.info};
   color: ${theme.colors.primaryWhite};
+
+  @media (min-width: 1440px) {
+    font-size: ${theme.fontSizes.text};
+  }
 `;

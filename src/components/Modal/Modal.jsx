@@ -1,9 +1,13 @@
 import { createPortal } from 'react-dom';
-import { ModalBackdrop, ModalContent } from './Modal.styled';
+
+import { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { selectModalActiveModal } from '../../redux/modal/modalSlice.selectors';
 import { closeModal } from '../../redux/modal/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+
+import { ModalBackdrop, ModalContent } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 

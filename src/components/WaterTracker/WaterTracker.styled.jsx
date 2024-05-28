@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { glow, pulse, theme } from '../../styles/theme';
 import { ReactComponent as Calendar } from '../../Pages/WelcomePage/icons/calendar.svg';
 import { ReactComponent as PersonalSetings } from '../../Pages/WelcomePage/icons/personal-settings.svg';
 import { ReactComponent as Statistics } from '../../Pages/WelcomePage/icons/statistics.svg';
@@ -96,6 +96,7 @@ export const Button = styled.button`
   box-shadow: ${theme.shadows.normalButton};
   &:hover {
     box-shadow: ${theme.shadows.hoverButton};
+    animation: ${pulse} 0.8s infinite, ${glow} 1.5s infinite;
   }
   @media screen and (min-width: 768px) {
     font-size: ${theme.fontSizes.listTitle};

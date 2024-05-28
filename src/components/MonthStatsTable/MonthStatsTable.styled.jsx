@@ -163,8 +163,12 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
     position: relative;
 
-    &:hover {
-      box-shadow: ${theme.shadows.table};
+    transition: ${theme.transition.normal};
+
+    &:hover,
+    &:focus,
+    &:active {
+      transform: scale(1.2);
     }
 
     @media screen and (min-width: 768px) {

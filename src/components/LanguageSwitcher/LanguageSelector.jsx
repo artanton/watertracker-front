@@ -16,7 +16,7 @@ const options = [
 export const LanguageSelector = () => {
   const { i18n } = useTranslation();
   const [selectedOption, setSelectedOption] = useState(
-    options.find(option => option.value === i18n.language)
+    options.find(option => option.value === i18n.language || options[0])
   );
 
   useEffect(() => {

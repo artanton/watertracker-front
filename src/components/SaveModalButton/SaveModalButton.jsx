@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ClapSpinner } from 'react-spinners-kit';
 
 import styled from 'styled-components';
-import { theme } from 'styles/theme';
+import { glow, pulse, theme } from 'styles/theme';
 
 const Button = styled.button`
   display: flex;
@@ -21,7 +21,8 @@ const Button = styled.button`
   line-height: ${theme.lineHeights.text};
 
   &:hover {
-    box-shadow: 0px 4px 14px 0px #407bff8a;
+    box-shadow: ${theme.shadows.hoverButton};
+    animation: ${pulse} 0.8s infinite, ${glow} 1.5s infinite;
   }
   @media (min-width: 768px) {
     width: 160px;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { glow, pulse, theme } from '../../styles/theme';
+import { Link } from 'react-router-dom';
 
 export const Wrap = styled.div`
   width: 100%;
@@ -81,6 +82,7 @@ export const Button = styled.button`
   box-shadow: ${theme.shadows.normalButton};
   &:hover {
     box-shadow: ${theme.shadows.hoverButton};
+    animation: ${pulse} 0.8s infinite, ${glow} 1.5s infinite;
   }
   @media screen and (min-width: 768px) {
     font-size: ${theme.fontSizes.listTitle};
@@ -105,13 +107,25 @@ export const SignUpForm = styled.form`
   }
 `;
 
-export const SignUpText = styled.span`
+// export const SignUpText = styled.span`
+//   font-size: ${theme.fontSizes.text};
+//   line-height: ${theme.lineHeights.text};
+//   color: ${theme.colors.primaryBlue};
+//   text-decoration: none;
+//   &:hover {
+//     color: ${theme.colors.secondaryOrange};
+//     transition: ${theme.transition.normal};
+//   }
+// `;
+
+export const StyledLink = styled(Link)`
   font-size: ${theme.fontSizes.text};
   line-height: ${theme.lineHeights.text};
   color: ${theme.colors.primaryBlue};
   text-decoration: none;
+
+  transition: color 0.3s ease;
   &:hover {
     color: ${theme.colors.secondaryOrange};
-    transition: ${theme.transition.normal};
   }
 `;

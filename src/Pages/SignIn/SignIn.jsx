@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import { useFormik } from 'formik';
 
 import { toast } from 'react-toastify';
@@ -16,7 +14,7 @@ import {
   Button,
   SignInForm,
   Wrap,
-  SignUpText,
+  StyledLink,
 } from './SignIn.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -106,13 +104,10 @@ function Signin() {
             <Error>{errors.password}</Error>
           )}
         </Label>
-
         <Button type="submit" disabled={isLoading}>
           {t('authForm.signinBtnTitle')}
         </Button>
-        <Link to="/signup">
-          <SignUpText>{t('authForm.signupLink')}</SignUpText>
-        </Link>
+        <StyledLink to="/signup">{t('authForm.signupLink')}</StyledLink>
       </SignInForm>
     </LayoutSignIn>
   );
