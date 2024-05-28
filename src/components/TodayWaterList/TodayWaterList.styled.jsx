@@ -50,10 +50,11 @@ export const AddWaterButton = styled.button`
   background: none;
   display: flex;
   gap: 8px;
+  transition: ${theme.transition.normal}, color 0.3s ease;
 
   &:hover {
+    transform: scale(1.2);
     color: ${theme.colors.secondaryOrange};
-    transition: ${theme.transition.normal};
   }
 `;
 

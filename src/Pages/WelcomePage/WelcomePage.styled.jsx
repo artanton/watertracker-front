@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const WrapperWelcomePg = styled.div`
   @media screen and (max-width: 767px) {
-    padding-bottom: 40px;
+    /* padding-bottom: 40px; */
   }
 
   @media screen and (min-width: 768px) and (max-width: 1439px) {
@@ -10,9 +10,10 @@ export const WrapperWelcomePg = styled.div`
   }
 
   @media only screen and (min-width: 1440px) {
+    margin-top: 80px !important;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-left: 100px;
+    align-items: flex-end;
+    margin: 0 auto;
   }
 `;

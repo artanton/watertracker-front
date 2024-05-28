@@ -25,13 +25,13 @@ export const LanguageSwitcher = () => {
         onClick={() => changeLanguage('en')}
         $isActive={activeLang === 'en'}
       >
-        <FlagGreatBritain />
+        <FlagGreatBritain width={20} />
       </Button>
       <Button
         onClick={() => changeLanguage('de')}
         $isActive={activeLang === 'de'}
       >
-        <FlagGermany />
+        <FlagGermany width={20} />
       </Button>
     </ButtonContainer>
   );

@@ -5,18 +5,16 @@ import { theme } from 'styles/theme';
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-
-  gap: 2px;
+  gap: 5px;
 `;
 
 export const Button = styled.button`
-  width: 42px;
+  display: inline-block;
 
   background: none;
 
   cursor: pointer;
-  padding: 8px;
+  padding: 0 8px;
   border-radius: 50%;
   border: none;
   opacity: ${props => (props.$isActive ? 1 : 0.5)};

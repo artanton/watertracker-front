@@ -262,7 +262,7 @@ export const FormUserSettings = () => {
                     {showRepeatPassword ? <Eye /> : <EyeSlash />}
                   </IconButton>
                 </InputWrapper>
-                <ErrorMessage name="newPassword" component={Error} />
+                <ErrorMessage name="repeatPassword" component={Error} />
               </FieldContainerNoMargin>
             </PasswordsContainer>
           </FormInfo>

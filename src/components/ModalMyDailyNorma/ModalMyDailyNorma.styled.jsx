@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { theme } from 'styles/theme';
+import { glow, pulse, theme } from 'styles/theme';
 
 import { inputValidationStyler } from 'helpers/helpers';
 
@@ -190,7 +190,7 @@ export const ButtonSave = styled.button`
   align-items: center;
   justify-content: center;
   width: 256px;
-  height: 20px;
+  /* height: 20px; */
   background-color: ${theme.colors.primaryBlue};
   padding: 8px 30px;
   border-radius: ${theme.radii.normal};
@@ -211,6 +211,6 @@ export const ButtonSave = styled.button`
 
   &:hover {
     box-shadow: ${theme.shadows.hoverButton};
-    transition: ${theme.transition.normal};
+    animation: ${pulse} 0.8s infinite, ${glow} 1.5s infinite;
   }
 `;

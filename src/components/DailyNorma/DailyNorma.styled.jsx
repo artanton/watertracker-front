@@ -49,9 +49,11 @@ export const WaterNormaAmountEdit = styled.button`
   background: none;
   color: #8baeff;
   padding: 0;
+  transition: ${theme.transition.normal}, color 0.3s ease;
 
   &:hover {
-    cursor: pointer;
+    transform: scale(1.2);
+    color: ${theme.colors.secondaryOrange};
   }
 `;
 

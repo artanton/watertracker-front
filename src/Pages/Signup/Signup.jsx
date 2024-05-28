@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,7 +28,7 @@ import {
   Button,
   SignUpForm,
   Wrap,
-  SignUpText,
+  StyledLink,
 } from './SignUp.styled';
 
 const Signup = () => {
@@ -158,9 +158,7 @@ const Signup = () => {
           </Button>
           {isLoggedIn && <Navigate to="/signin" />}
 
-          <Link to="/signin">
-            <SignUpText>{t('authForm.signinLink')}</SignUpText>
-          </Link>
+          <StyledLink to="/signin">{t('authForm.signinLink')}</StyledLink>
         </SignUpForm>
       </LayoutSignIn>
     </>

@@ -40,3 +40,46 @@ export const LayoutStyle = styled.section`
     background-image: url(${bgImageDesctop2x}), url(${bgMainPageDesctop2x});
   }
 `;
+
+// import styled from 'styled-components';
+
+// const bgBubblesMob1x = require('../../img/background/mobile/bg_mainpage_bottle@1x.png');
+// const bgBubblesMob2x = require('../../img/background/mobile/bg_mainpage_bottle@2x.png');
+// // const bgBubblesTablet1x = require('../../img/background/tablet/bg_mainpage@1x.png');
+// // const bgBubblesTablet2x = require('../../img/background/tablet/bg_mainpage@2x.png');
+// const bgBubblesDesctop1x = require('../../img/background/desktop/bg_mainpage@1x.png');
+// const bgBubblesDesctop2x = require('../../img/background/desktop/bg_mainpage@2x.png');
+
+// const bgBottleTablet1x = require('../../img/background/tablet/bg_mainpage_bottle@1x.png');
+// const bgBottleTablet2x = require('../../img/background/tablet/bg_mainpage_bottle@2x.png');
+// const bgBottleDesctop1x = require('../../img/background/desktop/bg_mainpage_bottle@1x.png');
+// const bgBottleDesctop2x = require('../../img/background/desktop/bg_mainpage_bottle@2x.png');
+
+// export const LayoutStyle = styled.section`
+//   background-image: url(${bgBubblesMob1x});
+//   background-repeat: no-repeat;
+//   background-position: center bottom;
+//   min-height: calc(100vh - 80px);
+
+//   background-size: cover;
+//   @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+//     background-image: url(${bgBubblesMob2x});
+//   }
+
+//   @media screen and (min-width: 768px) and (max-width: 1439px) {
+//     background-image: url(${bgBottleTablet1x});
+//     background-attachment: fixed;
+//   }
+//   @media screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+//     background-image: url(${bgBottleTablet2x});
+//     background-attachment: fixed;
+//   }
+//   @media only screen and (min-width: 1440px) {
+//     background-image: url(${bgBottleDesctop1x}), url(${bgBubblesDesctop1x});
+//     background-size: contain;
+//   }
+//   @media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+//     background-image: url(${bgBottleDesctop2x}), url(${bgBubblesDesctop2x});
+//     background-size: contain;
+//   }
+// `;
