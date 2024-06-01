@@ -6,10 +6,7 @@ export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',
   async thunkApi => {
     try {
-      const date = formatDate(new Date())
-      
-      // console.log(date);
-      // console.log(typeof(date));
+      const date = formatDate(new Date());
 
       const { data } = await authInstance.get(`/water/today?date=${date}`);
       return data;
@@ -59,7 +56,6 @@ export const patchWater = createAsyncThunk(
 export const addWater = createAsyncThunk(
   'today/addWater',
   async (waterData, thunkApi) => {
-    console.log(waterData);
     try {
       const { data } = await authInstance.post(`/water/add`, waterData);
       return data;
