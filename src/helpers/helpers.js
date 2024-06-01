@@ -29,6 +29,7 @@ export const calculateWaterRate = ({ weight, sportTime, gender }) => {
 };
 
 export const formatDate = date => {
+  
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
@@ -45,6 +46,7 @@ export function formatToTime(dateString) {
 export function formatToString(timeString) {
   const [hours, minutes] = timeString.split(':').map(Number);
   const date = new Date();
+ 
   date.setHours(hours);
   date.setMinutes(minutes);
   date.setSeconds(0);
@@ -57,6 +59,6 @@ export function formatToString(timeString) {
   const minute = String(date.getMinutes()).padStart(2, '0');
   const second = String(date.getSeconds()).padStart(2, '0');
 
-  const localDate = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
-  return localDate;
+  const pickedDate = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+  return pickedDate;
 }
