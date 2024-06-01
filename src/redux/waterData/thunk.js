@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authInstance } from '../authorization/authReducer';
+import { formatDate } from 'helpers/helpers';
 
 export const getWaterToday = createAsyncThunk(
   'water/getWaterToday',
   async thunkApi => {
     try {
-      const date = new Date();
+      const date = formatDate(new Date());
 
       const { data } = await authInstance.get(`/water/today?date=${date}`);
       return data;
