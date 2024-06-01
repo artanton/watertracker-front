@@ -20,6 +20,7 @@ import {
   StyledCalendar,
   Trigger,
 } from './MonthStatsTable.styled';
+import { formatDate } from 'helpers/helpers';
 
 const MonthStatsTable = () => {
   const dispatch = useDispatch();
@@ -42,8 +43,9 @@ const MonthStatsTable = () => {
     setSelectedDay(currentDayData);
   };
 
-  const handleMonthChange = newDate => {
-    const timestamp = newDate.getTime(); // Получаем метку времени текущей даты
+  const handleMonthChange = dateOfMonth => {
+    const timestamp = formatDate(new Date(dateOfMonth));
+
     dispatch(getMonthWater(timestamp)); // Вызываем thunk, передавая метку времени
   };
 
@@ -88,8 +90,8 @@ const MonthStatsTable = () => {
           return null;
         }}
         onActiveStartDateChange={({ activeStartDate }) => {
-          const newStartDate = new Date(activeStartDate); // Создаем копию объекта activeStartDate
-          newStartDate.setMonth(newStartDate.getMonth() + 1); // Добавляем 1 к текущему месяцу
+          const newStartDate = new Date(activeStartDate);
+
           handleMonthChange(newStartDate); // Вызываем функцию обработчика с новой датой
         }}
       />

@@ -16,9 +16,11 @@ import {
 import { useDispatch } from 'react-redux';
 import { apiGetUserSettings } from '../../redux/authorization/authReducer';
 import { getWaterToday, getMonthWater } from '../../redux/waterData/thunk';
+import { formatDate } from 'helpers/helpers';
 // import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
 function Home() {
-  const date = Date.now();
+  const date = formatDate(new Date());
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(apiGetUserSettings());
