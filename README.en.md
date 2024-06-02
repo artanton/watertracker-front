@@ -1,105 +1,157 @@
-# React homework template
+# <div style="text-align: center;">Water Tracker Application </div>
+<span style="color:red">The application's backend is hosted on the free Cloudinary service, which may cause a delay when performing the first action that requires a response from the server side of the application.</span>
+## <div style="text-align: center;">Overview</div>
 
-This project was created with
-[Create React App](https://github.com/facebook/create-react-app). To get
-acquainted and configure additional features
-[refer to documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<span style="font-weight:bold;">Stay Hydrated and Healthy with WaterTracker!</span>
 
-## Creating a repository by template
+With WaterTracker, you can:
 
-Use this GoIT repository as a template for creating a repository
-of your project. To use it just tap the `«Use this template»` button and choose
-`«Create a new repository»` option, as you can see on the image below.
+- <span style="font-weight:bold;">Create Your Personal Account:</span> Get started with a personalized experience.
+- <span style="font-weight:bold;">Calculate Your Optimal Daily Water Intake:</span> Our smart calculator uses your gender, weight, phisical activity time to determine the perfect amount of water you need each day.
+- <span style="font-weight:bold;">Track Your Daily Water Consumption:</span> Easily log every glass and stay on top of your hydration goals.
+- <span style="font-weight:bold;">Access Comprehensive Water Consumption Stats:</span> Use our intuitive calendar to review your hydration history for any period.
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+<span style="font-weight:bold;">Why Choose WaterTracker?</span>
 
-The page for creating a new repository will open on the next step. Fill out
-the Name field and make sure the repository is public, then click
-`«Create repository from template»` button.
+Using WaterTracker will not only help you stay hydrated but also boost your overall health and well-being. Join our community of health enthusiasts and start feeling better today!
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+<span style="font-weight:bold;">Record Your Water Intake with Ease:</span> Our user-friendly interface makes it simple to log your water consumption anytime, anywhere.
+<div style="
+padding: 20px;
+text-align: center;
+font-weight:bold;">English and Deutsch interfaces are available.</div>
 
-You now have a personal project repository, having a repository-template file 
-and folder structure. After that, you can work with it as you would with any 
-other private repository: clone it on your computer, write code, commit, and 
-send it to GitHub.
 
-## Preparing for coding
 
-1. Make sure you have an LTS version of Node.js installed on your computer.
-   [Download and install](https://nodejs.org/en/) if needed.
-2. Install the project's base dependencies with the `npm install` command.
-3. Start development mode by running the `npm start` command.
-4. Go to [http://localhost:3000](http://localhost:3000) in your browser. This
-   page will automatically reload after saving changes to the project files.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/main-interface.png" alt="Water Tracker Screenshot">
+</div>
 
-## Deploy
+## Table of Contents
 
-The production version of the project will automatically be linted, built, and
-deployed to GitHub Pages, in the `gh-pages` branch, every time the `main` branch
-is updated. For example, after a direct push or an accepted pull request. To do
-this, you need to edit the `homepage` field in the `package.json` file,
-replacing `your_username` and `your_repo_name` with your own, and submit the
-changes to GitHub.
+- [Components](#components)
+  - [Header](#header)
+  - [Pages](#pages)
+  - [Main Components](#main-components)
+- [Modals](#modals)
+  - [UserLogoModal](#userlogomodal)
+  - [SettingModal](#settingmodal)
+  - [UserLogoutModal](#userlogoutmodal)
+  - [DailyNormaModal](#dailynormamodal)
+  - [TodayListModal](#todaylistmodal)
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+## Components
 
-Next, you need to go to the settings of the GitHub repository (`Settings` >
-`Pages`) and set the distribution of the production version of files from the
-`/root` folder of the `gh-pages` branch, if this was not done automatically.
+### Header
 
-![GitHub Pages settings](./assets/repo-settings.png)
+#### Non-Authorized User
+- Logo: Displays the application logo and redirects to the WelcomePage for non-registered users.
+- UserAuth: Button that redirects to the SigninPage.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots//nonAuthUserMenu.png" alt="Water Tracker Screenshot">
+</div>
 
-### Deployment status
+#### Authorized User
+- Logo: Displays the application logo and redirects to the HomePage for registered users.
+- UserLogo: Button to open the UserLogoModal, displaying user info and options to edit or log out.
+- Lenguege swither: You can pick English or Deutsch interface.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/auth-user-header1.png" alt="Water Header Screenshot1">
+</div>
 
-The deployment status of the latest commit is displayed with an icon next to its
-ID.
 
-- **Yellow color** - the project is being built and deployed.
-- **Green color** - deployment completed successfully.
-- **Red color** - an error occurred during linting, build or deployment.
+### Pages
 
-More detailed information about the status can be viewed by clicking on the
-icon, and in the drop-down window, follow the link `Details`.
+#### WelcomePage
+- Route: /welcome
+- Displayed for non-authorized users.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/greetings.png" alt="Water Tracker Screenshot">
+</div>
 
-![Deployment status](./assets/deploy-status.png)
+#### SignupPage
+- Route: /signup
+- Contains the AuthForm for user registration.
+- Validates all form fields.
+- Automatically logs in the user after successful registration and redirects to HomePage.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/signup.png" alt="Water Tracker Screenshot">
+</div>
 
-### Live page
+#### SigninPage
+- Route: /signin
+- Logs in the user and redirects to HomePage.
+- Displays error notifications for failed login attempts.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/signin.png" alt="Water Tracker Screenshot">
+</div>
 
-After some time, usually a couple of minutes, the live page can be viewed at the
-address specified in the edited `homepage` property. For example, here is a link
-to a live version for this repository
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+#### HomePage
+<span style="font-weight:bold;">Route: /home</span>
+<span style="font-weight:bold;">Main page for authorized users with containers for:</span> 
+- DailyNorma: Displays user's daily water intake goal.
+- WaterRatioPanel: Shows the ratio of consumed to planned water intake and opens a modal for logging water intake.
+- TodayWaterList: Lists water portions consumed throughout the day.
+- MonthStatsTable: Allows users to view water consumption statistics for any day of the month.
 
-If a blank page opens, make sure there are no errors in the `Console` tab
-related to incorrect paths to the CSS and JS files of the project (**404**). You
-most likely have the wrong value for the `homepage` property in the
-`package.json` file.
 
-### Routing
+### Main Components
+1. DailyNorma: Displays planned daily water intake.
+2. WaterRatioPanel: Shows the ratio of consumed to planned water intake and opens a modal for logging water intake.
+3. TodayWaterList: Displays a list of water portions consumed throughout the day.
+4. MonthStatsTable: Allows users to view water consumption statistics for any day of the month.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/home.png" alt="Water Tracker Homepage">
+</div>
 
-If your application uses the `react-router-dom` library for routing, you must
-additionally configure the `<BrowserRouter>` component by passing the exact name
-of your repository in the `basename` prop. Slashes at the beginning and end of
-the line are required.
+### Modals
 
-```jsx
-<BrowserRouter basename="/your_repo_name/">
-  <App />
-</BrowserRouter>
-```
+#### UserLogoModal
+<span style="font-weight:bold;">Contains buttons:</span>
+- Setting: Opens the SettingModal.
+- LogoutBtn: Opens the UserLogoutModal.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/userLogoModal.png" alt="Water Tracker Screenshot">
+</div>
 
-## How it works
+#### SettingModal
+<span style="font-weight:bold;">Renders a form with user information fields:</span>
+- Your photo: Upload a photo.
+- Your gender identity: Radio buttons for gender selection.
+- Your name: Input for name.
+- E-mail: Input for email.
+- Password: Inputs for changing the password.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/settingModal.png" alt="Water Tracker Screenshot">
+</div>
 
-![How it works](./assets/how-it-works.png)
+<span style="font-weight:bold;">Modal closes on:</span>
+- Clicking the backdrop.
+- Pressing Escape.
+- Submitting the form after successful server response.
 
-1. After each push to the `main` branch of the GitHub repository, a special
-   script (GitHub Action) is launched from the `.github/workflows/deploy.yml`
-   file.
-2. All repository files are copied to the server, where the project is
-   initialized and linted and built before deployment.
-3. If all steps are successful, the built production version of the project
-   files is sent to the `gh-pages` branch. Otherwise, the script execution log
-   will indicate what the problem is.
+#### UserLogoutModal
+<span style="font-weight:bold;">Modal with:</span>
+- Header: "Log out"
+- Subheader: "Do you really want to leave?"
+- Buttons: "Cancel" and "Logout"
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/logout.png" alt="Water Tracker Screenshot">
+</div>
+
+
+#### DailyNormaModal
+<span style="font-weight:bold;">Consists of:</span>
+- Header: "My daily norma"
+- Description: Description of the water intake formula.
+- Form: Form with fields for gender, weight, activity time, and calculated water intake.
+- Save button: Button to submit data to the backend.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/dalyNormaModal.png" alt="Water Tracker Screenshot">
+</div>
+
+### TodayList
+- Allows users to log or edit water intake amounts.
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <img src="./src/img/screenshots/todaywaterlist.png" alt="Water Tracker Screenshot">
+</div>
