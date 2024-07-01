@@ -29,16 +29,13 @@ function Signin() {
   const isLoading = useSelector(selectIsLoading);
 
   const { t } = useTranslation();
-  //const error = useSelector(selectError);
+ 
 
   const swapPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  // const onSubmit = e => {
-  //   e.preventDefault();
-  //   dispatch(apiLoginUser(e));
-  // };
+ 
 
   const { values, touched, errors, handleChange, handleBlur } = useFormik({
     initialValues: {
@@ -46,7 +43,7 @@ function Signin() {
       password: '',
     },
     validationSchema: signInSchema,
-    //onSubmit,
+    
   });
 
   const onSubmit = event => {
@@ -58,7 +55,7 @@ function Signin() {
       email,
       password,
     };
-    //console.log(formData);
+    
 
     dispatch(apiLoginUser(formData))
       .unwrap()

@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const authInstance = axios.create({
-  baseURL: ' https://project-codebusters-backend.onrender.com/api',
+  // baseURL: ' https://project-codebusters-backend.onrender.com/api',
+  baseURL:"https://project-codebusters-backend-3x2e.onrender.com/api",
 });
 
 export const setToken = token => {

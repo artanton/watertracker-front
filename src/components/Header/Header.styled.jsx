@@ -22,7 +22,7 @@ export const HeaderContainer = styled.header`
 
 export const UserLanguagesWrapper = styled.div`
   display: flex;
-  gap: 2px;
+  gap: 8px;
 `;
 export const UserInfo = styled.div`
   display: flex;

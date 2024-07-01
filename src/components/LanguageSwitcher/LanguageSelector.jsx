@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
-import { FlagGermany } from 'components/Icons/FlagGermany';
-import { FlagGreatBritain } from 'components/Icons/FlagGreatBritain';
+// import { theme } from 'styles/theme';
+// import { FlagGermany } from 'components/Icons/FlagGermany';
+// import { FlagGreatBritain } from 'components/Icons/FlagGreatBritain';
 
 const options = [
   {
     value: 'en',
     label: 'En',
-    icon: <FlagGreatBritain width={16} height={16} />,
+    // icon: <FlagGreatBritain width={16} height={16} />,
   },
-  { value: 'de', label: 'De', icon: <FlagGermany width={16} height={16} /> },
+  {
+    value: 'de',
+    label: 'De',
+    //  icon: <FlagGermany width={16} height={16} />
+  },
 ];
 
 export const LanguageSelector = () => {
@@ -36,9 +41,9 @@ export const LanguageSelector = () => {
   const customStyles = {
     control: provided => ({
       ...provided,
-      display: 'flex',
-      alignItems: 'center',
+
       border: 'none',
+      borderRadius: '50%',
       fontSize: '16px',
     }),
     option: (provided, state) => ({
