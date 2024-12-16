@@ -17,7 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/final-team-project-group07">
+      <BrowserRouter basename="watertracker-front">
         <PersistGate persistor={persistor} loading={null}>
           <App />
           <ToastContainer
