@@ -22,6 +22,7 @@ import { apiLoginUser } from '../../redux/authorization/authReducer';
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
 import { selectIsLoading } from '../../redux/selectors';
+import { GoogleBtn } from 'components/googleBtn/GoogleBtn';
 
 function Signin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -105,6 +106,7 @@ function Signin() {
           {t('authForm.signinBtnTitle')}
         </Button>
         <StyledLink to="/signup">{t('authForm.signupLink')}</StyledLink>
+        <GoogleBtn/> 
       </SignInForm>
     </LayoutSignIn>
   );

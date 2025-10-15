@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-const userNameRegexp = /^[A-Za-zßäöüÄÖÜéèàáÁÉÈÀÑñ0-9]*$/;
+export const userNameRegexp = /^[A-Za-zßäöüÄÖÜéèàáÁÉÈÀÑñ0-9 '’]*$/;
 
 export const signInSchema = yup.object().shape({
   email: yup.string().matches(emailRegexp, 'Email is not valid').required(),

@@ -16,6 +16,7 @@ import { selectIsLoggedIn } from '../../redux/selectors';
 import { signUpSchema } from 'schemas/schemas';
 
 import { LayoutSignIn } from 'components/LayoutSignIn/LayoutSignIn';
+import { GoogleBtn } from 'components/googleBtn/GoogleBtn';
 
 import { Eye } from '../../components/Icons/Eye';
 import { EyeSlash } from '../../components/Icons/EyeSlash';
@@ -26,14 +27,13 @@ import {
   Input,
   Error,
   Button,
-  GoolgleButton,
-  ButtonContent,
   SignUpForm,
   Wrap,
   StyledLink,
 } from './SignUp.styled';
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -42,10 +42,6 @@ const Signup = () => {
   const swapPassword = () => {
     setShowPassword(!showPassword);
   };
-
-   const loginWithGoogle=()=> {
-      window.location.href = 'http://localhost:4000/api/auth/google';
-    }
 
   const swapRepeatPassword = () => {
     setShowRepeatPassword(!showRepeatPassword);
@@ -60,7 +56,6 @@ const Signup = () => {
       },
       validationSchema: signUpSchema,
     });
-  const dispatch = useDispatch();
 
   const onSubmit = event => {
     event.preventDefault();
@@ -71,11 +66,6 @@ const Signup = () => {
     if (password !== repeatPassword) {
       return toast.error('Please, write a correct email or password!');
     }
-
-    // if (token === null) {
-    //   return toast.error('You dont have token');
-    // }
-
     const formData = {
       email,
       password,
@@ -84,18 +74,7 @@ const Signup = () => {
 
     handleChange({ target: { name: 'email', value: '' } });
     handleChange({ target: { name: 'password', value: '' } });
-    handleChange({ target: { name: 'repeatPassword', value: '' } });
-
-    // dispatch(apiRegisterUser(formData))
-    //   .unwrap()
-    //   .then(() => handleChange({ target: { name: 'email', value: '' } }))
-    //   .then(() => handleChange({ target: { name: 'password', value: '' } }))
-    //   .then(() =>
-    //     handleChange({ target: { name: 'repeatPassword', value: '' } })
-    //   )
-    //   .catch(() => toast.error('Please, write a correct email or password!'));
-
-    //// event.currentTarget.reset();
+    handleChange({ target: { name: 'repeatPassword', value: '' } });  
   };
 
   return (
@@ -163,22 +142,9 @@ const Signup = () => {
             {t('authForm.signupBtnTitle')}
           </Button>
           {isLoggedIn && <Navigate to="/signin" />}
-
           <StyledLink to="/signin">{t('authForm.signinLink')}</StyledLink>
-           <GoolgleButton onClick={loginWithGoogle} >
-         <ButtonContent>
+          <GoogleBtn/> 
 
-            <svg width="24" height="24" viewBox="0 0 32 32">
-              <g>
-                <path fill="#4285F4" d="M31.68 16.364c0-1.13-.102-2.232-.293-3.273H16.32v6.195h8.64c-.372 2.01-1.49 3.715-3.18 4.86v4.04h5.14c3.01-2.77 4.75-6.85 4.75-11.822z"/>
-                <path fill="#34A853" d="M16.32 32c4.32 0 7.95-1.43 10.6-3.89l-5.14-4.04c-1.43.96-3.26 1.53-5.46 1.53-4.2 0-7.75-2.84-9.02-6.66H2.01v4.18C4.65 28.36 10.06 32 16.32 32z"/>
-                <path fill="#FBBC05" d="M7.3 18.94c-.32-.96-.5-1.98-.5-3.04s.18-2.08.5-3.04V8.68H2.01A15.98 15.98 0 0 0 0 16c0 2.62.63 5.1 1.74 7.32l5.56-4.38z"/>
-                <path fill="#EA4335" d="M16.32 6.36c2.35 0 4.45.81 6.11 2.4l4.58-4.58C24.27 1.43 20.64 0 16.32 0 10.06 0 4.65 3.64 2.01 8.68l5.29 4.18c1.27-3.82 4.82-6.66 9.02-6.66z"/>
-              </g>
-            </svg>
-           Continue with Google
-         </ButtonContent>
-          </GoolgleButton>
         </SignUpForm>
       </LayoutSignIn>
     </>

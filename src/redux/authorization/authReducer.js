@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const authInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  });
+});
 
 export const setToken = token => {
   authInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -42,14 +42,19 @@ export const apiLoginUser = createAsyncThunk(
 
 export const apiRefreshUser = createAsyncThunk(
   'auth/apiRefreshUser',
-  async (_, thunkApi) => {
-    const state = thunkApi.getState();
-    const token = state.auth.token;
+  async (data, thunkApi) => {
+    let token;
+    if (data) {
+      token = data;
+    } else {
+      const state = thunkApi.getState();
+      token = state.auth.token;
+    }
+
     if (!token) return thunkApi.rejectWithValue('You don’t have any token!');
     try {
       setToken(token);
       const { data } = await authInstance.get('/auth/current');
-      // data = {user: {name: 'Abra', email: 'abra@gmail.com'}, token: 'abrakadabra1223'}  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
