@@ -20,6 +20,7 @@ export const apiRegisterUser = createAsyncThunk(
     try {
       const { data } = await authInstance.post('/auth/register', formData);
       setToken(data.token);
+      // localStorage.setItem('accessToken', data.token);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -32,7 +33,25 @@ export const apiLoginUser = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.post('/auth/login', formData);
-      setToken(data);
+      setToken(data.token);
+      // localStorage.setItem('accessToken', data.token);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const apiRefreshUser = createAsyncThunk(
+  'auth/apiRefreshUser',
+  async (_, thunkApi) => {
+    // const token = localStorage.getItem('accessToken');
+    const state = thunkApi.getState();
+    const token = state.auth.token;
+    if (!token) return thunkApi.rejectWithValue('You don’t have any token!');
+    try {
+      setToken(token);
+      // localStorage.setItem('accessToken', token);
+      const { data } = await authInstance.get('/auth/current');
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -40,21 +59,18 @@ export const apiLoginUser = createAsyncThunk(
   }
 );
 
-export const apiRefreshUser = createAsyncThunk(
-  'auth/apiRefreshUser',
-  async (data, thunkApi) => {
-    let token;
-    if (data) {
-      token = data;
-    } else {
-      const state = thunkApi.getState();
-      token = state.auth.token;
+export const apiOauth = createAsyncThunk(
+  'auth/apiOauth',
+  async (token, thunkApi) => {
+    console.log(token);
+    if (!token) {
+      return thunkApi.rejectWithValue('You don’t have any token!');
     }
 
-    if (!token) return thunkApi.rejectWithValue('You don’t have any token!');
     try {
       setToken(token);
       const { data } = await authInstance.get('/auth/current');
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -68,7 +84,7 @@ export const apiLogoutUser = createAsyncThunk(
     try {
       await authInstance.post('/auth/logout');
       clearToken();
-
+      // localStorage.setItem('accessToken', '');
       return;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -128,26 +144,38 @@ const authSlice = createSlice({
       .addCase(apiRegisterUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
-        state.token = action.payload.token; //---------------------------------дані беруться з {data }------------------------------------------
+        state.userData = action.payload;
+        state.token = action.payload.token;
       })
       .addCase(apiLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.userData = action.payload; //-------------------------------------------------------------------------------------------------------------
-        state.token = action.payload.token; //-------------------------------------------------------------------------------------------------------------
+        console.log(action.payload);
+        state.userData = action.payload;
+        state.token = action.payload.token;
       })
       .addCase(apiRefreshUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
+        state.userData = action.payload;
+      })
+      .addCase(apiOauth.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.userData = {
+          _id: action.payload._id,
+          avatarURL: action.payload.avatarURL,
+          email: action.payload.email,
+          userName: action.payload.userName,
+          dailyNorma: action.payload.dailyNorma,
+        };
       })
       .addCase(apiLogoutUser.fulfilled, () => {
         return initialState;
       })
       .addCase(apiUpdateUserSettings.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.userData = action.payload; //------------------------------ дані беруться з {data }-----------------------------------------
+        state.userData = action.payload;
       })
       .addCase(apiGetUserSettings.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -162,6 +190,7 @@ const authSlice = createSlice({
           apiRegisterUser.pending,
           apiLoginUser.pending,
           apiRefreshUser.pending,
+          apiOauth.pending,
           apiLogoutUser.pending,
           apiUpdateUserSettings.pending,
           apiGetUserSettings.pending
@@ -176,6 +205,7 @@ const authSlice = createSlice({
           apiRegisterUser.rejected,
           apiLoginUser.rejected,
           apiRefreshUser.rejected,
+          apiOauth.rejected,
           apiLogoutUser.rejected,
           apiUpdateUserSettings.rejected,
           apiGetUserSettings.rejected
