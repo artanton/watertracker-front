@@ -20,7 +20,6 @@ export const apiRegisterUser = createAsyncThunk(
     try {
       const { data } = await authInstance.post('/auth/register', formData);
       setToken(data.token);
-      // localStorage.setItem('accessToken', data.token);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -34,7 +33,6 @@ export const apiLoginUser = createAsyncThunk(
     try {
       const { data } = await authInstance.post('/auth/login', formData);
       setToken(data.token);
-      // localStorage.setItem('accessToken', data.token);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -44,13 +42,11 @@ export const apiLoginUser = createAsyncThunk(
 export const apiRefreshUser = createAsyncThunk(
   'auth/apiRefreshUser',
   async (_, thunkApi) => {
-    // const token = localStorage.getItem('accessToken');
     const state = thunkApi.getState();
     const token = state.auth.token;
     if (!token) return thunkApi.rejectWithValue('You don’t have any token!');
     try {
       setToken(token);
-      // localStorage.setItem('accessToken', token);
       const { data } = await authInstance.get('/auth/current');
       return data;
     } catch (error) {
@@ -61,8 +57,7 @@ export const apiRefreshUser = createAsyncThunk(
 
 export const apiOauth = createAsyncThunk(
   'auth/apiOauth',
-  async (token, thunkApi) => {
-    console.log(token);
+  async (token, thunkApi) => {   
     if (!token) {
       return thunkApi.rejectWithValue('You don’t have any token!');
     }
@@ -84,7 +79,6 @@ export const apiLogoutUser = createAsyncThunk(
     try {
       await authInstance.post('/auth/logout');
       clearToken();
-      // localStorage.setItem('accessToken', '');
       return;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -162,6 +156,8 @@ const authSlice = createSlice({
       .addCase(apiOauth.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
+        state.token = action.payload.token;
+        console.log(action.payload.avatarURL);
         state.userData = {
           _id: action.payload._id,
           avatarURL: action.payload.avatarURL,

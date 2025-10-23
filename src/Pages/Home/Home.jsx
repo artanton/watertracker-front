@@ -14,7 +14,7 @@ import {
   ModalEditWater,
 } from 'components';
 import { useDispatch } from 'react-redux';
-import { apiGetUserSettings } from '../../redux/authorization/authReducer';
+// import { apiGetUserSettings } from '../../redux/authorization/authReducer';
 import { getWaterToday, getMonthWater } from '../../redux/waterData/thunk';
 import { formatDate } from 'helpers/helpers';
 // import { ModalEditWater } from 'components/ModalEditWater/ModalEditWater';
@@ -23,7 +23,7 @@ function Home() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(apiGetUserSettings());
+    // dispatch(apiGetUserSettings());
     dispatch(getWaterToday());
     dispatch(getMonthWater(date));
   }, [date, dispatch]);
