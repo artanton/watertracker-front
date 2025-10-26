@@ -14,9 +14,9 @@ import { useDispatch } from "react-redux";
         // window.location.href = `${process.env.REACT_APP_API_URL}/auth/google`;
         window.location.href = `https://watertracker-backend-4r1j.onrender.com/api/auth/google`;
       };
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
       useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const token = params.get('token');
        if (token)
         {
           dispatch(apiOauth(token));
