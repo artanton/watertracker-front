@@ -3,8 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const authInstance = axios.create({
-  // baseURL: process.env.REACT_APP_API_URL, // Use this line in development and deploment to server
-  baseURL: 'https://watertracker-backend-4r1j.onrender.com/api',
+  baseURL: process.env.REACT_APP_API_URL, // Use this line in development and deploment to server
+  // baseURL: 'https://watertracker-backend-4r1j.onrender.com/api',
 });
 
 export const setToken = token => {
@@ -58,7 +58,7 @@ export const apiRefreshUser = createAsyncThunk(
 
 export const apiOauth = createAsyncThunk(
   'auth/apiOauth',
-  async (token, thunkApi) => {   
+  async (token, thunkApi) => {
     if (!token) {
       return thunkApi.rejectWithValue('You don’t have any token!');
     }
@@ -158,7 +158,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.token = action.payload.token;
-        console.log(action.payload.avatarURL);
+
         state.userData = {
           _id: action.payload._id,
           avatarURL: action.payload.avatarURL,

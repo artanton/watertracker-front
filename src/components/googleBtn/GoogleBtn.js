@@ -11,7 +11,8 @@ import { useDispatch } from "react-redux";
 
       const loginWithGoogle = event => {
         event.preventDefault();
-        window.location.href = 'https://watertracker-backend-4r1j.onrender.com/api/auth/google';
+        // window.location.href = `${process.env.REACT_APP_API_URL}/auth/google`;
+        window.location.href = `https://watertracker-backend-4r1j.onrender.com/api/auth/google`;
       };
       useEffect(() => {
         const params = new URLSearchParams(window.location.search);
