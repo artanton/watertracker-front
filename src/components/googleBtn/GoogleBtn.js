@@ -1,25 +1,27 @@
 // import { useDispatch } from 'react-redux';
 
 // import { useEffect } from "react";
-import { apiOauth } from "../../redux/authorization/authReducer";
+// import { apiOauth } from "../../redux/authorization/authReducer";
 import { ButtonContent, GoolgleButton } from "./GoogleBtnStyled";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
   
   export const GoogleBtn = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
       const loginWithGoogle = event => {
         event.preventDefault();
         // window.location.href = `${process.env.REACT_APP_API_URL}/auth/google`;
         window.location.href = `https://watertracker-backend-4r1j.onrender.com/api/auth/google`;
-        const params = new URLSearchParams(window.location.search);
-        const token = params.get('token');
-         dispatch(apiOauth(token));
+        
       };
       // useEffect(() => {
-      //  if (token)
-      //   {
+      //   const params = new URLSearchParams(window.location.search);
+      //   const token = params.get('token');
+      //   console.log( token);
+      //   if (token)
+      //     {
+      //     dispatch(apiOauth(token));
          
       //   }
        
