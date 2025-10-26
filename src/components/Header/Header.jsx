@@ -25,9 +25,20 @@ export const Header = () => {
   const userData = useSelector(selectUserData);
   const userEmail = userData?.email ?? 'Sign in';
   const userEmailSplit = userEmail.split('@')[0];
-  const userName = userData?.userName;
   const userAvatar = userData?.avatarURL;
   const { t } = useTranslation();
+  const name = userData?.userName || '';
+  const userName = () => {
+    if (!name) return '';
+
+    const firstWord = name.split(' ')[0];
+
+    if (firstWord.length > 8) {
+      return firstWord.slice(0, 8) + '...';
+    }
+
+    return firstWord;
+  };
   return (
     <>
       <HeaderContainer>
@@ -41,7 +52,7 @@ export const Header = () => {
                 {isLoggedIn ? (
                   userName ? (
                     <div>
-                      <UserNameText>{userName}</UserNameText>
+                      <UserNameText>{userName()}</UserNameText>
                     </div>
                   ) : (
                     <div>{userEmailSplit}</div>
