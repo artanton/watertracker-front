@@ -145,7 +145,6 @@ const authSlice = createSlice({
       .addCase(apiLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        console.log(action.payload);
         state.userData = action.payload;
         state.token = action.payload.token;
       })
